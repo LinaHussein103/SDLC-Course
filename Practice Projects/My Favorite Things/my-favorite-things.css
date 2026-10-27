@@ -1,0 +1,36 @@
+body {
+  background-color: lightyellow;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  color: tomato;
+}
+
+img {
+  width: 300px;
+  border-radius: 10px;
+}
+
+p {
+  width: 400px;
+  margin: 20px auto;
+}
+
+ul {
+  border: 3px dashed tomato;
+  padding: 20px;
+  width: 300px;
+  margin: 0 auto 20px auto;
+  list-style-position: inside;
+}
+
+a {
+  color: darkred;
+}
+
+/* Bonus: hover effect */
+a:hover {
+  color: hotpink;
+}
