@@ -1,0 +1,41 @@
+body {
+  background-color: lightskyblue;
+  font-family: Verdana, sans-serif;
+  text-align: center;
+}
+
+.tag {
+  background-color: white;
+  border: 5px solid navy;
+  border-radius: 20px;
+  padding: 20px;
+  width: 300px;
+  margin: 40px auto;
+}
+
+h1 {
+  font-size: 22px;
+  color: white;
+  background-color: crimson;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+h2 {
+  font-size: 40px;
+  color: navy;
+}
+
+img {
+  width: 120px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Bonus: hover effect */
+.tag:hover {
+  background-color: lightyellow;
+}
