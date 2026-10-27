@@ -10,7 +10,11 @@ This course focuses on how software is developed in the real world, combining in
 💻 Level: Beginner-friendly
 
 📚 Sessions & Resources:
+
 HTML & CSS basics:
+
 HTML: https://www.w3schools.com/html/default.asp 
+
 CSS: https://www.w3schools.com/css/default.asp
+
 HTML & CSS Crash Course: https://www.youtube.com/watch?v=hu-q2zYwEYs&list=PL4cUxeGkcC9ivBf_eKCPIAYXWzLlPAm6G
