@@ -1,0 +1,12 @@
+body {
+  background-color: #eef4ff;
+}
+
+/* Bonus: cards lift up on hover */
+.card {
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
