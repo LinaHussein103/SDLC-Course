@@ -1,0 +1,1138 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Library System — UI/UX Wireframes &amp; Redesign Exercise</title>
+<style>
+@page{size:1123px 794px;margin:0}
+:root{--ink:#0F172A;--ink2:#334155;--muted:#5B6678;--line:#DCE1EA;--bg:#F5F7FB;
+  --pri:#4338CA;--priD:#3730A3;--priL:#EEF2FF;--ok:#047857;--okL:#ECFDF5;--warn:#B45309;--warnL:#FFFBEB;--err:#B91C1C;--errL:#FEF2F2;--info:#0E7490;--infoL:#ECFEFF}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:"Segoe UI",sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.pg{width:1123px;height:794px;position:relative;overflow:hidden;break-after:page;background:#fff;padding:30px 44px}
+.pg:last-child{break-after:auto}
+h1,h2,h3,.disp{font-family:Bahnschrift,"Segoe UI",sans-serif;font-weight:600;margin:0}
+p{margin:0}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.part{font:600 11px Bahnschrift;letter-spacing:2px;padding:5px 10px;border-radius:6px;text-transform:uppercase}
+.pA{background:#FFE4E6;color:#9F1239}.pB{background:#FEF3C7;color:#92400E}.pC{background:#D1FAE5;color:#065F46}.pD{background:#E0E7FF;color:#3730A3}
+.top h2{font-size:22px}
+.top .sub{color:var(--muted);font-size:13px;margin-left:auto}
+.foot{position:absolute;left:44px;right:44px;bottom:14px;display:flex;justify-content:space-between;font-size:10.5px;color:#94A3B8}
+.small{font-size:12px;color:var(--muted);line-height:1.45}
+/* phone */
+.phone{width:290px;height:596px;padding:9px;border-radius:38px;background:#111827;position:relative;flex:none;box-shadow:0 10px 26px rgba(15,23,42,.16)}
+.phone::before{content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);width:90px;height:18px;background:#111827;border-radius:0 0 12px 12px;z-index:9}
+.scr{width:272px;height:578px;border-radius:30px;overflow:hidden;background:#fff;position:relative}
+.sb{height:26px;display:flex;justify-content:space-between;align-items:center;padding:0 20px;font:600 10px "Segoe UI";color:#111}
+.cap{margin-top:10px;text-align:center;width:290px}
+.cap b{font:600 14px Bahnschrift;display:block}
+.cap span{font-size:11.5px;color:var(--muted)}
+.code{display:inline-block;font:700 11px Bahnschrift;letter-spacing:1px;padding:2px 7px;border-radius:5px;margin-bottom:3px}
+.cb{background:#FFE4E6;color:#9F1239}.cg{background:#D1FAE5;color:#065F46}
+.row{display:flex;gap:28px;align-items:flex-start}
+.flowarrow{align-self:center;font:600 30px Bahnschrift;color:#94A3B8;text-align:center;width:60px;margin-top:-60px}
+.flowarrow small{display:block;font:600 10.5px "Segoe UI";color:var(--muted);line-height:1.3}
+.notes{flex:1;border:1.5px dashed #CBD5E1;border-radius:14px;padding:14px 16px;height:596px;background:repeating-linear-gradient(#fff 0 31px,#E5E9F0 31px 32px);background-position:0 44px}
+.notes h3{font-size:14px;color:var(--muted);background:#fff;display:inline-block;padding-right:8px}
+/* ===== BAD design (legacy portal) ===== */
+.bad{font-family:Tahoma,Verdana,sans-serif;font-size:8.5px;color:#333;line-height:1.3}
+.bad .hdr{background:#1F3A68;color:#fff;padding:7px 8px;display:flex;gap:6px;align-items:center}
+.bad .seal{width:26px;height:26px;border-radius:50%;border:2px solid #C9A64A;display:grid;place-items:center;font:bold 8px Tahoma;color:#C9A64A;flex:none}
+.bad .nav{background:#D9DEE6;display:flex;flex-wrap:wrap;font-size:7.6px;border-bottom:1px solid #A9B1BD}
+.bad .nav span{padding:3px 4px;border-right:1px solid #B5BCC7;color:#1F3A68}
+.bad .nav span.on{background:#fff;font-weight:bold}
+.bad .lbl{font-size:8px;color:#444}
+.bad .in{border:1px solid #A0A7B2;height:15px;background:#fff;font-size:8px;padding:1px 3px;color:#222;display:flex;align-items:center}
+.bad .bt{display:inline-block;border:1px solid #8E96A3;background:linear-gradient(#FAFAFA,#DCDFE4);padding:2px 6px;font-size:8px;color:#222;border-radius:2px}
+.bad .lnk{color:#1A4FB5;text-decoration:underline}
+.bad .gry{color:#9CA3AF}
+.bad .ttl{font:bold 10px Tahoma;color:#1F3A68;border-bottom:1px solid #1F3A68;padding-bottom:2px;margin:7px 0 5px}
+.bad table{border-collapse:collapse;width:100%}
+.bad td,.bad th{border:1px solid #C3C9D2;padding:2px 3px;font-size:7.6px;text-align:left;vertical-align:top}
+.bad th{background:#E4E8EE;font-weight:bold}
+/* ===== GOOD design ===== */
+.good{font-family:"Segoe UI",sans-serif;font-size:11.5px;color:var(--ink);line-height:1.4}
+.good .apph{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 0}
+.good .logo{display:flex;align-items:center;gap:7px;font:600 14px Bahnschrift}
+.good .logo i{width:24px;height:24px;border-radius:7px;background:var(--pri);color:#fff;display:grid;place-items:center;font:600 12px Bahnschrift;font-style:normal}
+.good .h1{font:600 19px Bahnschrift;margin:10px 16px 0}
+.good .search{margin:10px 16px 0;height:40px;border:1.5px solid #94A3B8;border-radius:12px;display:flex;align-items:center;padding:0 12px;gap:8px;color:#475569;font-size:12px;background:#fff}
+.good .chips{display:flex;gap:6px;padding:10px 16px 0;overflow:hidden;white-space:nowrap}
+.good .chip{border:1px solid #CBD5E1;border-radius:99px;padding:5px 10px;font-size:11px;font-weight:600;color:#334155;background:#fff;flex:none}
+.good .chip.on{background:var(--pri);border-color:var(--pri);color:#fff}
+.good .sec{font:600 12.5px Bahnschrift;margin:14px 16px 6px;display:flex;justify-content:space-between;align-items:baseline}
+.good .sec a{font:600 11px "Segoe UI";color:var(--pri);text-decoration:none}
+.good .tab{position:absolute;left:0;right:0;bottom:0;height:56px;border-top:1px solid #E2E8F0;background:#fff;display:flex;justify-content:space-around;align-items:center;padding-bottom:6px}
+.good .tab span{font-size:10px;color:#475569;text-align:center;font-weight:600;width:60px;position:relative}
+.good .tab span i{display:block;font-style:normal;font-size:16px;line-height:1.1}
+.good .tab span.on{color:var(--pri)}
+.good .tab span .dot{position:absolute;top:-2px;right:14px;min-width:15px;height:15px;border-radius:99px;background:var(--err);color:#fff;font-size:9px;display:grid;place-items:center;padding:0 3px}
+.good .btn{height:44px;border-radius:12px;display:grid;place-items:center;font-weight:600;font-size:13px}
+.good .btn.p{background:var(--pri);color:#fff}
+.good .btn.s{border:1.5px solid #94A3B8;color:#1E293B;background:#fff}
+.good .btn.d{background:var(--err);color:#fff}
+.good .badge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:99px}
+.b-ok{background:var(--okL);color:var(--ok)}.b-warn{background:var(--warnL);color:var(--warn);border:1px solid #FDE68A}.b-err{background:var(--errL);color:var(--err)}.b-info{background:var(--infoL);color:var(--info)}.b-pri{background:var(--priL);color:var(--priD)}.b-mut{background:#F1F5F9;color:#475569}
+.cover{border-radius:5px;flex:none;position:relative;overflow:hidden;color:#fff;font:600 7px Bahnschrift;padding:4px;line-height:1.1;box-shadow:inset -3px 0 0 rgba(0,0,0,.18)}
+.cv1{background:linear-gradient(160deg,#1E3A8A,#2563EB)}.cv2{background:linear-gradient(160deg,#7C2D12,#EA580C)}.cv3{background:linear-gradient(160deg,#064E3B,#10B981)}.cv4{background:linear-gradient(160deg,#4C1D95,#8B5CF6)}.cv5{background:linear-gradient(160deg,#831843,#DB2777)}.cv6{background:linear-gradient(160deg,#134E4A,#0D9488)}
+.good .card{border:1px solid #E2E8F0;border-radius:14px;background:#fff}
+.good .res{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #EEF2F6;margin:0 16px}
+.good .res .t{font-weight:700;font-size:12px;line-height:1.25}
+.good .res .a{font-size:10.5px;color:#475569;margin-top:1px}
+.good .res .av{font-size:10.5px;font-weight:700;margin-top:5px;display:flex;align-items:center;gap:5px}
+.good .nb{display:flex;align-items:center;gap:10px;padding:4px 16px 0;font:600 14px Bahnschrift}
+.good .nb .bk{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-size:16px;color:#1E293B;background:#F1F5F9}
+.ann{position:absolute;width:20px;height:20px;border-radius:50%;background:#065F46;color:#fff;font:700 11px Bahnschrift;display:grid;place-items:center;box-shadow:0 0 0 2.5px #fff;z-index:20}
+.annlist{font-size:12px;line-height:1.45;color:var(--ink2)}
+.annlist div{display:flex;gap:9px;margin-bottom:9px}
+.annlist .n{width:20px;height:20px;border-radius:50%;background:#065F46;color:#fff;font:700 11px Bahnschrift;display:grid;place-items:center;flex:none;margin-top:1px}
+.annlist b{color:var(--ink)}.annlist div.plain{display:block}
+.req{font:600 10px Consolas;color:var(--pri);background:var(--priL);padding:1px 5px;border-radius:4px;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- ================= COVER ================= -->
+<section class="pg" style="background:#0B1022;color:#fff;padding:0">
+  <div style="position:absolute;inset:0;background:radial-gradient(800px 500px at 90% 0%,#1C2A5C,transparent 60%),radial-gradient(700px 500px at 0% 100%,#0E3A4A,transparent 60%)"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:40px 40px"></div>
+  <div style="position:relative;padding:90px 70px">
+    <div class="disp" style="font-size:14px;letter-spacing:3px;color:#7DD3FC">CODEFLOW PSUT · HANDOUT 03</div>
+    <h1 style="font-size:50px;line-height:1.08;margin-top:18px;max-width:780px">Library System<br>UI/UX Wireframes &amp; Redesign Exercise</h1>
+    <p style="font-size:18px;color:#C9D2EA;margin-top:18px">Industry Practices Using the SDLC · UI/UX Design · November 4, 2026</p>
+    <div style="display:flex;gap:14px;margin-top:56px">
+      <div style="border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:16px 20px;width:230px"><span class="part pA">Part A</span><p style="margin-top:10px;font:600 17px Bahnschrift">The current design</p><p style="font-size:12.5px;color:#AFBAD6;margin-top:4px">Student-facing flawed screens</p></div>
+      <div style="border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:16px 20px;width:230px"><span class="part pB">Part B</span><p style="margin-top:10px;font:600 17px Bahnschrift">Your turn</p><p style="font-size:12.5px;color:#AFBAD6;margin-top:4px">Analysis &amp; sketching activity</p></div>
+      <div style="border:1px dashed rgba(255,255,255,.3);border-radius:14px;padding:16px 20px;width:230px;opacity:.75"><span class="part pC">Part C</span><p style="margin-top:10px;font:600 17px Bahnschrift">Instructor reveal</p><p style="font-size:12.5px;color:#AFBAD6;margin-top:4px">Reference redesign — after the activity</p></div>
+      <div style="border:1px dashed rgba(255,255,255,.3);border-radius:14px;padding:16px 20px;width:230px;opacity:.75"><span class="part pD">Part D</span><p style="margin-top:10px;font:600 17px Bahnschrift">Answer key</p><p style="font-size:12.5px;color:#AFBAD6;margin-top:4px">Comparison &amp; principles</p></div>
+    </div>
+  </div>
+  <div class="foot" style="color:#6B7699"><span>Fictional university library system created for teaching. Sample books are real titles used as placeholder data.</span><span>1</span></div>
+</section>
+
+<!-- ================= HOW TO USE ================= -->
+<section class="pg">
+  <div class="top"><span class="part pD">Read first</span><h2>How to use this pack</h2></div>
+  <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:28px">
+    <div>
+      <h3 style="font-size:16px">Teaching sequence</h3>
+      <div style="margin-top:10px;display:grid;gap:10px">
+        <div style="display:flex;gap:12px;align-items:flex-start"><span class="part pA" style="flex:none">A</span><p style="font-size:13px;line-height:1.5"><b>Study the current design (pages 3–8).</b> Seven screens of a library app that technically meets the requirements. Walk through them in order as Omar, the student below.</p></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span class="part pB" style="flex:none">B</span><p style="font-size:13px;line-height:1.5"><b>Analyse and redesign in pairs (pages 9–11).</b> List problems, explain their impact, prioritise, sketch a better flow. 15–20 minutes.</p></div>
+        <div style="display:flex;gap:12px;align-items:flex-start"><span class="part pC" style="flex:none">C</span><p style="font-size:13px;line-height:1.5"><b>Instructor reveal (page 12 onward).</b> A reference redesign, then the answer key (Part D). Do not show these pages before the activity.</p></div>
+      </div>
+      <div style="margin-top:16px;border-radius:12px;background:#FFFBEB;border:1px solid #FDE68A;padding:12px 16px;font-size:12.5px;color:#78350F;line-height:1.5"><b>Instructor tip:</b> print or share pages 1–11 for students. Keep pages 12–23 for projection after the activity.</div>
+      <h3 style="font-size:16px;margin-top:20px">The scenario</h3>
+      <p style="font-size:13px;line-height:1.55;margin-top:6px;color:var(--ink2)">It is <b>Wednesday, 4 November 2026</b>. <b>Omar Khalid</b> (student ID 20230417) needs <i>Introduction to Algorithms</i> for an assignment. He opens the library app on his phone between lectures. He already has some reservations and loans. Later, a <b>librarian</b> processes the day’s requests at the circulation desk.</p>
+      <p class="small" style="margin-top:8px">Requirement IDs (e.g. <span class="req">FR-07</span>) refer to Handout 02 — the SRS.</p>
+    </div>
+    <div>
+      <h3 style="font-size:16px">Sample data used in both designs</h3>
+      <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:11.5px">
+        <thead><tr style="background:#1E293B;color:#fff"><th style="text-align:left;padding:6px 8px">Book</th><th style="text-align:left;padding:6px 8px">Copies</th><th style="text-align:left;padding:6px 8px">State on 4 Nov</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:6px 8px;border-bottom:1px solid var(--line)"><b>Introduction to Algorithms</b> (4th ed.)<br><span class="small">Cormen, Leiserson, Rivest, Stein · CS</span></td><td style="padding:6px 8px;border-bottom:1px solid var(--line)">3</td><td style="padding:6px 8px;border-bottom:1px solid var(--line)">2 available, 1 on loan</td></tr>
+          <tr><td style="padding:6px 8px;border-bottom:1px solid var(--line)"><b>Clean Code</b><br><span class="small">Robert C. Martin · CS</span></td><td style="padding:6px 8px;border-bottom:1px solid var(--line)">2</td><td style="padding:6px 8px;border-bottom:1px solid var(--line)">0 available · Omar is #2 on waitlist</td></tr>
+          <tr><td style="padding:6px 8px;border-bottom:1px solid var(--line)"><b>Software Engineering</b> (10th ed.)<br><span class="small">Ian Sommerville · CS</span></td><td style="padding:6px 8px;border-bottom:1px solid var(--line)">4</td><td style="padding:6px 8px;border-bottom:1px solid var(--line)">Omar’s copy is ready for pickup</td></tr>
+          <tr><td style="padding:6px 8px;border-bottom:1px solid var(--line)"><b>Database System Concepts</b> (7th ed.)<br><span class="small">Silberschatz, Korth, Sudarshan · CS</span></td><td style="padding:6px 8px;border-bottom:1px solid var(--line)">2</td><td style="padding:6px 8px;border-bottom:1px solid var(--line)">Omar’s loan, due 7 Nov 2026</td></tr>
+          <tr><td style="padding:6px 8px;border-bottom:1px solid var(--line)"><b>Discrete Mathematics and Its Applications</b><br><span class="small">Kenneth H. Rosen · Mathematics</span></td><td style="padding:6px 8px;border-bottom:1px solid var(--line)">3</td><td style="padding:6px 8px;border-bottom:1px solid var(--line)">Omar’s loan, due 2 Nov — overdue</td></tr>
+          <tr><td style="padding:6px 8px;border-bottom:1px solid var(--line)"><b>Calculus: Early Transcendentals</b><br><span class="small">James Stewart · Mathematics</span></td><td style="padding:6px 8px;border-bottom:1px solid var(--line)">3</td><td style="padding:6px 8px;border-bottom:1px solid var(--line)">Returned by Omar on 6 Oct</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:12px;border-radius:12px;background:var(--bg);padding:12px 14px;font-size:11.5px;color:var(--ink2);line-height:1.5"><b>Illustrative policy values</b> (from SRS business rules, not real PSUT rules): 14-day loans · reservations held 48 h after “ready” · example fine rate 0.25 JOD per overdue day.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Handout 03 · Library System UI/UX Wireframes · Codeflow PSUT</span><span>2</span></div>
+</section>
+
+<!-- ================= PART A DIVIDER / FLOW ================= -->
+<section class="pg" style="background:#FFF7F8">
+  <div class="top"><span class="part pA">Part A</span><h2>The current design</h2><span class="sub">Student-facing · 7 screens</span></div>
+  <p style="font-size:15px;line-height:1.55;max-width:860px;color:var(--ink2)">This is the library app as it exists today. It was built from the requirements by a team that focused on functionality. <b>Every screen works.</b> Your job is to decide whether it is <i>usable</i> — and why or why not.</p>
+  <div style="display:flex;align-items:center;gap:10px;margin-top:40px;flex-wrap:wrap">
+    <div class="fbox"><span class="code cb">A1</span><b>Home / Login</b></div><span class="fa">→</span>
+    <div class="fbox"><span class="code cb">A2</span><b>Book catalogue</b></div><span class="fa">→</span>
+    <div class="fbox"><span class="code cb">A3</span><b>Book details</b></div><span class="fa">→</span>
+    <div class="fbox"><span class="code cb">A4</span><b>Request form</b><br><span class="small">2 states</span></div><span class="fa">→</span>
+    <div class="fbox"><span class="code cb">A5</span><b>Confirmation</b></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;margin-top:16px">
+    <div class="fbox"><span class="code cb">A6</span><b>My Account / loans</b></div>
+    <span class="small" style="margin:0 10px">and, for library staff:</span>
+    <div class="fbox" style="width:230px"><span class="code cb">A7</span><b>Librarian circulation console</b><br><span class="small">desktop</span></div>
+  </div>
+  <div style="margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1000px">
+    <div style="background:#fff;border:1px solid #FECDD3;border-radius:14px;padding:16px 18px"><b style="font:600 15px Bahnschrift">Walk through it as Omar</b><p class="small" style="margin-top:6px">Goal: find out if <i>Introduction to Algorithms</i> is available and reserve it.</p></div>
+    <div style="background:#fff;border:1px solid #FECDD3;border-radius:14px;padding:16px 18px"><b style="font:600 15px Bahnschrift">Then check his account</b><p class="small" style="margin-top:6px">Goal: know what to collect, what is due and whether he owes anything.</p></div>
+    <div style="background:#fff;border:1px solid #FECDD3;border-radius:14px;padding:16px 18px"><b style="font:600 15px Bahnschrift">Then be the librarian</b><p class="small" style="margin-top:6px">Goal: prepare today’s requests and hand books over quickly and correctly.</p></div>
+  </div>
+  <style>.fbox{background:#fff;border:1.5px solid #FDA4AF;border-radius:12px;padding:10px 14px;width:170px;font-size:13px}.fbox .code{margin-right:6px}.fa{font:600 22px Bahnschrift;color:#FB7185}</style>
+  <div class="foot"><span>Part A · The current design</span><span>3</span></div>
+</section>
+
+<!-- ================= A1 + A2 ================= -->
+<section class="pg">
+  <div class="top"><span class="part pA">Part A</span><h2>Home / Login → Catalogue</h2><span class="sub">Omar opens the app to look for a book</span></div>
+  <div class="row">
+    <!-- A1 -->
+    <div>
+      <div class="phone"><div class="scr bad">
+        <div class="sb"><span>10:38</span><span>▮▮▮ ◔</span></div>
+        <div class="hdr"><div class="seal">UL</div><div><div style="font:bold 8.6px Tahoma;letter-spacing:.2px">UNIVERSITY LIBRARY &amp; INFORMATION RESOURCES DIRECTORATE</div><div style="font-size:7.4px;opacity:.85">Integrated Library Management Portal · v3.2</div></div></div>
+        <div class="nav"><span class="on">Home</span><span>Svc</span><span>E-Res</span><span>OPAC</span><span>MyAcc</span><span>Regs</span><span>FAQ</span><span>Contact</span><span>عربي</span></div>
+        <div style="padding:5px 7px">
+          <div style="color:#B91C1C;font-style:italic;font-size:7.8px;border:1px dashed #E5A3A3;padding:3px 4px;background:#FFF5F5">⚠ NOTICE: As per Circular 14/2026 the Directorate has revised its working hours. Users are advised to consult the Regulations section. Outstanding fines at end of semester will be referred to the Registrar.</div>
+          <div style="margin-top:4px;background:#FFFBE6;border:1px solid #E8D48A;padding:3px 4px;font-size:7.8px">OPAC catalogue search is available to registered users after login.</div>
+          <p class="gry" style="margin-top:5px;font-size:7.8px">Welcome to the Integrated Library Management Portal. This portal provides authorised users with access to circulation services, reservation services, electronic resources and account information in accordance with the Library Regulations. Unauthorised access is prohibited.</p>
+          <div class="ttl">User Authentication Form</div>
+          <div style="display:grid;grid-template-columns:78px 1fr;gap:4px 5px;align-items:center">
+            <span class="lbl">Student ID *</span><span class="in"></span>
+            <span class="lbl">Password *</span><span class="in"></span>
+            <span class="lbl">Full Name (as in records) *</span><span class="in"></span>
+            <span class="lbl">Faculty *</span><span class="in" style="justify-content:space-between">-- Select --<span>▾</span></span>
+            <span class="lbl">Academic Year *</span><span class="in" style="justify-content:space-between">-- Select --<span>▾</span></span>
+            <span class="lbl">E-mail *</span><span class="in"></span>
+          </div>
+          <div style="display:flex;gap:4px;align-items:flex-start;margin-top:6px;font-size:7.4px"><span style="width:8px;height:8px;border:1px solid #777;flex:none;margin-top:1px"></span><span>I have read and accept the Library Regulations and the Terms of Use of the Portal (Ref. LIB-REG-2019) *</span></div>
+          <div style="margin-top:6px;display:flex;gap:4px"><span class="bt">Reset</span><span class="bt">Submit Form</span></div>
+          <div style="margin-top:6px;font-size:7.4px"><span class="lnk">Forgot password?</span> | <span class="lnk">New user registration</span> | <span class="lnk">Help</span> | <span class="lnk">Accessibility</span> | <span class="lnk">Old portal</span></div>
+          <div style="margin-top:6px;border-top:1px solid #ddd;padding-top:4px;font-size:7.2px" class="gry">Latest news: <span class="lnk">New e-journal trial (IEEE)</span> · <span class="lnk">Exam period hours</span> · <span class="lnk">Thesis submission guidelines</span> · <span class="lnk">Library survey 2025</span></div>
+          <div style="margin-top:8px;font-size:7px" class="gry">© University Library. Best viewed at 1280×1024 in Internet Explorer 11 or later.</div>
+        </div>
+      </div></div>
+      <div class="cap"><span class="code cb">A1</span><b>Home / Login</b><span>First screen when the app opens</span></div>
+    </div>
+    <div class="flowarrow">→<small>after<br>Submit Form</small></div>
+    <!-- A2 -->
+    <div>
+      <div class="phone"><div class="scr bad">
+        <div class="sb"><span>10:40</span><span>▮▮▮ ◔</span></div>
+        <div class="hdr" style="padding:5px 8px"><div class="seal" style="width:20px;height:20px;font-size:7px">UL</div><div style="font:bold 8px Tahoma">ILMP · Online Public Access Catalogue</div></div>
+        <div class="nav"><span>Home</span><span>Svc</span><span>E-Res</span><span class="on">OPAC</span><span>MyAcc</span><span>Regs</span><span>FAQ</span><span>Logout</span></div>
+        <div style="padding:5px 7px">
+          <div class="ttl" style="margin-top:2px">OPAC — Catalogue Search Results</div>
+          <div style="display:flex;gap:3px;align-items:center;font-size:7.6px"><span>Type:</span><span class="in" style="width:52px;justify-content:space-between">Keyword<span>▾</span></span><span class="in" style="flex:1">algorithms</span><span class="bt" style="padding:1px 4px">Go</span></div>
+          <div style="margin-top:4px;font-size:7.4px;color:#555">Records 1–6 of 214 | Sort: <span class="lnk">Relevance</span> | Page <b>1</b> <span class="lnk">2</span> <span class="lnk">3</span> … <span class="lnk">36</span></div>
+          <div style="margin-top:4px">
+            <div class="ri"><span class="tc cv1"></span><div><span class="lnk" style="font-weight:bold">Introduction to algorithms / Thomas H. Cormen … [et al.]</span><br>Cormen, Thomas H.; Leiserson, Charles E.; Rivest, Ronald L.; Stein, Clifford · MIT Press, 2022 · 4th ed. · 1312 p. · ISBN 9780262046305 · Call No. QA76.6 .C662 2022 · Loc: MAIN-L2-STK<br>Status: <span style="color:#16A34A">●</span> In (2/3) <span class="bts"><span class="bt">View</span><span class="bt">Hold</span><span class="bt">Request</span><span class="bt">+List</span></span></div></div>
+            <div class="ri"><span class="tc cv2"></span><div><span class="lnk" style="font-weight:bold">Clean code : a handbook of agile software craftsmanship</span><br>Martin, Robert C. · Prentice Hall, 2009 · 1st ed. · 431 p. · ISBN 9780132350884 · Call No. QA76.76 .D47 M37 · Loc: MAIN-L2-STK<br>Status: <span style="color:#DC2626">●</span> Out <span class="bts"><span class="bt">View</span><span class="bt">Hold</span><span class="bt">Request</span><span class="bt">+List</span></span></div></div>
+            <div class="ri"><span class="tc cv3"></span><div><span class="lnk" style="font-weight:bold">Software engineering / Ian Sommerville</span><br>Sommerville, Ian · Pearson, 2016 · 10th ed. · 810 p. · ISBN 9780133943030 · Call No. QA76.758 .S657 · Loc: MAIN-L2-STK<br>Status: <span style="color:#16A34A">●</span> In (1/4)* <span class="bts"><span class="bt">View</span><span class="bt">Hold</span><span class="bt">Request</span><span class="bt">+List</span></span></div></div>
+            <div class="ri"><span class="tc cv4"></span><div><span class="lnk" style="font-weight:bold">Database system concepts / Abraham Silberschatz …</span><br>Silberschatz, A.; Korth, H.; Sudarshan, S. · McGraw-Hill, 2020 · 7th ed. · ISBN 9780078022159 · Loc: MAIN-L2-REF<br>Status: Avl <span class="bts"><span class="bt">View</span><span class="bt">Hold</span><span class="bt">Request</span><span class="bt">+List</span></span></div></div>
+            <div class="ri"><span class="tc cv5"></span><div><span class="lnk" style="font-weight:bold">Algorithms in C++ : parts 1–4</span><br>Sedgewick, Robert · Addison-Wesley, 1998 · 3rd ed. · Loc: STORE<br>Status: <span style="color:#16A34A">●</span> Lib Use Only <span class="bts"><span class="bt">View</span><span class="bt">Hold</span><span class="bt">Request</span><span class="bt">+List</span></span></div></div>
+          </div>
+          <div style="font-size:7px;margin-top:3px" class="gry">* Shelf status may not reflect items currently in transit or on hold.</div>
+          <div style="margin-top:5px;font-size:7.4px">Page <b>1</b> <span class="lnk">2</span> <span class="lnk">3</span> … <span class="lnk">36</span> <span class="lnk">Next »</span> &nbsp; <span class="lnk" style="font-size:7px">Advanced options ▸</span></div>
+        </div>
+      </div></div>
+      <div class="cap"><span class="code cb">A2</span><b>Book catalogue</b><span>Search results for “algorithms”</span></div>
+    </div>
+    <div class="notes"><h3>Your notes</h3></div>
+  </div>
+  <style>.ri{display:flex;gap:4px;padding:4px 0;border-bottom:1px solid #E1E5EB;font-size:7.4px;line-height:1.3}.ri .tc{width:14px;height:20px;flex:none;border-radius:1px;margin-top:2px}.ri .bts{display:inline-flex;gap:2px;margin-left:3px}.ri .bt{padding:0 3px;font-size:7px}</style>
+  <div class="foot"><span>Part A · The current design</span><span>4</span></div>
+</section>
+
+<!-- ================= A3 + A4 ================= -->
+<section class="pg">
+  <div class="top"><span class="part pA">Part A</span><h2>Book details → Request form</h2><span class="sub">Omar opens the first result and tries to reserve it</span></div>
+  <div class="row">
+    <!-- A3 -->
+    <div>
+      <div class="phone"><div class="scr bad">
+        <div class="sb"><span>10:41</span><span>▮▮▮ ◔</span></div>
+        <div class="hdr" style="padding:5px 8px"><div class="seal" style="width:20px;height:20px;font-size:7px">UL</div><div style="font:bold 8px Tahoma">ILMP · Online Public Access Catalogue</div></div>
+        <div class="nav"><span>Home</span><span>Svc</span><span>E-Res</span><span class="on">OPAC</span><span>MyAcc</span><span>Regs</span><span>FAQ</span><span>Logout</span></div>
+        <div style="padding:5px 7px">
+          <div style="font-size:7.2px" class="gry">Home › OPAC › Results › Record 0004471</div>
+          <div class="ttl">Full Bibliographic Record</div>
+          <div style="display:flex;gap:4px;margin-bottom:5px"><span class="bt" style="background:#1F3A68;color:#fff;border-color:#1F3A68;padding:3px 8px">🖶 Print Record</span><span class="bt" style="background:#1F3A68;color:#fff;border-color:#1F3A68;padding:3px 8px">Export (MARC)</span><span class="bt" style="padding:3px 8px">E-mail</span></div>
+          <table>
+            <tr><th style="width:70px">Record No.</th><td>0004471</td></tr>
+            <tr><th>Material Type</th><td>BK</td></tr>
+            <tr><th>Title Statement</th><td>Introduction to algorithms / Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein</td></tr>
+            <tr><th>Edition</th><td>4th ed.</td></tr>
+            <tr><th>Imprint</th><td>Cambridge, Mass. : The MIT Press, c2022</td></tr>
+            <tr><th>Phys. Desc.</th><td>xviii, 1292 p. : ill. ; 24 cm</td></tr>
+            <tr><th>Subjects</th><td>Computer programming; Computer algorithms</td></tr>
+            <tr><th>ISBN</th><td>9780262046305 (hbk)</td></tr>
+            <tr><th>Call No.</th><td>QA76.6 .C662 2022</td></tr>
+            <tr><th>Language</th><td>eng</td></tr>
+            <tr><th>Notes</th><td>Includes bibliographical references and index.</td></tr>
+            <tr><th>Holdings</th><td>3 &nbsp;|&nbsp; Status: see shelf</td></tr>
+          </table>
+          <div style="margin-top:5px;border:1px solid #C3C9D2;padding:3px 4px;background:#F4F6F9;font-size:7.6px">▸ <b>Notice</b> <span class="gry">(click to expand)</span></div>
+          <div style="margin-top:5px;font-size:7.6px">Related: <span class="lnk">Algorithms (Sedgewick)</span> · <span class="lnk">Data structures</span> · <span class="lnk">Same author</span> · <span class="lnk">Subject browse</span></div>
+          <div style="margin-top:6px;display:flex;gap:3px;align-items:center"><span class="bt" style="background:#fff;color:#555">Place Hold</span><span class="bt" style="background:#fff;color:#555">Place Request</span><span class="bt" style="background:#fff;color:#555">Add to List</span><span class="bt" style="background:#fff;color:#555">Back</span></div>
+          <div style="margin-top:6px;font-size:6.8px" class="gry">Loan period subject to Regulation 7.2(b). Standard loan 14 days from issue. Requested items must be collected in person. Hold and Request privileges may be suspended for users with outstanding fines.</div>
+        </div>
+      </div></div>
+      <div class="cap"><span class="code cb">A3</span><b>Book details</b><span>Introduction to Algorithms</span></div>
+    </div>
+    <div class="flowarrow">→<small>after<br>Place Request</small></div>
+    <!-- A4 step -->
+    <div>
+      <div class="phone"><div class="scr bad">
+        <div class="sb"><span>10:42</span><span>▮▮▮ ◔</span></div>
+        <div class="hdr" style="padding:5px 8px"><div class="seal" style="width:20px;height:20px;font-size:7px">UL</div><div style="font:bold 8px Tahoma">ILMP · Circulation Services</div></div>
+        <div class="nav"><span>Home</span><span class="on">Svc</span><span>E-Res</span><span>OPAC</span><span>MyAcc</span><span>Regs</span><span>FAQ</span><span>Logout</span></div>
+        <div style="padding:5px 7px">
+          <div class="ttl">Request Form</div>
+          <p style="font-size:7.6px">Please complete all mandatory fields (*) to proceed. Incomplete forms will not be processed.</p>
+          <div style="display:grid;grid-template-columns:82px 1fr;gap:5px 5px;align-items:center;margin-top:6px">
+            <span class="lbl">Student ID *</span><span class="in"></span>
+            <span class="lbl">Full Name *</span><span class="in"></span>
+            <span class="lbl">E-mail *</span><span class="in"></span>
+            <span class="lbl">ISBN / Record No. *</span><span class="in"></span>
+            <span class="lbl">Request Type *</span><span style="font-size:7.6px">○ Normal &nbsp;○ ILL &nbsp;○ Recall</span>
+            <span class="lbl">Pickup Point *</span><span class="in" style="justify-content:space-between">-- Select --<span>▾</span></span>
+            <span class="lbl">Required by *</span><span class="in gry">dd/mm/yyyy</span>
+            <span class="lbl">Ref.</span><span class="in"></span>
+            <span class="lbl">Remarks</span><span class="in" style="height:26px"></span>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:4px"><span class="bt" style="background:#1F3A68;color:#fff;border-color:#1F3A68">Cancel</span><span class="bt">Next &gt;&gt;</span></div>
+          <div style="margin-top:8px;font-size:7px" class="gry">Session expires after 5 minutes of inactivity. Unsaved data will be lost.</div>
+        </div>
+      </div></div>
+      <div class="cap"><span class="code cb">A4</span><b>Request form</b><span>Opened from “Place Request”</span></div>
+    </div>
+    <div class="notes"><h3>Your notes</h3></div>
+  </div>
+  <div class="foot"><span>Part A · The current design</span><span>5</span></div>
+</section>
+
+<!-- ================= A4 error + A5 ================= -->
+<section class="pg">
+  <div class="top"><span class="part pA">Part A</span><h2>Request form (after Next) → Confirmation</h2><span class="sub">Omar typed the date as 6-11-2026</span></div>
+  <div class="row">
+    <div>
+      <div class="phone"><div class="scr bad">
+        <div class="sb"><span>10:44</span><span>▮▮▮ ◔</span></div>
+        <div class="hdr" style="padding:5px 8px"><div class="seal" style="width:20px;height:20px;font-size:7px">UL</div><div style="font:bold 8px Tahoma">ILMP · Circulation Services</div></div>
+        <div class="nav"><span>Home</span><span class="on">Svc</span><span>E-Res</span><span>OPAC</span><span>MyAcc</span><span>Regs</span><span>FAQ</span><span>Logout</span></div>
+        <div style="padding:5px 7px">
+          <div style="color:#D11;font-weight:bold;font-size:8px">Error 0x1F: Invalid input. The form could not be processed. Please try again.</div>
+          <div class="ttl">Request Form</div>
+          <p style="font-size:7.6px">Please complete all mandatory fields (*) to proceed. Incomplete forms will not be processed.</p>
+          <div style="display:grid;grid-template-columns:82px 1fr;gap:5px 5px;align-items:center;margin-top:6px">
+            <span class="lbl">Student ID *</span><span class="in"></span>
+            <span class="lbl">Full Name *</span><span class="in"></span>
+            <span class="lbl">E-mail *</span><span class="in"></span>
+            <span class="lbl">ISBN / Record No. *</span><span class="in"></span>
+            <span class="lbl">Request Type *</span><span style="font-size:7.6px">○ Normal &nbsp;○ ILL &nbsp;○ Recall</span>
+            <span class="lbl">Pickup Point *</span><span class="in" style="justify-content:space-between">-- Select --<span>▾</span></span>
+            <span class="lbl">Required by *</span><span class="in gry">dd/mm/yyyy</span>
+            <span class="lbl">Ref.</span><span class="in"></span>
+            <span class="lbl">Remarks</span><span class="in" style="height:26px"></span>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:4px"><span class="bt" style="background:#1F3A68;color:#fff;border-color:#1F3A68">Cancel</span><span class="bt">Next &gt;&gt;</span></div>
+          <div style="margin-top:8px;font-size:7px" class="gry">Session expires after 5 minutes of inactivity. Unsaved data will be lost.</div>
+          <div style="margin-top:14px;border-top:1px dashed #ccc;padding-top:6px;font-size:7.4px;color:#555"><i>(Second attempt succeeds. “Next &gt;&gt;” shows a read-only summary with a “Submit” button, which leads to A5.)</i></div>
+        </div>
+      </div></div>
+      <div class="cap"><span class="code cb">A4</span><b>Request form — after “Next”</b><span>Same screen, returned with an error</span></div>
+    </div>
+    <div class="flowarrow">→<small>after<br>Submit</small></div>
+    <div>
+      <div class="phone"><div class="scr bad">
+        <div class="sb"><span>10:47</span><span>▮▮▮ ◔</span></div>
+        <div class="hdr" style="padding:5px 8px"><div class="seal" style="width:20px;height:20px;font-size:7px">UL</div><div style="font:bold 8px Tahoma">ILMP · Circulation Services</div></div>
+        <div class="nav"><span>Home</span><span class="on">Svc</span><span>E-Res</span><span>OPAC</span><span>MyAcc</span><span>Regs</span><span>FAQ</span><span>Logout</span></div>
+        <div style="padding:5px 7px">
+          <div class="ttl">Transaction Completed</div>
+          <p style="font-size:9px;color:#14532D;font-weight:bold">Your request has been processed successfully.</p>
+          <table style="margin-top:6px">
+            <tr><th style="width:70px">Ref. No.</th><td>RQ-2026-11-04-1042 / 0004471-B</td></tr>
+            <tr><th>Item</th><td>Introduction to algorithms / Thomas H. Cormen … [et al.]</td></tr>
+            <tr><th>Request Type</th><td>N</td></tr>
+            <tr><th>Pickup Point</th><td>MAIN</td></tr>
+            <tr><th>Request Date</th><td>2026-11-04 10:47:12</td></tr>
+            <tr><th>Status</th><td>PND-Q</td></tr>
+          </table>
+          <div style="margin-top:8px;display:flex;gap:4px"><span class="bt">Print</span><span class="bt">New Search</span><span class="bt">Home</span></div>
+          <p style="margin-top:8px;font-size:7.6px">Thank you for using the Integrated Library Management Portal. For enquiries please contact the Circulation Section during official working hours quoting your Ref. No.</p>
+          <div style="margin-top:150px;font-size:6.6px" class="gry">Note: Requested items must be collected in person from the Circulation Desk within 48 hours of the availability notice, failing which the request will lapse automatically and the item will be released. Availability notices are sent to the registered e-mail address only. The Directorate is not responsible for undelivered e-mail.</div>
+        </div>
+      </div></div>
+      <div class="cap"><span class="code cb">A5</span><b>Confirmation</b><span>Shown after the request is submitted</span></div>
+    </div>
+    <div class="notes"><h3>Your notes</h3></div>
+  </div>
+  <div class="foot"><span>Part A · The current design</span><span>6</span></div>
+</section>
+
+<!-- ================= A6 ================= -->
+<section class="pg">
+  <div class="top"><span class="part pA">Part A</span><h2>My Account / loan tracking</h2><span class="sub">Omar checks what he needs to collect, return or pay</span></div>
+  <div class="row">
+    <div>
+      <div class="phone"><div class="scr bad">
+        <div class="sb"><span>10:50</span><span>▮▮▮ ◔</span></div>
+        <div class="hdr" style="padding:5px 8px"><div class="seal" style="width:20px;height:20px;font-size:7px">UL</div><div style="font:bold 8px Tahoma">ILMP · My Account</div></div>
+        <div class="nav"><span>Home</span><span>Svc</span><span>E-Res</span><span>OPAC</span><span class="on">MyAcc</span><span>Messages (3)</span><span>Regs</span><span>Logout</span></div>
+        <div style="padding:5px 7px">
+          <div class="ttl">Circulation Summary — 20230417</div>
+          <div style="font-size:7.4px;margin-bottom:4px">Patron: KHALID, OMAR · Type: UG · Status: A · Exp: 31/08/27</div>
+          <table>
+            <tr><th></th><th>Ref</th><th>Item</th><th>Typ</th><th>St</th><th>Iss.</th><th>Due</th><th>Fn</th></tr>
+            <tr><td>☐</td><td>RQ-1042</td><td>Introduction to algorithms</td><td>R</td><td>PND</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>☐</td><td>RQ-1031</td><td>Software engineering</td><td>R</td><td>RDY</td><td>—</td><td>05/11/26</td><td>—</td></tr>
+            <tr><td>☐</td><td>WL-0877</td><td>Clean code : a handbook…</td><td>W</td><td>Q2</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>☐</td><td>LN-5521</td><td>Database system concepts</td><td>L</td><td>ACT</td><td>24/10/26</td><td>11/07/26</td><td>—</td></tr>
+            <tr><td>☐</td><td>LN-5498</td><td>Discrete mathematics and its…</td><td>L</td><td>OD</td><td>19/10/26</td><td>2026-11-02</td><td>0.500</td></tr>
+            <tr><td>☐</td><td>LN-5310</td><td>Calculus : early transcend…</td><td>L</td><td>RTN</td><td>22/09/26</td><td>06/10/26</td><td>0.000</td></tr>
+          </table>
+          <div style="margin-top:5px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:7.6px">Total Fn: <b>0.500</b></span><span><span class="bt">Cancel Selected</span> <span class="bt">Refresh</span></span></div>
+          <div style="margin-top:6px;font-size:7px" class="gry">Fn calculated as per Reg. 9.4. Typ: R=Request, W=Waiting, L=Loan. St: PND=Pending, RDY=Ready, Q=Queue, ACT=Active, OD=Overdue, RTN=Returned. Dates shown in system format.</div>
+          <div class="ttl" style="margin-top:10px">Account Options</div>
+          <div style="font-size:7.6px;line-height:1.7"><span class="lnk">Change password</span> · <span class="lnk">Update e-mail</span> · <span class="lnk">Reading history (export CSV)</span> · <span class="lnk">Saved lists</span> · <span class="lnk">Preferences</span> · <span class="lnk">Request history</span> · <span class="lnk">Payment history</span></div>
+          <div style="margin-top:10px;font-size:7px" class="gry">Last login: 2026-11-04 10:39:55 from 10.12.4.188</div>
+        </div>
+      </div></div>
+      <div class="cap"><span class="code cb">A6</span><b>My Account</b><span>Reached via “MyAcc” in the menu</span></div>
+    </div>
+    <div class="notes" style="flex:1.2"><h3>Your notes</h3></div>
+    <div style="width:250px;background:#FFF7F8;border:1px solid #FECDD3;border-radius:14px;padding:16px 18px;height:596px">
+      <b style="font:600 15px Bahnschrift">Try these tasks as Omar</b>
+      <ol style="padding-left:18px;font-size:12.5px;line-height:1.6;color:var(--ink2);margin-top:10px">
+        <li>Which book can you collect <b>today</b>, and until when?</li>
+        <li>When is <i>Database System Concepts</i> due?</li>
+        <li>Do you owe a fine? How much, in what currency, and why?</li>
+        <li>Where is <i>Introduction to Algorithms</i> in the process?</li>
+        <li>You have 3 messages. What do they say?</li>
+      </ol>
+      <p class="small" style="margin-top:12px">Time yourself. Note every moment you had to guess.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Part A · The current design</span><span>7</span></div>
+</section>
+
+<!-- ================= A7 librarian ================= -->
+<section class="pg">
+  <div class="top"><span class="part pA">Part A</span><h2>Librarian circulation console</h2><span class="sub">Desktop · used at the circulation desk</span></div>
+  <div style="border:1px solid #9CA3AF;border-radius:8px;overflow:hidden;box-shadow:0 10px 24px rgba(15,23,42,.12);width:1035px" class="bad">
+    <div style="background:#E5E7EB;padding:5px 10px;display:flex;gap:6px;align-items:center;font-size:9px;color:#374151;font-family:Segoe UI"><span style="width:9px;height:9px;border-radius:50%;background:#F87171"></span><span style="width:9px;height:9px;border-radius:50%;background:#FBBF24"></span><span style="width:9px;height:9px;border-radius:50%;background:#34D399"></span><span style="margin-left:10px;background:#fff;border-radius:4px;padding:2px 10px;flex:1">ilmp.library.university.example/staff/circ/console.aspx?mode=ALL&amp;sid=7f3a…</span></div>
+    <div class="hdr" style="padding:6px 10px"><div class="seal" style="width:22px;height:22px;font-size:7px">UL</div><div style="font:bold 10px Tahoma">ILMP Staff Module · Circulation Console</div><div style="margin-left:auto;font-size:8.5px">User: lib.staff04 · Branch: MAIN · Session 7f3a91 · <span style="text-decoration:underline">Logout</span></div></div>
+    <div style="display:flex">
+      <div style="width:150px;background:#EEF1F5;border-right:1px solid #C3C9D2;padding:6px;font-size:8.6px;line-height:1.75;color:#1F3A68">
+        <b>Circulation</b><br>› Console (All)<br>› Check-out<br>› Check-in<br>› Requests<br>› Holds<br>› Recalls<br>› ILL<br>› Fines &amp; Fees<br>› Patron Lookup<br>› Item Lookup<br><b>Cataloguing</b><br>› MARC Editor<br>› Authorities<br><b>Reports</b><br>› Daily Stats<br>› Overdue List<br>› Export<br><b>Admin</b><br>› Parameters<br>› Users
+      </div>
+      <div style="flex:1;padding:8px 10px">
+        <div style="display:flex;gap:8px;align-items:center;font-size:8.6px">
+          <b style="font-size:10px;color:#1F3A68">Console — All Transactions (37)</b>
+          <span style="margin-left:14px">Exact RecID:</span><span class="in" style="width:80px"></span><span class="bt">Filter</span>
+          <span style="margin-left:auto">Action:</span><span class="in" style="width:120px;justify-content:space-between">-- Select --<span>▾</span></span><span class="bt">Go</span>
+        </div>
+        <table style="margin-top:6px">
+          <tr><th>☐</th><th>RecID</th><th>Created</th><th>CrBy</th><th>LastMod</th><th>SessID</th><th>Typ</th><th>ItemRec</th><th>Barcode</th><th>Title</th><th class="gry">Pat.ID</th><th>PType</th><th>St</th><th>Loc</th><th>Due</th><th>Fn</th></tr>
+          <tr><td>☐</td><td>RQ-1042</td><td>04/11/26 10:47</td><td>WEB</td><td>04/11/26 10:47</td><td>a91c22</td><td>R</td><td>0004471</td><td>31120004471</td><td>Introduction to algorithms /</td><td class="gry">20230417</td><td>UG</td><td>PND</td><td>MAIN-L2</td><td>—</td><td>—</td></tr>
+          <tr><td>☐</td><td>RQ-1039</td><td>04/11/26 09:05</td><td>WEB</td><td>04/11/26 09:05</td><td>77be01</td><td>R</td><td>0003310</td><td>31120003310</td><td>Database system concepts /</td><td class="gry">20221183</td><td>UG</td><td>PND</td><td>MAIN-L2</td><td>—</td><td>—</td></tr>
+          <tr><td>☐</td><td>LN-5498</td><td>19/10/26 12:10</td><td>lib.staff02</td><td>03/11/26 00:00</td><td>SYS</td><td>L</td><td>0002204</td><td>31120002204</td><td>Discrete mathematics and its applications /</td><td class="gry">20230417</td><td>UG</td><td>OD</td><td>OUT</td><td>02/11/26</td><td>0.500</td></tr>
+          <tr><td>☐</td><td>RQ-1036</td><td>03/11/26 16:20</td><td>WEB</td><td>03/11/26 16:20</td><td>c1d9e4</td><td>R</td><td>0001187</td><td>31120001187</td><td>Calculus : early transcendentals /</td><td class="gry">20240052</td><td>UG</td><td>PND</td><td>MAIN-L1</td><td>—</td><td>—</td></tr>
+          <tr><td>☐</td><td>RQ-1031</td><td>02/11/26 11:02</td><td>SYS</td><td>03/11/26 14:00</td><td>SYS</td><td>R</td><td>0004012</td><td>31120004012</td><td>Software engineering /</td><td class="gry">20230417</td><td>UG</td><td>RDY</td><td>DESK</td><td>05/11/26</td><td>—</td></tr>
+          <tr><td>☐</td><td>LN-5530</td><td>21/10/26 13:44</td><td>lib.staff01</td><td>21/10/26 13:44</td><td>e09a7f</td><td>L</td><td>0003871</td><td>31120003871</td><td>Clean code : a handbook of agile software craftsmanship /</td><td class="gry">20220877</td><td>UG</td><td>ACT</td><td>OUT</td><td>04/11/26</td><td>—</td></tr>
+          <tr><td>☐</td><td>RQ-1028</td><td>01/11/26 08:30</td><td>WEB</td><td>02/11/26 17:30</td><td>SYS</td><td>R</td><td>0002205</td><td>31120002205</td><td>Discrete mathematics and its applications /</td><td class="gry">20230991</td><td>UG</td><td>RDY</td><td>DESK</td><td>04/11/26</td><td>—</td></tr>
+          <tr><td>☐</td><td>LN-5521</td><td>24/10/26 10:15</td><td>lib.staff04</td><td>24/10/26 10:15</td><td>5ab310</td><td>L</td><td>0003309</td><td>31120003309</td><td>Database system concepts /</td><td class="gry">20230417</td><td>UG</td><td>ACT</td><td>OUT</td><td>07/11/26</td><td>—</td></tr>
+          <tr><td>☐</td><td>LN-5310</td><td>22/09/26 09:12</td><td>lib.staff02</td><td>06/10/26 11:40</td><td>91ff20</td><td>L</td><td>0001186</td><td>31120001186</td><td>Calculus : early transcendentals /</td><td class="gry">20230417</td><td>UG</td><td>RTN</td><td>MAIN-L1</td><td>06/10/26</td><td>0.000</td></tr>
+          <tr><td>☐</td><td>WL-0877</td><td>28/10/26 19:03</td><td>WEB</td><td>28/10/26 19:03</td><td>0c7d55</td><td>W</td><td>0003870</td><td>—</td><td>Clean code : a handbook of agile software craftsmanship /</td><td class="gry">20230417</td><td>UG</td><td>Q2</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>☐</td><td>LN-5477</td><td>14/10/26 15:20</td><td>lib.staff01</td><td>04/11/26 09:58</td><td>3e2b8a</td><td>L</td><td>0003872</td><td>31120003872</td><td>Clean code : a handbook of agile software craftsmanship /</td><td class="gry">20210334</td><td>UG</td><td>RTN</td><td>CHK-IN</td><td>28/10/26</td><td>0.000</td></tr>
+          <tr><td>☐</td><td>RQ-1025</td><td>31/10/26 14:12</td><td>WEB</td><td>02/11/26 10:00</td><td>SYS</td><td>R</td><td>0004013</td><td>31120004013</td><td>Software engineering /</td><td class="gry">20220461</td><td>UG</td><td>COL</td><td>OUT</td><td>16/11/26</td><td>—</td></tr>
+        </table>
+        <div style="margin-top:5px;display:flex;justify-content:space-between;font-size:8.4px;color:#555"><span>Showing 1–12 of 37 · <span class="lnk">Next</span> · Rows per page: 12</span><span class="gry">Last action: 1 record(s) affected.</span></div>
+        <div style="margin-top:6px;font-size:8px" class="gry">Action list: MARK-RDY · ISSUE · RETURN · CANCEL · EXTEND · LOST · DAMAGED · RECALC-FN · PRINT-SLIP. Select one or more rows, choose an action, then click Go. Codes: PND pending · RDY ready · COL collected · ACT active · OD overdue · RTN returned · Q queue.</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;gap:20px;margin-top:16px;align-items:flex-start">
+    <div class="cap" style="text-align:left;width:auto;margin:0"><span class="code cb">A7</span><b>Librarian circulation console</b><span>Omar is at the desk to collect his book. The librarian must find his ready item and issue it.</span></div>
+    <div class="notes" style="height:72px;flex:1;background:none"><h3>Your notes</h3></div>
+  </div>
+  <div class="foot"><span>Part A · The current design</span><span>8</span></div>
+</section>
+
+<!-- ================= PART B: ACTIVITY ================= -->
+<section class="pg" style="background:#FFFCF2">
+  <div class="top"><span class="part pB">Part B</span><h2 style="font-size:30px">YOUR TURN: FIX THE EXPERIENCE</h2><span class="sub">Work in pairs · 15–20 minutes</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1.05fr;gap:30px;margin-top:6px">
+    <div>
+      <h3 style="font-size:17px">Instructions</h3>
+      <div style="margin-top:10px;display:grid;gap:9px">
+        <div class="ins"><span>1</span><p>Examine the flawed wireframes (A1–A7).</p></div>
+        <div class="ins"><span>2</span><p>Identify at least <b>five</b> usability problems.</p></div>
+        <div class="ins"><span>3</span><p>Explain <b>why</b> each problem affects the user.</p></div>
+        <div class="ins"><span>4</span><p><b>Prioritise</b> the most serious problems.</p></div>
+        <div class="ins"><span>5</span><p>Sketch a redesigned <b>homepage, catalogue or reservation flow</b>.</p></div>
+        <div class="ins"><span>6</span><p>Explain the reasoning behind your decisions — link them to user goals or requirements in Handout 02.</p></div>
+      </div>
+      <div style="margin-top:18px;border-radius:12px;background:#fff;border:1px solid #FDE68A;padding:12px 16px;font-size:12.5px;line-height:1.5;color:var(--ink2)"><b>Remember:</b> a problem is not “I don’t like the colour”. Describe what the user is trying to do, what goes wrong, and what it costs them (time, errors, confusion, exclusion).</div>
+    </div>
+    <div>
+      <h3 style="font-size:17px">Discussion questions</h3>
+      <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="dq">What is the user’s primary goal?</div>
+        <div class="dq">Which steps are unnecessary?</div>
+        <div class="dq">Where should authentication happen?</div>
+        <div class="dq">How should the interface display availability?</div>
+        <div class="dq">How should unavailable books be handled?</div>
+        <div class="dq">How should physical collection be communicated?</div>
+        <div class="dq">How can the student monitor their borrowing period?</div>
+        <div class="dq">How should the system communicate errors?</div>
+        <div class="dq">What should change on mobile?</div>
+        <div class="dq">How can the librarian complete routine actions faster?</div>
+      </div>
+    </div>
+  </div>
+  <style>.ins{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.45}.ins span{flex:none;width:26px;height:26px;border-radius:50%;background:#92400E;color:#fff;display:grid;place-items:center;font:600 13px Bahnschrift}.dq{background:#fff;border:1px solid #F3E3B5;border-radius:10px;padding:10px 12px;font:500 13px Bahnschrift;color:#3F2D0C;min-height:52px;display:flex;align-items:center}</style>
+  <div class="foot"><span>Part B · Redesign activity</span><span>9</span></div>
+</section>
+
+<!-- ================= PART B: PROBLEM LOG ================= -->
+<section class="pg" style="background:#FFFCF2">
+  <div class="top"><span class="part pB">Part B</span><h2>Problem log</h2><span class="sub">Fill in at least five rows, then rank them</span></div>
+  <table class="log">
+    <thead><tr><th style="width:44px">Rank</th><th style="width:70px">Screen</th><th>What is the problem?</th><th>Who is affected, and how? (time, errors, confusion, exclusion)</th><th style="width:150px">Requirement / principle</th><th>Your proposed fix</th></tr></thead>
+    <tbody>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <div style="display:flex;gap:16px;margin-top:14px">
+    <div style="flex:1;border:1px solid #F3E3B5;background:#fff;border-radius:12px;padding:12px 16px;font-size:12px;color:var(--ink2);line-height:1.5"><b>Severity guide.</b> <b>High</b> — blocks the task or causes a wrong outcome. <b>Medium</b> — slows the user or causes avoidable errors. <b>Low</b> — cosmetic or minor annoyance.</div>
+    <div style="flex:1;border:1px solid #F3E3B5;background:#fff;border-radius:12px;padding:12px 16px;font-size:12px;color:var(--ink2);line-height:1.5"><b>Is it bad UX or missing functionality?</b> If the feature exists but is hard to find or use, it is a UX problem. If the system cannot do it at all, it is a functional gap. If it contradicts the SRS, it is a requirements problem.</div>
+  </div>
+  <style>.log{width:100%;border-collapse:collapse;font-size:12px;background:#fff}.log th{background:#78350F;color:#fff;text-align:left;padding:8px;font-weight:600}.log td{border:1px solid #E9D9AE;height:58px}</style>
+  <div class="foot"><span>Part B · Redesign activity</span><span>10</span></div>
+</section>
+
+<!-- ================= PART B: SKETCH CANVAS ================= -->
+<section class="pg" style="background:#FFFCF2">
+  <div class="top"><span class="part pB">Part B</span><h2>Sketch canvas</h2><span class="sub">Low-fidelity: boxes, lines and labels. No colours needed.</span></div>
+  <div style="display:flex;gap:26px;align-items:flex-start;justify-content:center">
+    <div><div class="sk"><div class="skscr"></div></div><div class="sklbl">Screen 1: ____________________</div></div>
+    <div class="fa2">→</div>
+    <div><div class="sk"><div class="skscr"></div></div><div class="sklbl">Screen 2: ____________________</div></div>
+    <div class="fa2">→</div>
+    <div><div class="sk"><div class="skscr"></div></div><div class="sklbl">Screen 3: ____________________</div></div>
+  </div>
+  <style>.sk{width:270px;height:560px;border:2.5px solid #57534E;border-radius:36px;padding:12px;background:#fff}.skscr{width:100%;height:100%;border:1px solid #D6D3D1;border-radius:26px;background-image:radial-gradient(#D6D3D1 1px,transparent 1.2px);background-size:16px 16px}.sklbl{margin-top:10px;font-size:13px;color:#57534E;text-align:center}.fa2{font:600 30px Bahnschrift;color:#A8A29E;margin-top:260px}</style>
+  <div class="foot"><span>Part B · Redesign activity · Dot grid = 16 px</span><span>11</span></div>
+</section>
+
+<!-- ================= STOP DIVIDER ================= -->
+<section class="pg" style="background:#7F1D1D;color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(0,0,0,.08) 0 24px,transparent 24px 48px)"></div>
+  <div style="position:relative">
+    <div style="width:130px;height:130px;margin:0 auto;background:#DC2626;clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%);display:grid;place-items:center;font:700 34px Bahnschrift;letter-spacing:1px;border:4px solid #fff">STOP</div>
+    <h1 style="font-size:54px;margin-top:30px;letter-spacing:.5px">STOP — Instructor Reveal</h1>
+    <p style="font-size:24px;margin-top:16px;color:#FECACA">Do Not Continue Until After the Redesign Activity.</p>
+    <p style="font-size:14px;margin-top:40px;color:#FCA5A5">Parts C and D contain the reference redesign and the answer key.</p>
+  </div>
+  <div class="foot" style="color:#FCA5A5"><span>Handout 03 · Instructor section begins</span><span>12</span></div>
+</section>
+
+<!-- ================= PART C: OVERVIEW ================= -->
+<section class="pg" style="background:#F3FBF7">
+  <div class="top"><span class="part pC">Part C</span><h2>The improved design — reference solution</h2><span class="sub">Mobile-first student app · desktop librarian dashboard</span></div>
+  <p style="font-size:14.5px;line-height:1.55;max-width:960px;color:var(--ink2)">The redesign keeps <b>exactly the same capabilities</b> as Part A — search, details, reservation, waitlist, notifications, loans, fines and librarian processing. What changes is <b>order, priority, wording and feedback</b>. It is a proposed reference, not the only correct answer.</p>
+  <h3 style="font-size:16px;margin-top:22px">Core student flow — authenticate only when it is needed</h3>
+  <div style="display:flex;align-items:center;gap:8px;margin-top:12px">
+    <div class="gf"><span class="code cg">C1</span><b>Explore</b><span>no sign-in</span></div><span class="ga">→</span>
+    <div class="gf"><span class="code cg">C2–C3</span><b>Select book</b><span>see real copies</span></div><span class="ga">→</span>
+    <div class="gf"><span class="code cg">C3</span><b>Reserve book</b><span>primary action</span></div><span class="ga">→</span>
+    <div class="gf" style="border-color:#D97706;background:#FFFBEB"><span class="code cg">C4</span><b>Authenticate</b><span>university sign-in</span></div><span class="ga">→</span>
+    <div class="gf"><span class="code cg">C4</span><b>Back to reservation</b><span>same book kept <span class="req">FR-08</span></span></div><span class="ga">→</span>
+    <div class="gf"><span class="code cg">C5</span><b>Confirm</b><span>status + next steps</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px">
+    <div class="gp"><b>1 · Goal first</b><p>The first screen answers “do you have this book?” — search is the hero, sign-in is optional.</p></div>
+    <div class="gp"><b>2 · Honest status</b><p>Availability counts real copies. Reservation states separate “Preparing” from “Ready for pickup”.</p></div>
+    <div class="gp"><b>3 · Physical world visible</b><p>Pickup location, hours, 48-hour window and ID requirement appear wherever a decision is made.</p></div>
+    <div class="gp"><b>4 · One primary action</b><p>Each screen has one clear, labelled main button. Destructive actions ask for confirmation.</p></div>
+  </div>
+  <div style="display:flex;gap:20px;margin-top:22px;font-size:12px;color:var(--ink2)">
+    <div style="flex:1;background:#fff;border:1px solid #BBF7D0;border-radius:12px;padding:12px 16px"><b>Screens in this part:</b> C1 Explore · C2 Search results (+ empty state) · C3 Book details (available / unavailable) · C4 Contextual sign-in · C5 Confirmation · C6 My Books (+ cancel dialog) · C7 Notifications (+ loading &amp; error states) · C8 Librarian dashboard · Visual system.</div>
+    <div style="flex:.7;background:#fff;border:1px solid #BBF7D0;border-radius:12px;padding:12px 16px">Green numbered markers <span class="ann" style="position:static;display:inline-grid;vertical-align:middle;width:18px;height:18px;font-size:10px">1</span> point to design decisions explained beside each screen.</div>
+  </div>
+  <style>.gf{background:#fff;border:1.5px solid #6EE7B7;border-radius:12px;padding:9px 11px;width:142px;font-size:12.5px;line-height:1.3}.gf b{display:block;margin-top:3px}.gf span:last-child{font-size:11px;color:var(--muted)}.ga{font:600 20px Bahnschrift;color:#10B981}.gp{background:#fff;border:1px solid #BBF7D0;border-radius:12px;padding:14px 16px}.gp b{font:600 14px Bahnschrift;color:#065F46}.gp p{font-size:12px;color:var(--ink2);margin-top:6px;line-height:1.45}</style>
+  <div class="foot"><span>Part C · Improved design (instructor reveal)</span><span>13</span></div>
+</section>
+
+<!-- ================= C1 + C2 + C2 empty ================= -->
+<section class="pg" style="background:#F3FBF7">
+  <div class="top"><span class="part pC">Part C</span><h2>Explore → Search results</h2><span class="sub">Guest can browse and search without signing in <span class="req">FR-01</span> <span class="req">FR-07</span></span></div>
+  <div class="row" style="gap:22px">
+    <!-- C1 -->
+    <div style="position:relative">
+      <div class="phone"><div class="scr good">
+        <div class="sb"><span>10:38</span><span>▮▮▮ ◔</span></div>
+        <div class="apph"><span class="logo"><i>UL</i>University Library</span><span style="font-weight:600;color:var(--pri);font-size:12px">Sign in</span></div>
+        <div class="h1">Find a book</div>
+        <div class="search">⌕ <span>Search title, author or ISBN</span></div>
+        <div class="chips"><span class="chip">Computer Science</span><span class="chip">Engineering</span><span class="chip">Mathematics</span><span class="chip">Business</span><span class="chip">Literature</span></div>
+        <div class="sec">Available in Computer Science <a>See all</a></div>
+        <div style="display:flex;gap:10px;padding:0 16px;overflow:hidden">
+          <div style="width:96px;flex:none"><div class="cover cv1" style="width:96px;height:120px;font-size:9px">Introduction to Algorithms</div><div style="font-weight:700;font-size:11px;margin-top:5px;line-height:1.2">Introduction to Algorithms</div><div style="font-size:10px;color:#475569">Cormen et al.</div><div class="badge b-ok" style="margin-top:4px;padding:2px 6px">● 2 available</div></div>
+          <div style="width:96px;flex:none"><div class="cover cv4" style="width:96px;height:120px;font-size:9px">Database System Concepts</div><div style="font-weight:700;font-size:11px;margin-top:5px;line-height:1.2">Database System Concepts</div><div style="font-size:10px;color:#475569">Silberschatz et al.</div><div class="badge b-ok" style="margin-top:4px;padding:2px 6px">● 1 available</div></div>
+          <div style="width:96px;flex:none"><div class="cover cv2" style="width:96px;height:120px;font-size:9px">Clean Code</div><div style="font-weight:700;font-size:11px;margin-top:5px;line-height:1.2">Clean Code</div><div style="font-size:10px;color:#475569">Robert C. Martin</div><div class="badge b-warn" style="margin-top:4px;padding:2px 6px">◷ Waitlist</div></div>
+        </div>
+        <div style="margin:14px 16px 0;border-radius:12px;background:var(--priL);padding:10px 12px;font-size:10.5px;color:#312E81;line-height:1.45"><b>How borrowing works</b><br>Reserve here → we prepare it → <b>collect in person</b> at the Main Library desk → 14-day loan.</div>
+        <div class="tab"><span class="on"><i>⌂</i>Explore</span><span><i>▤</i>My Books</span><span><i>🔔</i>Alerts</span><span><i>☺</i>Account</span></div>
+      </div></div>
+      <span class="ann" style="left:8px;top:122px">1</span><span class="ann" style="left:262px;top:66px">2</span><span class="ann" style="left:8px;top:332px">3</span><span class="ann" style="left:262px;top:470px">4</span>
+      <div class="cap"><span class="code cg">C1</span><b>Explore (guest)</b><span>Search is the hero; no login wall</span></div>
+    </div>
+    <!-- C2 -->
+    <div style="position:relative">
+      <div class="phone"><div class="scr good">
+        <div class="sb"><span>10:39</span><span>▮▮▮ ◔</span></div>
+        <div class="search" style="margin-top:8px;border-color:var(--pri);border-width:2px">⌕ <span style="color:var(--ink);flex:1">algorithms</span><span style="color:#64748B">✕</span></div>
+        <div class="chips"><span class="chip" style="border-color:#94A3B8">☰ Filters</span><span class="chip on">✓ Available now</span><span class="chip">Category ▾</span><span class="chip">Format ▾</span></div>
+        <div style="display:flex;justify-content:space-between;margin:10px 16px 0;font-size:10.5px;color:#475569"><span><b style="color:var(--ink)">5 results</b> for “algorithms”</span><span>Sort: Relevance ▾</span></div>
+        <div class="res"><div class="cover cv1" style="width:44px;height:60px"></div><div style="flex:1"><div class="t">Introduction to Algorithms</div><div class="a">Cormen, Leiserson, Rivest, Stein · 4th ed.</div><div class="av" style="color:var(--ok)">● 2 of 3 copies available</div></div><span style="color:#94A3B8;align-self:center">›</span></div>
+        <div class="res"><div class="cover cv3" style="width:44px;height:60px"></div><div style="flex:1"><div class="t">Software Engineering</div><div class="a">Ian Sommerville · 10th ed.</div><div class="av" style="color:var(--ok)">● 1 of 4 copies available</div></div><span style="color:#94A3B8;align-self:center">›</span></div>
+        <div class="res"><div class="cover cv4" style="width:44px;height:60px"></div><div style="flex:1"><div class="t">Database System Concepts</div><div class="a">Silberschatz, Korth, Sudarshan · 7th ed.</div><div class="av" style="color:var(--ok)">● 1 of 2 copies available</div></div><span style="color:#94A3B8;align-self:center">›</span></div>
+        <div style="margin:10px 16px 0;font-size:10.5px;color:#475569;display:flex;justify-content:space-between"><span>2 more results not available now</span><span style="color:var(--pri);font-weight:600">Show</span></div>
+        <div class="res" style="opacity:.95;border-bottom:none"><div class="cover cv2" style="width:44px;height:60px"></div><div style="flex:1"><div class="t">Clean Code</div><div class="a">Robert C. Martin</div><div class="av" style="color:var(--warn)">◷ All 2 copies on loan · 1 waiting</div></div><span style="color:#94A3B8;align-self:center">›</span></div>
+        <div class="tab"><span class="on"><i>⌂</i>Explore</span><span><i>▤</i>My Books</span><span><i>🔔</i>Alerts</span><span><i>☺</i>Account</span></div>
+      </div></div>
+      <span class="ann" style="left:262px;top:82px">5</span><span class="ann" style="left:262px;top:180px">6</span><span class="ann" style="left:262px;top:440px">7</span>
+      <div class="cap"><span class="code cg">C2</span><b>Search results</b><span>“Available now” filter on</span></div>
+    </div>
+    <!-- C2 empty -->
+    <div style="position:relative">
+      <div class="phone" style="width:240px;height:494px"><div class="scr good" style="width:222px;height:476px">
+        <div class="sb" style="padding:0 16px"><span>10:39</span><span>▮▮▮</span></div>
+        <div class="search" style="margin:8px 12px 0;height:36px">⌕ <span style="color:var(--ink);flex:1">algoritms</span><span style="color:#64748B">✕</span></div>
+        <div style="text-align:center;padding:34px 18px 0">
+          <div style="width:56px;height:56px;margin:0 auto;border-radius:50%;background:#F1F5F9;display:grid;place-items:center;font-size:24px;color:#64748B">⌕</div>
+          <div style="font:600 14px Bahnschrift;margin-top:12px">No results for “algoritms”</div>
+          <div style="font-size:11px;color:#475569;margin-top:6px">Did you mean</div>
+          <div class="btn s" style="height:36px;margin:6px 20px 0;font-size:12px;color:var(--pri);border-color:var(--pri)">algorithms</div>
+          <div style="font-size:10.5px;color:#475569;margin-top:16px;text-align:left;line-height:1.55">Try:<br>• checking the spelling<br>• searching by author or ISBN<br>• fewer words</div>
+          <div style="margin-top:14px;font-size:11px;font-weight:600;color:var(--pri)">Browse Computer Science ›</div>
+        </div>
+      </div></div>
+      <div class="cap" style="width:240px"><span class="code cg">C2</span><b>Empty state</b><span>Helps the user recover</span></div>
+    </div>
+    <div class="annlist" style="flex:1">
+      <div><span class="n">1</span><span><b>Search first.</b> The user’s main goal is the largest target on screen.</span></div>
+      <div><span class="n">2</span><span><b>Sign-in is optional</b> here; it appears only when needed <span class="req">FR-07</span>.</span></div>
+      <div><span class="n">3</span><span><b>Availability on every card</b> — text + icon, not colour alone.</span></div>
+      <div><span class="n">4</span><span><b>Expectations early:</b> pickup is physical; tab bar has labels.</span></div>
+      <div><span class="n">5</span><span><b>Filters visible</b> as chips; advanced options behind one button.</span></div>
+      <div><span class="n">6</span><span><b>Real copy counts</b> (“2 of 3”) instead of “In/Out” <span class="req">FR-04</span>.</span></div>
+      <div><span class="n">7</span><span><b>Unavailable</b> books are still shown, with the waitlist explained.</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>Part C · Improved design (instructor reveal)</span><span>14</span></div>
+</section>
+
+<!-- ================= C3 available + unavailable ================= -->
+<section class="pg" style="background:#F3FBF7">
+  <div class="top"><span class="part pC">Part C</span><h2>Book details — available vs. unavailable</h2><span class="sub">One clear primary action, with defined behaviour <span class="req">FR-03</span> <span class="req">FR-09</span> <span class="req">FR-11</span></span></div>
+  <div class="row" style="gap:26px">
+    <!-- C3 available -->
+    <div style="position:relative">
+      <div class="phone"><div class="scr good">
+        <div class="sb"><span>10:40</span><span>▮▮▮ ◔</span></div>
+        <div class="nb"><span class="bk">‹</span><span style="font-size:12px;color:#475569;font-family:Segoe UI;font-weight:600">Search results</span></div>
+        <div style="display:flex;gap:12px;padding:12px 16px 0">
+          <div class="cover cv1" style="width:74px;height:100px;font-size:8.5px">Introduction to Algorithms</div>
+          <div><div style="font:600 16px/1.2 Bahnschrift">Introduction to Algorithms</div><div style="font-size:11px;color:#475569;margin-top:3px">Cormen, Leiserson, Rivest, Stein</div><div style="font-size:10.5px;color:#475569">4th edition · 2022 · Computer Science</div></div>
+        </div>
+        <div style="margin:12px 16px 0;border-radius:12px;background:var(--okL);border:1px solid #A7F3D0;padding:10px 12px">
+          <div style="font-weight:700;color:var(--ok);font-size:12.5px">● 2 of 3 copies available</div>
+          <div style="font-size:10.5px;color:#065F46;margin-top:2px">Reserve now and we’ll set a copy aside for you.</div>
+        </div>
+        <div style="margin:10px 16px 0;display:grid;gap:8px;font-size:11px">
+          <div style="display:flex;gap:9px"><span style="width:26px;height:26px;border-radius:8px;background:#F1F5F9;display:grid;place-items:center;flex:none">⌂</span><span><b>Collect in person</b><br><span style="color:#475569">Main Library, circulation desk (Level 1)</span></span></div>
+          <div style="display:flex;gap:9px"><span style="width:26px;height:26px;border-radius:8px;background:#F1F5F9;display:grid;place-items:center;flex:none">◷</span><span><b>14-day loan</b><br><span style="color:#475569">Starts when you collect the book</span></span></div>
+          <div style="display:flex;gap:9px"><span style="width:26px;height:26px;border-radius:8px;background:#F1F5F9;display:grid;place-items:center;flex:none">⏳</span><span><b>Held for 48 h</b> once it’s ready<br><span style="color:#475569">We’ll notify you when to come</span></span></div>
+        </div>
+        <div style="margin:10px 16px 0;font-size:10.5px;color:#334155;line-height:1.45">The leading textbook on algorithms: sorting, graphs, dynamic programming and more.</div>
+        <div style="margin:6px 16px 0;font-size:11px;font-weight:600;color:var(--pri)">Details: ISBN, call number, shelf ▾</div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:10px 16px 16px;background:#fff;border-top:1px solid #E2E8F0"><div class="btn p">Reserve book</div></div>
+      </div></div>
+      <span class="ann" style="left:262px;top:200px">1</span><span class="ann" style="left:8px;top:280px">2</span><span class="ann" style="left:262px;top:440px">3</span><span class="ann" style="left:262px;top:548px">4</span>
+      <div class="cap"><span class="code cg">C3</span><b>Available</b><span>Introduction to Algorithms</span></div>
+    </div>
+    <!-- C3 unavailable -->
+    <div style="position:relative">
+      <div class="phone"><div class="scr good">
+        <div class="sb"><span>10:41</span><span>▮▮▮ ◔</span></div>
+        <div class="nb"><span class="bk">‹</span><span style="font-size:12px;color:#475569;font-family:Segoe UI;font-weight:600">Search results</span></div>
+        <div style="display:flex;gap:12px;padding:12px 16px 0">
+          <div class="cover cv2" style="width:74px;height:100px;font-size:8.5px">Clean Code</div>
+          <div><div style="font:600 16px/1.2 Bahnschrift">Clean Code</div><div style="font-size:11px;color:#475569;margin-top:3px">Robert C. Martin</div><div style="font-size:10.5px;color:#475569">2009 · Computer Science</div></div>
+        </div>
+        <div style="margin:12px 16px 0;border-radius:12px;background:var(--warnL);border:1px solid #FDE68A;padding:10px 12px">
+          <div style="font-weight:700;color:var(--warn);font-size:12.5px">◷ No copies available right now</div>
+          <div style="font-size:10.5px;color:#78350F;margin-top:2px">2 copies · both on loan or reserved · 1 student waiting</div>
+        </div>
+        <div style="margin:12px 16px 0;font-size:11px;line-height:1.5">
+          <b style="font:600 12.5px Bahnschrift">How the waitlist works</b>
+          <div style="display:flex;gap:8px;margin-top:6px"><span class="badge b-pri" style="padding:1px 7px">1</span><span>Join — you’ll be <b>#2 in the queue</b>.</span></div>
+          <div style="display:flex;gap:8px;margin-top:5px"><span class="badge b-pri" style="padding:1px 7px">2</span><span>When a copy is returned, it is set aside for the next student first.</span></div>
+          <div style="display:flex;gap:8px;margin-top:5px"><span class="badge b-pri" style="padding:1px 7px">3</span><span>We notify you; collect within 48 h at the Main Library desk.</span></div>
+        </div>
+        <div style="margin:10px 16px 0;font-size:10.5px;color:#475569">Free. You can leave the waitlist at any time in My Books.</div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:10px 16px 16px;background:#fff;border-top:1px solid #E2E8F0"><div class="btn p">Join waitlist</div></div>
+      </div></div>
+      <span class="ann" style="left:262px;top:200px">5</span><span class="ann" style="left:8px;top:300px">6</span><span class="ann" style="left:262px;top:548px">7</span>
+      <div class="cap"><span class="code cg">C3</span><b>Unavailable</b><span>Clean Code</span></div>
+    </div>
+    <div class="annlist" style="flex:1">
+      <div><span class="n">1</span><span><b>Availability first,</b> as copies — answers “can I get it?” instantly.</span></div>
+      <div><span class="n">2</span><span><b>Physical pickup, loan length and hold window</b> are visible before the user commits <span class="req">BR-01</span> <span class="req">BR-02</span> <span class="req">BR-05</span>.</span></div>
+      <div><span class="n">3</span><span><b>Bibliographic detail is collapsed</b> — available, but not competing with the task.</span></div>
+      <div><span class="n">4</span><span><b>Sticky primary button</b> in the thumb zone; label says exactly what happens.</span></div>
+      <div><span class="n">5</span><span><b>Unavailable is explained</b> (why, how many waiting) instead of just “Out”.</span></div>
+      <div><span class="n">6</span><span><b>Waitlist behaviour is defined</b> in plain steps, matching <span class="req">BR-07</span> <span class="req">FR-15</span>.</span></div>
+      <div><span class="n">7</span><span><b>Same position, different action:</b> “Join waitlist” replaces “Reserve book” — never both.</span></div>
+      <div class="plain" style="margin-top:6px;padding:10px 12px;background:#fff;border:1px solid #BBF7D0;border-radius:10px;font-size:11.5px">If the last copy is taken by someone else while Omar is reading, tapping <b>Reserve book</b> shows “This copy was just reserved” and offers the waitlist <span class="req">FR-10</span>.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Part C · Improved design (instructor reveal)</span><span>15</span></div>
+</section>
+
+<!-- ================= C4 contextual auth ================= -->
+<section class="pg" style="background:#F3FBF7">
+  <div class="top"><span class="part pC">Part C</span><h2>Contextual authentication</h2><span class="sub">Sign in only when reserving — and come back to the same book <span class="req">FR-05</span> <span class="req">FR-08</span></span></div>
+  <div class="row" style="gap:12px;align-items:flex-start">
+    <!-- C4a sheet -->
+    <div style="position:relative;zoom:.84">
+      <div class="phone"><div class="scr good">
+        <div class="sb"><span>10:41</span><span>▮▮▮ ◔</span></div>
+        <div style="opacity:.35">
+          <div class="nb"><span class="bk">‹</span></div>
+          <div style="display:flex;gap:12px;padding:12px 16px 0"><div class="cover cv1" style="width:74px;height:100px"></div><div><div style="font:600 16px/1.2 Bahnschrift">Introduction to Algorithms</div></div></div>
+        </div>
+        <div style="position:absolute;inset:0;background:rgba(15,23,42,.45)"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:22px 22px 0 0;padding:10px 18px 18px">
+          <div style="width:40px;height:4px;border-radius:2px;background:#CBD5E1;margin:0 auto 12px"></div>
+          <div style="font:600 17px Bahnschrift">Sign in to reserve</div>
+          <p style="font-size:11px;color:#475569;margin-top:5px;line-height:1.5">Reserving needs your university account so we can hold the book for you. Browsing never does.</p>
+          <div style="display:flex;gap:10px;align-items:center;margin-top:12px;padding:10px;border:1px solid #E2E8F0;border-radius:12px"><div class="cover cv1" style="width:32px;height:44px"></div><div><div style="font-weight:700;font-size:11.5px">Introduction to Algorithms</div><div style="font-size:10.5px;color:var(--ok);font-weight:700">● 2 of 3 copies available</div></div></div>
+          <div class="btn p" style="margin-top:14px">Sign in with university account</div>
+          <div class="btn" style="margin-top:6px;color:#334155">Not now</div>
+        </div>
+      </div></div>
+      <span class="ann" style="left:262px;top:356px">1</span>
+      <div class="cap"><span class="code cg">C4·a</span><b>Tap “Reserve book”</b><span>Not signed in → sheet</span></div>
+    </div>
+    <div class="flowarrow" style="width:34px;font-size:24px">→</div>
+    <!-- C4b university SSO -->
+    <div style="position:relative;zoom:.84">
+      <div class="phone"><div class="scr good" style="background:#F8FAFC">
+        <div class="sb"><span>10:42</span><span>▮▮▮ ◔</span></div>
+        <div style="margin:4px 12px 0;background:#E2E8F0;border-radius:8px;padding:5px 10px;font-size:10px;color:#334155">🔒 sso.university.example</div>
+        <div style="padding:22px 18px 0">
+          <div style="width:44px;height:44px;border-radius:12px;background:#1E293B;color:#fff;display:grid;place-items:center;font:600 15px Bahnschrift">U</div>
+          <div style="font:600 18px Bahnschrift;margin-top:12px">University sign-in</div>
+          <p style="font-size:11px;color:#475569;margin-top:4px">Library Reservations is asking you to sign in.</p>
+          <label style="display:block;font-size:11px;font-weight:700;margin-top:16px">University username or email</label>
+          <div class="search" style="margin:5px 0 0;height:42px;color:var(--ink)">omar.khalid</div>
+          <label style="display:block;font-size:11px;font-weight:700;margin-top:12px">Password</label>
+          <div class="search" style="margin:5px 0 0;height:42px;justify-content:space-between;color:var(--ink)"><span>••••••••••</span><span style="color:var(--pri);font-weight:600;font-size:11px">Show</span></div>
+          <div class="btn p" style="margin-top:18px;background:#1E293B">Sign in</div>
+          <div style="text-align:center;margin-top:12px;font-size:11px;color:var(--pri);font-weight:600">Forgot password?</div>
+          <p style="font-size:10px;color:#475569;margin-top:16px;line-height:1.45">Single sign-on managed by university IT. The library app never sees your password.</p>
+        </div>
+      </div></div>
+      <span class="ann" style="left:262px;top:40px">2</span><span class="ann" style="left:262px;top:250px">3</span>
+      <div class="cap"><span class="code cg">C4·b</span><b>Approved university login</b><span>Generic SSO page (illustrative)</span></div>
+    </div>
+    <div class="flowarrow" style="width:34px;font-size:24px">→</div>
+    <!-- C4c review -->
+    <div style="position:relative;zoom:.84">
+      <div class="phone"><div class="scr good">
+        <div class="sb"><span>10:42</span><span>▮▮▮ ◔</span></div>
+        <div class="nb"><span class="bk">‹</span><span>Review reservation</span></div>
+        <div style="margin:10px 16px 0;padding:8px 10px;border-radius:10px;background:var(--okL);color:#065F46;font-size:10.5px;font-weight:600">✓ Signed in as Omar Khalid · 20230417</div>
+        <div style="display:flex;gap:10px;align-items:center;margin:12px 16px 0;padding:10px;border:1px solid #E2E8F0;border-radius:12px"><div class="cover cv1" style="width:40px;height:54px"></div><div><div style="font-weight:700;font-size:12px">Introduction to Algorithms</div><div style="font-size:10.5px;color:#475569">4th edition</div><div style="font-size:10.5px;color:var(--ok);font-weight:700;margin-top:2px">● Copy available</div></div></div>
+        <div style="margin:12px 16px 0;font-size:11px"><b>Pickup</b><div style="color:#475569">Main Library, circulation desk (Level 1)</div></div>
+        <div style="margin:12px 16px 0;font-size:11px"><b style="font:600 12.5px Bahnschrift">What happens next</b>
+          <div style="display:flex;gap:8px;margin-top:6px"><span class="badge b-pri" style="padding:1px 7px">1</span><span>Library staff prepare your copy.</span></div>
+          <div style="display:flex;gap:8px;margin-top:5px"><span class="badge b-pri" style="padding:1px 7px">2</span><span>You get a <b>“Ready for pickup”</b> notification.</span></div>
+          <div style="display:flex;gap:8px;margin-top:5px"><span class="badge b-pri" style="padding:1px 7px">3</span><span>Collect within 48 h. Bring your student ID card.</span></div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:10px 16px 16px;background:#fff;border-top:1px solid #E2E8F0"><div class="btn p">Confirm reservation</div><div style="text-align:center;font-size:11px;color:#475569;margin-top:8px">You can cancel later in My Books</div></div>
+      </div></div>
+      <span class="ann" style="left:262px;top:84px">4</span><span class="ann" style="left:8px;top:270px">5</span>
+      <div class="cap"><span class="code cg">C4·c</span><b>Back in context</b><span>Same book, one confirm tap</span></div>
+    </div>
+    <div class="annlist" style="flex:1;font-size:11.5px;margin-left:10px">
+      <div><span class="n">1</span><span><b>Why</b> sign-in is needed is explained; the chosen book is shown in the sheet.</span></div>
+      <div><span class="n">2</span><span><b>University identity,</b> not a custom form — no ID-number-only login, no name/faculty fields <span class="req">FR-05</span>.</span></div>
+      <div><span class="n">3</span><span><b>Labels above inputs,</b> show-password, recovery link, large targets.</span></div>
+      <div><span class="n">4</span><span><b>Eligibility</b> confirmed from the university record <span class="req">FR-06</span>; nothing re-typed.</span></div>
+      <div><span class="n">5</span><span><b>Returns to the task</b> with the book preserved <span class="req">FR-08</span> and sets expectations before confirming.</span></div>
+      <div class="plain" style="padding:10px 12px;background:#fff;border:1px solid #FECACA;border-radius:10px"><b style="color:var(--err)">If sign-in fails:</b> “We couldn’t sign you in. Check your username and password, or reset it.” The reservation is not lost; the user returns to C4·a.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Part C · Improved design (instructor reveal)</span><span>16</span></div>
+</section>
+
+<!-- ================= C5 + C6 + cancel ================= -->
+<section class="pg" style="background:#F3FBF7">
+  <div class="top"><span class="part pC">Part C</span><h2>Confirmation → My Books</h2><span class="sub">Transparent status at every stage <span class="req">FR-12</span> <span class="req">FR-13</span> <span class="req">FR-25–26</span></span></div>
+  <div class="row" style="gap:20px">
+    <!-- C5 -->
+    <div style="position:relative">
+      <div class="phone"><div class="scr good">
+        <div class="sb"><span>10:43</span><span>▮▮▮ ◔</span></div>
+        <div style="text-align:center;padding:24px 18px 0">
+          <div style="width:58px;height:58px;margin:0 auto;border-radius:50%;background:var(--okL);color:var(--ok);display:grid;place-items:center;font-size:28px;font-weight:700">✓</div>
+          <div style="font:600 19px Bahnschrift;margin-top:12px">Reservation Confirmed</div>
+          <p style="font-size:11px;color:#334155;margin-top:6px;line-height:1.5">Your request has been received. We’ll notify you when your book is ready for collection at the university library.</p>
+        </div>
+        <div style="margin:14px 16px 0;padding:12px;border:1px solid #E2E8F0;border-radius:12px">
+          <div style="font-weight:700;font-size:12px">Introduction to Algorithms</div><div style="font-size:10px;color:#475569">Reservation R-1042 · today 10:43</div>
+          <div style="display:flex;justify-content:space-between;margin-top:12px;position:relative">
+            <div style="position:absolute;top:7px;left:12px;right:12px;height:2px;background:#E2E8F0"></div><div style="position:absolute;top:7px;left:12px;width:33%;height:2px;background:var(--ok)"></div>
+            <div class="stp"><i style="background:var(--ok)"></i>Requested</div><div class="stp"><i style="background:#fff;border:3px solid var(--pri)"></i><b style="color:var(--pri)">Preparing</b></div><div class="stp"><i></i>Ready for pickup</div><div class="stp"><i></i>Collected</div>
+          </div>
+        </div>
+        <div style="margin:10px 16px 0;padding:9px 11px;border-radius:10px;background:var(--warnL);border:1px solid #FDE68A;font-size:10.5px;color:#78350F;line-height:1.45"><b>Not ready yet.</b> Please wait for the “Ready for pickup” notification before coming to the library.</div>
+        <div style="margin:8px 16px 0;font-size:10.5px;color:#334155;line-height:1.5">Then: collect within <b>48 h</b> · Main Library desk · bring your student ID.</div>
+        <div style="position:absolute;left:16px;right:16px;bottom:16px"><div class="btn p">View in My Books</div><div class="btn s" style="margin-top:8px">Continue browsing</div></div>
+      </div></div>
+      <span class="ann" style="left:262px;top:126px">1</span><span class="ann" style="left:8px;top:236px">2</span><span class="ann" style="left:262px;top:316px">3</span>
+      <div class="cap"><span class="code cg">C5</span><b>Reservation confirmed</b><span>Honest: received, not ready</span></div>
+    </div>
+    <!-- C6 -->
+    <div style="position:relative">
+      <div class="phone"><div class="scr good">
+        <div class="sb"><span>10:44</span><span>▮▮▮ ◔</span></div>
+        <div class="h1" style="margin-top:4px">My Books</div>
+        <div style="display:flex;margin:8px 16px 0;background:#F1F5F9;border-radius:10px;padding:3px;font-size:11px;font-weight:700"><span style="flex:1;text-align:center;background:#fff;border-radius:8px;padding:5px">Current (5)</span><span style="flex:1;text-align:center;padding:5px;color:#475569">History</span></div>
+        <div style="margin:8px 16px 0;padding:7px 10px;border-radius:10px;background:var(--errL);color:var(--err);font-size:10.5px;font-weight:700;display:flex;justify-content:space-between"><span>⚠ 1 overdue book · fine 0.50 JOD</span><span>›</span></div>
+        <div class="mb"><div class="mbh">READY FOR PICKUP</div>
+          <div class="it"><div class="cover cv3" style="width:30px;height:40px"></div><div style="flex:1"><b>Software Engineering</b><div class="badge b-ok" style="margin-top:3px">Ready for Pickup</div><div class="m">Collect by 5 Nov, 14:00 · Main desk</div></div></div></div>
+        <div class="mb"><div class="mbh">RESERVATIONS</div>
+          <div class="it"><div class="cover cv1" style="width:30px;height:40px"></div><div style="flex:1"><b>Introduction to Algorithms</b><div class="badge b-info" style="margin-top:3px">Preparing</div><div class="m">Requested today, 10:43 · <span style="color:var(--pri);font-weight:600">Cancel</span></div></div></div>
+          <div class="it"><div class="cover cv2" style="width:30px;height:40px"></div><div style="flex:1"><b>Clean Code</b><div class="badge b-mut" style="margin-top:3px">Waitlist · #2 in queue</div></div></div></div>
+        <div class="mb"><div class="mbh">ON LOAN</div>
+          <div class="it"><div class="cover cv5" style="width:30px;height:40px"></div><div style="flex:1"><b>Discrete Mathematics…</b><div class="badge b-err" style="margin-top:3px">Overdue by 2 Days</div><div class="m">Was due 2 Nov · fine 0.50 JOD</div></div></div>
+          <div class="it" style="border:none"><div class="cover cv4" style="width:30px;height:40px"></div><div style="flex:1"><b>Database System Concepts</b><div class="badge b-warn" style="margin-top:3px">Due in 3 Days</div><div class="m">Due 7 Nov 2026</div></div></div></div>
+        <div class="tab"><span><i>⌂</i>Explore</span><span class="on"><i>▤</i>My Books</span><span><i>🔔</i>Alerts<b class="dot">3</b></span><span><i>☺</i>Account</span></div>
+      </div></div>
+      <span class="ann" style="left:262px;top:118px">4</span><span class="ann" style="left:262px;top:172px">5</span><span class="ann" style="left:262px;top:398px">6</span>
+      <div class="cap"><span class="code cg">C6</span><b>My Books</b><span>Grouped by what Omar must do</span></div>
+    </div>
+    <!-- C6 cancel dialog -->
+    <div style="position:relative">
+      <div class="phone" style="width:240px;height:494px"><div class="scr good" style="width:222px;height:476px">
+        <div class="sb" style="padding:0 16px"><span>10:45</span><span>▮▮▮</span></div>
+        <div style="opacity:.3"><div class="h1" style="font-size:16px;margin:4px 14px 0">My Books</div><div style="margin:12px 14px 0;height:60px;border-radius:10px;background:#E2E8F0"></div><div style="margin:8px 14px 0;height:60px;border-radius:10px;background:#E2E8F0"></div><div style="margin:8px 14px 0;height:60px;border-radius:10px;background:#E2E8F0"></div></div>
+        <div style="position:absolute;inset:0;background:rgba(15,23,42,.45)"></div>
+        <div style="position:absolute;left:14px;right:14px;top:120px;background:#fff;border-radius:16px;padding:16px">
+          <div style="font:600 15px Bahnschrift">Cancel this reservation?</div>
+          <p style="font-size:10.5px;color:#334155;margin-top:6px;line-height:1.5"><b>Introduction to Algorithms</b> will be released to other students. You can reserve it again if a copy is still available.</p>
+          <div class="btn d" style="margin-top:12px;height:40px;font-size:12px">Cancel reservation</div>
+          <div class="btn s" style="margin-top:7px;height:40px;font-size:12px">Keep reservation</div>
+        </div>
+      </div></div>
+      <span class="ann" style="left:212px;top:150px">7</span>
+      <div class="cap" style="width:240px"><span class="code cg">C6</span><b>Confirm destructive action</b><span>After tapping “Cancel”</span></div>
+    </div>
+    <div class="annlist" style="flex:1;font-size:11.5px">
+      <div><span class="n">1</span><span><b>Clear success</b> that doesn’t claim the book is ready.</span></div>
+      <div><span class="n">2</span><span><b>Progress tracker</b> shows where the request is in the process.</span></div>
+      <div><span class="n">3</span><span><b>Physical next steps</b> stated up-front; shortcut to My Books.</span></div>
+      <div><span class="n">4</span><span><b>Problems first:</b> overdue banner with the fine and currency.</span></div>
+      <div><span class="n">5</span><span><b>Grouped by action</b> — collect, wait, return. Reservation ≠ ready.</span></div>
+      <div><span class="n">6</span><span><b>Plain status labels</b> and absolute dates, no codes.</span></div>
+      <div><span class="n">7</span><span><b>Destructive action confirmed,</b> consequence explained, safe option available.</span></div>
+    </div>
+  </div>
+  <style>.stp{position:relative;z-index:1;width:52px;text-align:center;font-size:8.5px;color:#475569;line-height:1.2}.stp i{display:block;width:16px;height:16px;border-radius:50%;background:#E2E8F0;margin:0 auto 4px;box-sizing:border-box}
+  .mb{margin:8px 16px 0}.mbh{font:700 9.5px "Segoe UI";letter-spacing:.8px;color:#475569;margin-bottom:3px}.it{display:flex;gap:9px;padding:6px 0;border-bottom:1px solid #EEF2F6;font-size:11px;line-height:1.25}.it .m{font-size:10px;color:#475569;margin-top:3px}.it .badge{font-size:9.5px;padding:2px 7px}</style>
+  <div class="foot"><span>Part C · Improved design (instructor reveal)</span><span>17</span></div>
+</section>
+
+<!-- ================= C7 notifications + states ================= -->
+<section class="pg" style="background:#F3FBF7">
+  <div class="top"><span class="part pC">Part C</span><h2>Notifications, loading and error states</h2><span class="sub">Useful messages with actions <span class="req">FR-14–18</span> · honest failure <span class="req">E8</span></span></div>
+  <div class="row" style="gap:20px">
+    <!-- C7 -->
+    <div style="position:relative">
+      <div class="phone"><div class="scr good">
+        <div class="sb"><span>10:46</span><span>▮▮▮ ◔</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin:4px 16px 0"><span style="font:600 19px Bahnschrift">Alerts</span><span style="font-size:11px;color:var(--pri);font-weight:600">Mark all read</span></div>
+        <div class="mbh" style="margin:10px 16px 2px">TODAY</div>
+        <div class="nt un"><span class="ic b-ok">✓</span><div><b>Your book is ready for collection.</b><p>Software Engineering · collect by 5 Nov, 14:00 at the Main Library desk.</p><a>View pickup details</a></div></div>
+        <div class="nt un"><span class="ic b-err">!</span><div><b>Your book is 2 days overdue. Current fine: 0.50 JOD.</b><p>Discrete Mathematics… · example rate 0.25 JOD/day.</p><a>See loan</a></div></div>
+        <div class="nt un"><span class="ic b-warn">◷</span><div><b>Your loan is due in 3 days.</b><p>Database System Concepts · due 7 Nov 2026.</p><a>See loan</a></div></div>
+        <div class="mbh" style="margin:8px 16px 2px">EARLIER</div>
+        <div class="nt"><span class="ic b-pri">★</span><div><b>A waitlisted copy is now yours.</b><p>Software Engineering was set aside for you · 2 Nov.</p></div></div>
+        <div class="tab"><span><i>⌂</i>Explore</span><span><i>▤</i>My Books</span><span class="on"><i>🔔</i>Alerts</span><span><i>☺</i>Account</span></div>
+      </div></div>
+      <span class="ann" style="left:262px;top:96px">1</span><span class="ann" style="left:262px;top:236px">2</span>
+      <div class="cap"><span class="code cg">C7</span><b>Notifications</b><span>Each one has a next action</span></div>
+    </div>
+    <!-- loading -->
+    <div style="position:relative">
+      <div class="phone" style="width:240px;height:494px"><div class="scr good" style="width:222px;height:476px">
+        <div class="sb" style="padding:0 16px"><span>10:46</span><span>▮▮▮</span></div>
+        <div class="h1" style="font-size:16px;margin:4px 14px 0">My Books</div>
+        <div style="margin:10px 14px 0;font-size:10.5px;color:#475569">Loading your books…</div>
+        <div class="sk2"><span class="c"></span><span><i style="width:120px"></i><i style="width:70px"></i></span></div>
+        <div class="sk2"><span class="c"></span><span><i style="width:100px"></i><i style="width:80px"></i></span></div>
+        <div class="sk2"><span class="c"></span><span><i style="width:130px"></i><i style="width:60px"></i></span></div>
+        <div class="sk2"><span class="c"></span><span><i style="width:90px"></i><i style="width:70px"></i></span></div>
+      </div></div>
+      <span class="ann" style="left:212px;top:96px">3</span>
+      <div class="cap" style="width:240px"><span class="code cg">State</span><b>Loading</b><span>Skeleton keeps the layout stable</span></div>
+    </div>
+    <!-- error -->
+    <div style="position:relative">
+      <div class="phone" style="width:240px;height:494px"><div class="scr good" style="width:222px;height:476px">
+        <div class="sb" style="padding:0 16px"><span>10:47</span><span>▮▯▯ ✕</span></div>
+        <div style="margin:4px 12px 0;padding:7px 10px;border-radius:9px;background:#1E293B;color:#fff;font-size:10px">◌ You’re offline</div>
+        <div style="text-align:center;padding:40px 18px 0">
+          <div style="width:56px;height:56px;margin:0 auto;border-radius:50%;background:var(--errL);color:var(--err);display:grid;place-items:center;font-size:24px;font-weight:700">!</div>
+          <div style="font:600 14px Bahnschrift;margin-top:12px">We couldn’t confirm your reservation</div>
+          <p style="font-size:10.5px;color:#334155;margin-top:6px;line-height:1.5">Your connection dropped. <b>Nothing has been reserved yet.</b> Your choice is kept, so you can try again.</p>
+          <div class="btn p" style="margin-top:16px;height:40px;font-size:12px">Try again</div>
+          <div style="margin-top:10px;font-size:11px;color:var(--pri);font-weight:600">Back to book</div>
+        </div>
+      </div></div>
+      <span class="ann" style="left:212px;top:200px">4</span>
+      <div class="cap" style="width:240px"><span class="code cg">State</span><b>Error</b><span>Lost connection while confirming</span></div>
+    </div>
+    <div class="annlist" style="flex:1;font-size:11.5px">
+      <div><span class="n">1</span><span><b>Plain-language messages</b> matching the SRS examples; unread items marked with a dot and bold text, not colour alone.</span></div>
+      <div><span class="n">2</span><span><b>Fines are transparent:</b> days overdue, amount, currency and the (illustrative) rate <span class="req">FR-17</span> <span class="req">BR-03</span>.</span></div>
+      <div><span class="n">3</span><span><b>Loading:</b> skeleton cards plus text, so screen-reader users also know something is happening.</span></div>
+      <div><span class="n">4</span><span><b>Error:</b> says what happened, what did <i>not</i> happen, and how to recover. Never a false success.</span></div>
+      <div class="plain" style="padding:10px 12px;background:#fff;border:1px solid #BBF7D0;border-radius:10px">Reminders follow <span class="req">FR-16</span>: 3, 2 and 1 day before, and on the due date — also sent to university email per the communication policy.</div>
+    </div>
+  </div>
+  <style>.nt{display:flex;gap:10px;margin:0 16px;padding:9px 0;border-bottom:1px solid #EEF2F6;font-size:10.5px;line-height:1.35;position:relative}.nt.un::before{content:"";position:absolute;left:-9px;top:15px;width:6px;height:6px;border-radius:50%;background:var(--pri)}.nt .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-weight:700;flex:none}.nt b{font-size:11px}.nt p{color:#475569;margin-top:2px}.nt a{display:inline-block;margin-top:4px;color:var(--pri);font-weight:700;font-size:10.5px}
+  .sk2{display:flex;gap:10px;margin:12px 14px 0;align-items:center}.sk2 .c{width:34px;height:46px;border-radius:5px;background:#E2E8F0;flex:none}.sk2 i{display:block;height:9px;border-radius:4px;background:#E2E8F0;margin:5px 0}</style>
+  <div class="foot"><span>Part C · Improved design (instructor reveal)</span><span>18</span></div>
+</section>
+
+<!-- ================= C8 librarian dashboard ================= -->
+<section class="pg" style="background:#F3FBF7">
+  <div class="top"><span class="part pC">Part C</span><h2>Librarian dashboard</h2><span class="sub">Desktop-first: used all day at a desk with a barcode scanner <span class="req">FR-19–24</span></span></div>
+  <div style="border:1px solid #CBD5E1;border-radius:10px;overflow:hidden;box-shadow:0 10px 24px rgba(15,23,42,.12);width:1035px;background:#fff;font-size:11px;position:relative" class="good">
+    <div style="background:#E5E7EB;padding:5px 10px;display:flex;gap:6px;align-items:center;font-size:9px;color:#374151"><span style="width:9px;height:9px;border-radius:50%;background:#F87171"></span><span style="width:9px;height:9px;border-radius:50%;background:#FBBF24"></span><span style="width:9px;height:9px;border-radius:50%;background:#34D399"></span><span style="margin-left:10px;background:#fff;border-radius:4px;padding:2px 10px;flex:1">library.university.example/desk</span></div>
+    <div style="display:flex;height:538px">
+      <div style="width:150px;background:#0F172A;color:#CBD5E1;padding:14px 12px;font-size:11.5px;line-height:2.1">
+        <div class="logo" style="color:#fff;margin-bottom:10px"><i>UL</i>Desk</div>
+        <div style="background:#1E293B;color:#fff;border-radius:7px;padding:0 8px">▣ Today</div><div style="padding:0 8px">▤ Reservations</div><div style="padding:0 8px">⇄ Loans</div><div style="padding:0 8px">↩ Returns</div><div style="padding:0 8px">▦ Inventory</div><div style="padding:0 8px">☺ Students</div>
+        <div style="position:absolute;bottom:14px;font-size:10px;color:#94A3B8;line-height:1.4">R. Haddad<br>Librarian</div>
+      </div>
+      <div style="flex:1;padding:14px 16px;background:#F8FAFC">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div class="search" style="margin:0;flex:1;height:40px;border-color:var(--pri);border-width:2px;background:#fff">▥ <span>Scan a barcode or enter a student ID / name</span></div>
+          <span style="font-size:11px;color:#475569">Wed 4 Nov 2026 · Desk open until 17:00</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px">
+          <div class="tl on"><b>3</b>To prepare</div><div class="tl"><b>2</b>Ready for pickup</div><div class="tl"><b>1</b>Due today</div><div class="tl er"><b>1</b>Overdue</div><div class="tl"><b>1</b>Returns to process</div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:12px">
+          <div style="flex:1.55;background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:10px 12px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><b style="font:600 13.5px Bahnschrift">To prepare (3)</b><span style="font-size:10px;color:#475569">Oldest first</span></div>
+            <table class="dt">
+              <tr><th>Student</th><th>Book &amp; copy</th><th>Requested</th><th></th></tr>
+              <tr><td><b>Yazan Ali</b><br><span class="sid">20240052</span></td><td>Calculus: Early Transcendentals<br><span class="sid">Copy 2 · QA303.2 .S74 · Level 1</span></td><td>Yesterday 16:20<br><span class="badge b-warn" style="font-size:9px;padding:1px 6px">&gt; 18 h</span></td><td><span class="mini p">Mark ready</span></td></tr>
+              <tr><td><b>Sara Nasser</b><br><span class="sid">20221183</span></td><td>Database System Concepts<br><span class="sid">Copy 1 · QA76.9 .D3 S5637 · Level 2</span></td><td>Today 09:05</td><td><span class="mini p">Mark ready</span></td></tr>
+              <tr><td><b>Omar Khalid</b><br><span class="sid">20230417</span></td><td>Introduction to Algorithms<br><span class="sid">Copy 3 · QA76.6 .C662 · Level 2</span></td><td>Today 10:43</td><td><span class="mini p">Mark ready</span></td></tr>
+            </table>
+            <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:baseline"><b style="font:600 13.5px Bahnschrift">Returns to process (1)</b></div>
+            <div style="margin-top:6px;border:1px solid #FDE68A;background:var(--warnL);border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:10px">
+              <div style="flex:1"><b>Clean Code</b> · Copy 1 · returned 09:58 by Hamza R. — condition OK<br><span style="color:#78350F">Waitlist first <span class="req">BR-07</span>: next is <b>Rana T.</b> (#1 of 2)</span></div>
+              <span class="mini p">Allocate &amp; prepare</span>
+            </div>
+            <div style="margin-top:10px"><b style="font:600 13.5px Bahnschrift">Overdue (1)</b></div>
+            <div style="margin-top:6px;display:flex;gap:10px;align-items:center;font-size:11px;padding:6px 0;border-top:1px solid #EEF2F6"><span class="badge b-err">Overdue by 2 days</span><span><b>Omar Khalid</b> <span class="sid">20230417</span> · Discrete Mathematics… · fine 0.50 JOD</span><span style="margin-left:auto;color:var(--pri);font-weight:600">View loan</span></div>
+          </div>
+          <div style="flex:1;background:#fff;border:2px solid var(--pri);border-radius:12px;padding:10px 12px">
+            <div style="font-size:10px;color:#475569;font-weight:700;letter-spacing:.6px">PICKUP DESK · SCANNED STUDENT CARD</div>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:8px"><span style="width:40px;height:40px;border-radius:50%;background:var(--priL);color:var(--priD);display:grid;place-items:center;font:600 14px Bahnschrift">OK</span><div><b style="font-size:13px">Omar Khalid</b><br><span class="sid">20230417</span> · <span class="badge b-ok" style="font-size:9px;padding:1px 6px">Active student ✓</span></div></div>
+            <div style="margin-top:8px;padding:6px 9px;border-radius:8px;background:var(--errL);color:var(--err);font-size:10.5px">Has 1 overdue loan (2 days, 0.50 JOD). Remind the student.</div>
+            <div style="margin-top:10px;font:600 12px Bahnschrift">Ready for this student (1)</div>
+            <div style="margin-top:6px;border:1px solid #E2E8F0;border-radius:10px;padding:9px">
+              <div style="display:flex;gap:8px"><div class="cover cv3" style="width:28px;height:38px"></div><div><b>Software Engineering</b><br><span class="sid">Copy 4 · on hold shelf H-12</span><br><span class="badge b-ok" style="font-size:9px;padding:1px 6px;margin-top:3px">Ready for Pickup · expires 5 Nov 14:00</span></div></div>
+              <div style="margin-top:8px;font-size:10.5px;color:#334155">Loan will be due <b>18 Nov 2026</b> (14 days, from today)</div>
+              <div class="btn p" style="margin-top:8px;height:38px;font-size:12px">Confirm hand-over</div>
+            </div>
+            <div style="margin-top:10px;font-size:10.5px;color:#475569">Also: Introduction to Algorithms — <span class="badge b-info" style="font-size:9px;padding:1px 6px">Preparing</span> (not ready)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;right:16px;bottom:14px;background:#0F172A;color:#fff;border-radius:10px;padding:9px 14px;font-size:11px;display:flex;gap:14px;align-items:center;box-shadow:0 8px 20px rgba(0,0,0,.25)"><span>✓ Hand-over confirmed — <b>Software Engineering</b> to Omar Khalid · due 18 Nov 2026</span><span style="color:#A5B4FC;font-weight:700">Undo</span></div>
+    <span class="ann" style="left:166px;top:40px">1</span><span class="ann" style="left:318px;top:77px">2</span><span class="ann" style="left:646px;top:222px">3</span><span class="ann" style="left:646px;top:394px">4</span><span class="ann" style="left:1005px;top:144px">5</span><span class="ann" style="left:1010px;top:500px">6</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:10px" class="annlist">
+    <div style="font-size:10.5px"><span class="n">1</span><span><b>Scan-first search</b> for student or copy.</span></div>
+    <div style="font-size:10.5px"><span class="n">2</span><span><b>Task queues,</b> not one table of codes.</span></div>
+    <div style="font-size:10.5px"><span class="n">3</span><span><b>One action per row,</b> labelled with the verb.</span></div>
+    <div style="font-size:10.5px"><span class="n">4</span><span><b>Waitlist rule built in</b> to returns.</span></div>
+    <div style="font-size:10.5px"><span class="n">5</span><span><b>Student identity</b> and eligibility first.</span></div>
+    <div style="font-size:10.5px"><span class="n">6</span><span><b>Specific feedback + Undo.</b></span></div>
+  </div>
+  <style>.tl{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:7px 10px;font-size:10.5px;color:#475569;font-weight:600}.tl b{display:block;font:600 19px Bahnschrift;color:var(--ink)}.tl.on{border:2px solid var(--pri);background:var(--priL)}.tl.er b{color:var(--err)}
+  .dt{width:100%;border-collapse:collapse;margin-top:6px}.dt th{text-align:left;font-size:9.5px;color:#475569;font-weight:700;padding:4px 6px;border-bottom:1px solid #E2E8F0;letter-spacing:.4px}.dt td{padding:6px;border-bottom:1px solid #EEF2F6;font-size:11px;vertical-align:middle}.sid{font:600 10px Consolas;color:#334155}.mini{display:inline-block;padding:6px 10px;border-radius:8px;font-weight:700;font-size:10.5px;white-space:nowrap}.mini.p{background:var(--pri);color:#fff}</style>
+  <div class="foot"><span>Part C · Improved design (instructor reveal)</span><span>19</span></div>
+</section>
+
+<!-- ================= Visual system ================= -->
+<section class="pg" style="background:#F3FBF7">
+  <div class="top"><span class="part pC">Part C</span><h2>Visual system &amp; accessibility decisions</h2><span class="sub">One consistent set of rules across student and librarian screens</span></div>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:18px">
+    <div class="vs">
+      <h3>Colour roles &amp; contrast on white</h3>
+      <div class="sw"><span style="background:#4338CA"></span><div><b>Primary · #4338CA</b><br>buttons, links, focus · 7.9 : 1</div></div>
+      <div class="sw"><span style="background:#047857"></span><div><b>Success · #047857</b><br>available, ready · 5.5 : 1</div></div>
+      <div class="sw"><span style="background:#B45309"></span><div><b>Warning · #B45309</b><br>due soon, waitlist · 5.0 : 1</div></div>
+      <div class="sw"><span style="background:#B91C1C"></span><div><b>Danger · #B91C1C</b><br>overdue, destructive · 6.5 : 1</div></div>
+      <div class="sw"><span style="background:#475569"></span><div><b>Secondary text · #475569</b><br>metadata · 7.6 : 1</div></div>
+      <p class="small" style="margin-top:6px">All exceed WCAG 2.2 AA (4.5 : 1 for text). Status is never shown by colour alone — always text + icon.</p>
+    </div>
+    <div class="vs">
+      <h3>Typography (mock-ups at ~73% scale)</h3>
+      <div style="font:600 22px Bahnschrift">Screen title</div>
+      <div style="font:600 16px Bahnschrift;margin-top:4px">Section heading</div>
+      <div style="font-size:14px;margin-top:4px">Body text — 16 px on device</div>
+      <div style="font-size:12px;color:#475569;margin-top:4px">Metadata — 13–14 px on device</div>
+      <p class="small" style="margin-top:10px">Absolute dates (“7 Nov 2026”) plus relative labels (“Due in 3 days”). No status codes or abbreviations.</p>
+      <h3 style="margin-top:14px">Touch &amp; focus</h3>
+      <p class="small">Primary buttons 48 px tall on device; all targets ≥ 44 px (above the WCAG 2.2 minimum of 24 px). Visible focus ring for keyboard users on the librarian dashboard.</p>
+      <div style="display:flex;gap:10px;margin-top:8px;align-items:center"><span style="padding:8px 14px;border-radius:10px;background:#4338CA;color:#fff;font-weight:600;font-size:12px;outline:3px solid #A5B4FC;outline-offset:2px">Focused</span><span style="font-size:11px;color:#475569">focus ring</span></div>
+    </div>
+    <div class="vs">
+      <h3>Components</h3>
+      <div style="display:grid;gap:7px;margin-top:4px" class="good">
+        <div class="btn p" style="height:38px;font-size:12px">Primary — Reserve book</div>
+        <div class="btn s" style="height:38px;font-size:12px">Secondary — Continue browsing</div>
+        <div class="btn d" style="height:38px;font-size:12px">Destructive — Cancel reservation</div>
+        <div class="btn" style="height:38px;font-size:12px;background:#E2E8F0;color:#475569">Disabled — with reason shown</div>
+      </div>
+      <h3 style="margin-top:14px">Status labels</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px" class="good">
+        <span class="badge b-ok">● 2 of 3 available</span><span class="badge b-info">Preparing</span><span class="badge b-ok">Ready for Pickup</span><span class="badge b-warn">Due in 3 Days</span><span class="badge b-err">Overdue by 2 Days</span><span class="badge b-mut">Waitlist · #2</span><span class="badge b-mut">Returned</span>
+      </div>
+      <p class="small" style="margin-top:10px">The same labels appear in the student app, notifications and librarian dashboard.</p>
+    </div>
+  </div>
+  <div style="margin-top:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+    <div class="vs2"><b>Labels</b> sit above inputs, never placeholder-only.</div>
+    <div class="vs2"><b>Errors</b> appear next to the field, in words, and keep what the user typed.</div>
+    <div class="vs2"><b>Navigation</b> — 4 labelled tabs, identical on every student screen.</div>
+    <div class="vs2"><b>Screen readers</b> — status badges and icons have text equivalents.</div>
+  </div>
+  <style>.vs{background:#fff;border:1px solid #BBF7D0;border-radius:14px;padding:14px 16px}.vs h3{font-size:14px;color:#065F46;margin-bottom:8px}.sw{display:flex;gap:10px;align-items:center;margin-bottom:7px;font-size:11.5px;line-height:1.35}.sw span{width:34px;height:34px;border-radius:9px;flex:none}.vs2{background:#fff;border:1px solid #BBF7D0;border-radius:12px;padding:10px 12px;font-size:12px;color:var(--ink2)}</style>
+  <div class="foot"><span>Part C · Improved design (instructor reveal)</span><span>20</span></div>
+</section>
+
+<!-- ================= PART D: ANSWER KEY 1 ================= -->
+<section class="pg" style="background:#F6F7FF">
+  <div class="top"><span class="part pD">Part D</span><h2>Design comparison &amp; answer key (1/2)</h2><span class="sub">Student-facing screens A1–A3</span></div>
+  <table class="ak">
+    <thead><tr><th style="width:26px">#</th><th style="width:40px">Screen</th><th>Problem in bad design</th><th>Improvement in good design</th><th style="width:150px">UX principle</th><th style="width:96px">Type</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>A1</td><td><b>Login required before browsing;</b> search hidden until sign-in. Contradicts <span class="req">FR-07</span>.</td><td>Browse and search as a guest; authenticate only at “Reserve” (C1, C4).</td><td>Reduce friction · user goals first</td><td><span class="ty r">Requirements</span> <span class="ty f">Flow</span></td></tr>
+      <tr><td>2</td><td>A1</td><td><b>Custom form asks for ID, password, name, faculty, year, email</b> — data the university already has; not an approved identity mechanism.</td><td>University single sign-on; profile and eligibility come from university records (C4·b).</td><td>Minimise input · security by design</td><td><span class="ty r">Requirements</span> <span class="ty i">Interaction</span></td></tr>
+      <tr><td>3</td><td>A1</td><td><b>Weak hierarchy:</b> giant institutional header, two notices, welcome paragraph and news compete with the task.</td><td>Search is the largest element; one short “How borrowing works” card.</td><td>Visual hierarchy · minimalist design</td><td><span class="ty v">Visual</span></td></tr>
+      <tr><td>4</td><td>A1</td><td><b>Cramped, cryptic navigation</b> (“Svc”, “E-Res”, “OPAC”, “MyAcc”) with tiny targets.</td><td>4 labelled bottom tabs: Explore, My Books, Alerts, Account.</td><td>Match the real world · recognition</td><td><span class="ty a">IA</span> <span class="ty x">Accessibility</span></td></tr>
+      <tr><td>5</td><td>A1</td><td><b>Tiny checkbox and links;</b> “Reset” next to and styled like “Submit Form”.</td><td>≥ 44 px targets; one primary button; no reset button.</td><td>Error prevention · Fitts’s law</td><td><span class="ty x">Accessibility</span> <span class="ty i">Interaction</span></td></tr>
+      <tr><td>6</td><td>A1</td><td><b>Low-contrast grey text</b> (≈ 2.5 : 1) and “best viewed at 1280×1024” — not designed for phones.</td><td>All text ≥ 4.5 : 1; mobile-first layout.</td><td>WCAG 1.4.3 · mobile-first</td><td><span class="ty x">Accessibility</span> <span class="ty v">Visual</span></td></tr>
+      <tr><td>7</td><td>A2</td><td><b>Overloaded results:</b> tiny covers, publisher, pages, call number, location codes on every row.</td><td>Cover, title, author, edition, availability; details moved to the book page.</td><td>Information hierarchy · progressive disclosure</td><td><span class="ty v">Visual</span> <span class="ty a">IA</span></td></tr>
+      <tr><td>8</td><td>A2</td><td><b>Ambiguous availability:</b> “In (2/3)”, “Out”, “Avl”, “Lib Use Only” with a green dot; colour-only meaning; footnote says status may be wrong.</td><td>“2 of 3 copies available” / “All copies on loan · 1 waiting” with icon + text.</td><td>Clarity · visibility of status · WCAG 1.4.1</td><td><span class="ty a">IA</span> <span class="ty x">Accessibility</span></td></tr>
+      <tr><td>9</td><td>A2</td><td><b>Four identical buttons</b> per row; “Hold” vs “Request” meaning unclear; both offered for unavailable books.</td><td>Whole card is tappable; one context-correct action on the detail page.</td><td>Consistency · recognition over recall</td><td><span class="ty i">Interaction</span></td></tr>
+      <tr><td>10</td><td>A2</td><td><b>Filters hidden</b> in a tiny “Advanced options” link after pagination; weak search box.</td><td>Prominent search with clear button; filter chips including “Available now”.</td><td>Discoverability · efficiency</td><td><span class="ty a">IA</span></td></tr>
+      <tr><td>11</td><td>A3</td><td><b>Wrong priority:</b> “Print Record” and “Export (MARC)” are prominent; reservation buttons are faint and at the bottom.</td><td>Sticky “Reserve book” as the only primary action.</td><td>Primary action clarity</td><td><span class="ty v">Visual</span> <span class="ty i">Interaction</span></td></tr>
+      <tr><td>12</td><td>A3</td><td><b>Librarian jargon:</b> MARC fields, “Holdings: 3 | Status: see shelf” — not whether a copy can be reserved.</td><td>Plain metadata, collapsed “Details”; availability card first.</td><td>Match the real world</td><td><span class="ty a">IA</span></td></tr>
+      <tr><td>13</td><td>A3</td><td><b>Hidden physical requirements:</b> pickup inside a collapsed “Notice”; loan period in 6.8 px footer.</td><td>Pickup place, 14-day loan and 48-hour hold shown as rows before reserving.</td><td>Set expectations · visibility</td><td><span class="ty a">IA</span> <span class="ty r">Requirements</span></td></tr>
+    </tbody>
+  </table>
+  <div class="foot"><span>Part D · Answer key · Type legend on next page</span><span>21</span></div>
+</section>
+
+<!-- ================= PART D: ANSWER KEY 2 ================= -->
+<section class="pg" style="background:#F6F7FF">
+  <div class="top"><span class="part pD">Part D</span><h2>Design comparison &amp; answer key (2/2)</h2><span class="sub">Screens A4–A7</span></div>
+  <table class="ak">
+    <thead><tr><th style="width:26px">#</th><th style="width:40px">Screen</th><th>Problem in bad design</th><th>Improvement in good design</th><th style="width:150px">UX principle</th><th style="width:96px">Type</th></tr></thead>
+    <tbody>
+      <tr><td>14</td><td>A4</td><td><b>Repeated data entry:</b> ID, name, email and ISBN typed again although the user is signed in and on the book page.</td><td>Nothing re-typed; review screen shows the book and identity (C4·c).</td><td>Efficiency · minimise memory load</td><td><span class="ty i">Interaction</span></td></tr>
+      <tr><td>15</td><td>A4</td><td><b>Vague, irrelevant fields:</b> “Request Type: Normal / ILL / Recall”, “Ref.”, a one-option “Pickup Point”, “Required by”.</td><td>Only what the SRS needs; pickup location shown as information.</td><td>Simplicity · requirements traceability</td><td><span class="ty r">Requirements</span> <span class="ty a">IA</span></td></tr>
+      <tr><td>16</td><td>A4</td><td><b>No progress indication;</b> “Next &gt;&gt;” leads to more steps; Cancel is styled as the primary button.</td><td>Single review + confirm; primary button is the forward action.</td><td>Visibility of status · user control</td><td><span class="ty f">Flow</span> <span class="ty v">Visual</span></td></tr>
+      <tr><td>17</td><td>A4</td><td><b>Unhelpful error</b> (“Error 0x1F”) that clears every field; placeholder-only date format; 5-minute timeout.</td><td>Errors next to the field in plain words; input kept; no free-text date needed.</td><td>Help users recover · error prevention</td><td><span class="ty i">Interaction</span> <span class="ty x">Accessibility</span></td></tr>
+      <tr><td>18</td><td>A1→A4</td><td><b>After login the user lands on Home,</b> not the book they chose — they must search again. Contradicts <span class="req">FR-08</span>.</td><td>Return to the same reservation after sign-in.</td><td>Preserve context</td><td><span class="ty r">Requirements</span> <span class="ty f">Flow</span></td></tr>
+      <tr><td>19</td><td>A5</td><td><b>Misleading success:</b> “processed successfully” suggests the book is ready; status “PND-Q”; collection rules in tiny grey text far below.</td><td>“Reservation Confirmed … we’ll notify you when ready”; progress tracker; “Not ready yet” notice; pickup steps.</td><td>Honest feedback · set expectations</td><td><span class="ty a">IA</span> <span class="ty v">Visual</span></td></tr>
+      <tr><td>20</td><td>A5</td><td><b>Dead end:</b> only Print / New Search / Home — no route to track the reservation.</td><td>“View in My Books” primary; “Continue browsing” secondary.</td><td>Navigation · next steps</td><td><span class="ty f">Flow</span></td></tr>
+      <tr><td>21</td><td>A6</td><td><b>One table of codes</b> (R/W/L, PND/RDY/ACT/OD/RTN); “Ready” looks the same as “Pending”; overdue not highlighted.</td><td>Grouped by what to do: Ready / Reservations / On loan; plain labels and colours + text.</td><td>Visibility of status · recognition</td><td><span class="ty a">IA</span> <span class="ty v">Visual</span></td></tr>
+      <tr><td>22</td><td>A6</td><td><b>Mixed date formats:</b> “11/07/26” (US order) next to “24/10/26” and ISO dates; “Due” column reused for pickup expiry.</td><td>“Due 7 Nov 2026 · Due in 3 Days”; pickup deadline labelled “Collect by”.</td><td>Consistency · clarity</td><td><span class="ty v">Visual</span> <span class="ty a">IA</span></td></tr>
+      <tr><td>23</td><td>A6</td><td><b>Fine “0.500”</b> without currency, rate or reason; “Reg. 9.4” reference only.</td><td>“Overdue by 2 Days · fine 0.50 JOD (0.25 JOD/day, illustrative)”.</td><td>Trust · transparency</td><td><span class="ty a">IA</span></td></tr>
+      <tr><td>24</td><td>A6</td><td><b>Notifications hidden</b> as “Messages (3)” text link; “Cancel Selected” acts without confirmation.</td><td>Alerts tab with badge; actionable messages; confirmation dialog for cancel.</td><td>Visibility · error prevention</td><td><span class="ty i">Interaction</span> <span class="ty a">IA</span></td></tr>
+      <tr><td>25</td><td>A7</td><td><b>15-column table</b> where session IDs and timestamps outshine student ID (in light grey); all statuses look alike.</td><td>Task queues (To prepare, Ready, Overdue, Returns); student name + ID prominent.</td><td>Workflow optimisation · hierarchy</td><td><span class="ty v">Visual</span> <span class="ty a">IA</span></td></tr>
+      <tr><td>26</td><td>A7</td><td><b>Slow actions:</b> select row → dropdown → “Go”; exact-ID filter; feedback “1 record(s) affected”.</td><td>Scan-first search; one labelled button per row; specific toast with Undo.</td><td>Efficiency · feedback · user control</td><td><span class="ty i">Interaction</span></td></tr>
+      <tr><td>27</td><td>A7</td><td><b>Waitlist rule not visible</b> at check-in; the librarian could reshelve a copy someone is waiting for.</td><td>Returns card shows “Waitlist first: next is Rana T.” with one action <span class="req">BR-07</span>.</td><td>Error prevention · encode business rules</td><td><span class="ty r">Requirements</span> <span class="ty f">Flow</span></td></tr>
+    </tbody>
+  </table>
+  <div style="display:flex;gap:8px;margin-top:8px;font-size:10.5px;align-items:center;color:var(--ink2)"><b>Type:</b> <span class="ty v">Visual</span> visual design <span class="ty i">Interaction</span> interaction design <span class="ty a">IA</span> information architecture <span class="ty x">Accessibility</span> <span class="ty f">Flow</span> user flow <span class="ty r">Requirements</span> requirements misunderstanding</div>
+  <style>.ak{width:100%;border-collapse:collapse;font-size:10.6px;background:#fff;line-height:1.35}.ak th{background:#1E1B4B;color:#fff;text-align:left;padding:6px 7px;font-weight:600}.ak td{padding:5px 7px;border-bottom:1px solid #E0E3F0;vertical-align:top}.ak tr:nth-child(even) td{background:#FAFBFF}.ty{display:inline-block;font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;margin:1px 0;white-space:nowrap}.ty.v{background:#FCE7F3;color:#9D174D}.ty.i{background:#E0E7FF;color:#3730A3}.ty.a{background:#CFFAFE;color:#155E75}.ty.x{background:#FEF3C7;color:#92400E}.ty.f{background:#D1FAE5;color:#065F46}.ty.r{background:#FEE2E2;color:#991B1B}</style>
+  <div class="foot"><span>Part D · Answer key</span><span>22</span></div>
+</section>
+
+<!-- ================= PART D: SUMMARY ================= -->
+<section class="pg" style="background:#F6F7FF">
+  <div class="top"><span class="part pD">Part D</span><h2>Key differences &amp; how to use this reference</h2></div>
+  <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:24px">
+    <div>
+      <table class="ak" style="font-size:11.5px">
+        <thead><tr><th>Problem in bad design</th><th>Improvement in good design</th><th>UX principle</th></tr></thead>
+        <tbody>
+          <tr><td>Login required before browsing</td><td>Browse first, authenticate at reservation</td><td>Reduce friction</td></tr>
+          <tr><td>Cluttered catalogue</td><td>Clear search and meaningful filters</td><td>Information hierarchy</td></tr>
+          <tr><td>Ambiguous availability</td><td>Availability per physical copy</td><td>Clarity and feedback</td></tr>
+          <tr><td>Confusing reservation steps</td><td>Clear guided reservation flow</td><td>Efficiency</td></tr>
+          <tr><td>Hidden physical collection requirement</td><td>Explicit pickup instructions</td><td>Set expectations</td></tr>
+          <tr><td>Ambiguous loan statuses</td><td>Clear status labels</td><td>Visibility of system status</td></tr>
+          <tr><td>Confusing fine information</td><td>Transparent overdue information</td><td>Trust and transparency</td></tr>
+          <tr><td>Difficult librarian operations</td><td>Task-focused dashboard</td><td>Workflow optimisation</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:14px;background:#fff;border:1px solid #C7D2FE;border-radius:12px;padding:12px 16px;font-size:12px;line-height:1.5;color:var(--ink2)">
+        <b style="font:600 14px Bahnschrift;color:#3730A3">Bad UX vs. missing functionality</b><br>
+        The Part A design <b>can do everything</b> the SRS asks — browse, search, reserve, waitlist (“Hold”), cancel, notifications (“Messages”), fines, and every librarian action (via the “Action” menu). Most problems are therefore <b>UX problems</b>: the capability exists but is slow, hidden or misleading. Three items are different: rows <b>1</b>, <b>2</b> and <b>18</b> directly contradict requirements (<span class="req">FR-07</span>, <span class="req">FR-05</span>, <span class="req">FR-08</span>) — these are <b>requirements misunderstandings</b>, not matters of taste.
+      </div>
+    </div>
+    <div>
+      <div style="background:#fff;border:1px solid #C7D2FE;border-radius:12px;padding:14px 16px">
+        <b style="font:600 14px Bahnschrift;color:#3730A3">Issues by type (27 total)</b>
+        <div class="bar"><span>Information architecture</span><i style="width:56%"></i><b>13</b></div>
+        <div class="bar"><span>Interaction design</span><i style="width:35%"></i><b>8</b></div>
+        <div class="bar"><span>Visual design</span><i style="width:39%"></i><b>9</b></div>
+        <div class="bar"><span>Accessibility</span><i style="width:22%"></i><b>5</b></div>
+        <div class="bar"><span>User flow</span><i style="width:22%"></i><b>5</b></div>
+        <div class="bar"><span>Requirements misunderstanding</span><i style="width:26%"></i><b>6</b></div>
+        <p class="small" style="margin-top:6px">Many issues have more than one type, so counts overlap.</p>
+      </div>
+      <div style="margin-top:14px;background:#fff;border:1px solid #FDE68A;border-radius:12px;padding:14px 16px;font-size:12px;line-height:1.5;color:var(--ink2)">
+        <b style="font:600 14px Bahnschrift;color:#92400E">This is a proposed reference, not the answer</b><br>
+        Several choices are trade-offs: e.g. hiding bibliographic detail helps students but may slow researchers; a 4-tab bar is simple but leaves no room for future features. Before building, a real team would <b>validate it with usability testing</b>:
+        <ul style="margin:6px 0 0;padding-left:18px">
+          <li>5–8 students: find a book, reserve it, find what to collect and what is owed.</li>
+          <li>2–3 librarians: process a morning queue and a busy pickup hour.</li>
+          <li>Measure task success, time on task, errors and confidence; then iterate.</li>
+        </ul>
+      </div>
+      <div style="margin-top:14px;background:#1E1B4B;color:#E0E7FF;border-radius:12px;padding:14px 16px;font-size:12.5px;line-height:1.5">Designing software means understanding <b style="color:#fff">the users</b>, <b style="color:#fff">their goals</b>, <b style="color:#fff">the requirements</b> and <b style="color:#fff">the consequences of every design decision</b>.</div>
+    </div>
+  </div>
+  <style>.bar{display:grid;grid-template-columns:150px 1fr 24px;gap:8px;align-items:center;font-size:11.5px;margin-top:7px;color:var(--ink2)}.bar i{height:10px;border-radius:5px;background:#6366F1;display:block}.bar b{text-align:right}</style>
+  <div class="foot"><span>Part D · Answer key</span><span>23</span></div>
+</section>
+
+</body>
+</html>
+
+
+

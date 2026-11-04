@@ -1,0 +1,115 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>UI/UX Design — Codeflow PSUT</title>
+<style>
+@page { size: 1280px 720px; margin: 0; }
+:root{
+  --ink:#0E1628; --ink2:#334155; --muted:#5B6678; --line:#DCE1EA; --bg:#F5F7FB; --card:#FFFFFF;
+  --navy:#0A1022; --navy2:#121A33; --indigo:#4F46E5; --cyan:#0891B2; --cyanL:#22D3EE; --amber:#F59E0B;
+  --good:#047857; --goodL:#D1FAE5; --bad:#BE123C; --badL:#FFE4E6;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slide{width:1280px;height:720px;position:relative;overflow:hidden;background:var(--bg);break-after:page;page-break-after:always}
+.slide:last-child{break-after:auto}
+.pad{position:absolute;inset:0;padding:56px 72px 64px}
+h1,h2,h3,.disp{font-family:Bahnschrift,"Segoe UI",sans-serif;margin:0;font-weight:600;letter-spacing:-.2px}
+h2{font-size:42px;line-height:1.08;color:var(--ink)}
+h3{font-size:21px;line-height:1.2}
+p{margin:0}
+.kicker{font-family:Bahnschrift,sans-serif;font-size:14px;letter-spacing:2.4px;text-transform:uppercase;color:var(--indigo);font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:26px;height:3px;background:linear-gradient(90deg,var(--indigo),var(--cyanL));border-radius:2px}
+.lead{font-size:20px;line-height:1.45;color:var(--ink2);margin-top:14px;max-width:900px}
+.foot{position:absolute;left:72px;right:72px;bottom:22px;display:flex;justify-content:space-between;font-size:12px;color:#8A94A6;letter-spacing:.3px}
+.foot b{color:#5B6678;font-weight:600}
+.dark .foot{color:#6B7699}.dark .foot b{color:#9AA5C4}
+.dark{background:radial-gradient(1200px 700px at 85% 10%,#1C2A5C 0%,transparent 60%),radial-gradient(900px 600px at 0% 100%,#0E3A4A 0%,transparent 55%),var(--navy);color:#fff}
+.grid-bg::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 6px 18px rgba(15,23,42,.05)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-size:14px;font-weight:600}
+.row{display:flex;gap:20px}
+.small{font-size:14px;color:var(--muted);line-height:1.45}
+.num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--indigo);color:#fff;font:600 14px Bahnschrift,sans-serif;flex:none}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:6px;background:#EEF2FF;color:#3730A3}
+/* question slides */
+.q .pad{display:flex;flex-direction:column;justify-content:center}
+.q .qlabel{font-family:Bahnschrift,sans-serif;font-size:16px;letter-spacing:3px;color:var(--amber);text-transform:uppercase;font-weight:600;display:flex;align-items:center;gap:12px}
+.q .qmark{position:absolute;right:40px;top:-60px;font:700 560px/1 Bahnschrift,sans-serif;color:rgba(255,255,255,.04)}
+.q h1{font-size:68px;line-height:1.08;margin-top:22px;max-width:1000px;font-weight:600}
+.q .hint{margin-top:34px;display:flex;gap:12px}
+.q .hint span{border:1px solid rgba(255,255,255,.18);color:#C9D2EA;padding:9px 16px;border-radius:999px;font-size:15px}
+/* phones */
+.phone{width:236px;height:480px;border-radius:36px;background:#0B0F1A;padding:9px;box-shadow:0 20px 40px rgba(15,23,42,.18);position:relative;flex:none}
+.phone .scr{width:100%;height:100%;border-radius:28px;overflow:hidden;background:#fff;position:relative;font-size:11px}
+.phone .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:84px;height:18px;background:#0B0F1A;border-radius:0 0 12px 12px;z-index:5}
+.sbar{height:28px;display:flex;justify-content:space-between;align-items:center;padding:0 18px;font-size:10px;font-weight:600}
+.arrow{color:var(--indigo);font:600 28px Bahnschrift}
+.callout{position:absolute;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--amber);color:#111;font:700 13px Bahnschrift;box-shadow:0 0 0 3px #fff;z-index:6}
+html,body{width:1280px;height:720px;overflow:hidden}</style>
+</head>
+<body><section class="slide">
+  <svg width="0" height="0" style="position:absolute"><defs><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3.2"/></filter></defs></svg>
+  <div class="pad">
+    <div class="kicker">Fidelity</div>
+    <h2>Low-fidelity wireframes</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:22px">
+      <!-- hand drawn -->
+      <div>
+        <div style="height:372px;border-radius:12px;background:#FFFDF6;border:1px solid #EADFC4;background-image:repeating-linear-gradient(#FFFDF6 0 27px,#DCE8F5 27px 28px);position:relative;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.08)">
+          <svg width="340" height="372" viewBox="0 0 340 372" style="filter:url(#rough)">
+            <g fill="none" stroke="#1F2937" stroke-width="2.2" stroke-linecap="round">
+              <rect x="90" y="18" width="160" height="330" rx="18"/>
+              <line x1="104" y1="52" x2="200" y2="52"/>
+              <rect x="104" y="66" width="132" height="24" rx="6"/>
+              <rect x="104" y="104" width="132" height="70"/><line x1="104" y1="104" x2="236" y2="174"/><line x1="236" y1="104" x2="104" y2="174"/>
+              <line x1="104" y1="188" x2="210" y2="188"/><line x1="104" y1="200" x2="180" y2="200"/>
+              <rect x="104" y="216" width="30" height="30"/><line x1="142" y1="224" x2="228" y2="224"/><line x1="142" y1="236" x2="200" y2="236"/>
+              <rect x="104" y="256" width="30" height="30"/><line x1="142" y1="264" x2="228" y2="264"/><line x1="142" y1="276" x2="200" y2="276"/>
+              <line x1="92" y1="316" x2="248" y2="316"/><circle cx="125" cy="332" r="6"/><circle cx="170" cy="332" r="6"/><circle cx="215" cy="332" r="6"/>
+              <path d="M250 78 C 275 70, 285 60, 292 50" stroke="#2563EB"/><path d="M84 140 C 60 150, 46 160, 40 178" stroke="#2563EB"/>
+            </g>
+            <g font-family="Ink Free, Segoe Print, cursive" font-size="15" fill="#2563EB"><text x="258" y="44">search!</text><text x="8" y="196">big photo?</text></g>
+          </svg>
+        </div>
+        <h3 style="margin-top:14px">Hand-drawn sketch</h3><p class="small">Minutes per idea. Draw five, keep one.</p>
+      </div>
+      <!-- paper / sticky notes -->
+      <div>
+        <div style="height:372px;border-radius:12px;background:#B88B5A;background-image:radial-gradient(rgba(0,0,0,.06) 1px,transparent 1px);background-size:6px 6px;position:relative;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.08)">
+          <div style="position:absolute;left:30px;top:26px;width:150px;height:300px;background:#fff;transform:rotate(-3deg);box-shadow:2px 4px 10px rgba(0,0,0,.25);border-radius:4px">
+            <svg width="150" height="300" style="filter:url(#rough)"><g fill="none" stroke="#111" stroke-width="2"><rect x="12" y="14" width="126" height="272" rx="14"/><line x1="24" y1="40" x2="100" y2="40"/><rect x="24" y="52" width="102" height="20" rx="5"/></g></svg>
+            <div style="position:absolute;left:22px;top:84px;width:106px;height:58px;background:#FDE68A;box-shadow:1px 2px 4px rgba(0,0,0,.2);font:15px 'Ink Free',cursive;padding:6px;transform:rotate(2deg)">Featured event</div>
+            <div style="position:absolute;left:22px;top:152px;width:106px;height:44px;background:#A7F3D0;box-shadow:1px 2px 4px rgba(0,0,0,.2);font:14px 'Ink Free',cursive;padding:6px;transform:rotate(-2deg)">list item</div>
+            <div style="position:absolute;left:22px;top:204px;width:106px;height:44px;background:#A7F3D0;box-shadow:1px 2px 4px rgba(0,0,0,.2);font:14px 'Ink Free',cursive;padding:6px;transform:rotate(1deg)">list item</div>
+          </div>
+          <div style="position:absolute;right:26px;top:60px;width:118px;height:110px;background:#FBCFE8;transform:rotate(4deg);box-shadow:2px 4px 8px rgba(0,0,0,.25);font:16px/1.3 'Ink Free',cursive;padding:10px">filter chips here?<br>→ test with 3 users</div>
+          <div style="position:absolute;right:40px;top:200px;width:104px;height:86px;background:#BFDBFE;transform:rotate(-5deg);box-shadow:2px 4px 8px rgba(0,0,0,.25);font:16px/1.3 'Ink Free',cursive;padding:10px">Tab bar:<br>Home · Saved · Me</div>
+        </div>
+        <h3 style="margin-top:14px">Paper wireframe</h3><p class="small">Rearrange sticky notes with users in the room.</p>
+      </div>
+      <!-- grayscale digital -->
+      <div>
+        <div style="height:372px;border-radius:12px;background:#E5E7EB;position:relative;overflow:hidden;display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,0,0,.08)">
+          <div style="width:170px;height:330px;background:#fff;border:2px solid #6B7280;border-radius:18px;padding:16px 12px;font-family:Segoe UI;position:relative">
+            <div style="font-weight:700;color:#374151;font-size:13px">Campus Events</div>
+            <div style="margin-top:8px;border:1.5px solid #9CA3AF;border-radius:5px;padding:5px 6px;font-size:10px;color:#6B7280">⌕ Search</div>
+            <div style="margin-top:8px;height:72px;background:#D1D5DB;border-radius:5px;display:grid;place-items:center;color:#6B7280;font-size:10px">[ image ]</div>
+            <div style="margin-top:6px;font-size:11px;font-weight:700;color:#374151">Hackathon 2026</div><div style="font-size:9.5px;color:#6B7280">Thu · Main Hall</div>
+            <div style="margin-top:8px;display:flex;gap:6px;align-items:center"><span style="width:28px;height:28px;background:#D1D5DB;border-radius:4px"></span><span style="font-size:10px;color:#374151">Career Fair<br><span style="color:#9CA3AF">Sun · Gym</span></span></div>
+            <div style="margin-top:8px;display:flex;gap:6px;align-items:center"><span style="width:28px;height:28px;background:#D1D5DB;border-radius:4px"></span><span style="font-size:10px;color:#374151">Robotics Club<br><span style="color:#9CA3AF">Mon · Lab 3</span></span></div>
+            <div style="position:absolute;left:12px;right:12px;bottom:14px;height:28px;background:#4B5563;border-radius:5px;color:#fff;font-size:10.5px;display:grid;place-items:center">Register</div>
+          </div>
+        </div>
+        <h3 style="margin-top:14px">Grayscale digital</h3><p class="small">Clean boxes in Figma/FigJam — easy to share &amp; link.</p>
+      </div>
+    </div>
+    <div style="position:absolute;left:72px;right:72px;bottom:54px;display:flex;gap:10px;align-items:center">
+      <b style="font-size:15px;margin-right:6px">Why low-fi?</b>
+      <span class="chip" style="background:#EEF2FF;color:#3730A3">Fast</span><span class="chip" style="background:#EEF2FF;color:#3730A3">Cheap</span><span class="chip" style="background:#EEF2FF;color:#3730A3">Easy to change</span><span class="chip" style="background:#EEF2FF;color:#3730A3">Encourages experimentation</span><span class="chip" style="background:#EEF2FF;color:#3730A3">Focus on structure, not styling</span>
+    </div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>14</span></div>
+</section></body></html>

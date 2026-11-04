@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>UI/UX Design — Codeflow PSUT</title>
+<style>
+@page { size: 1280px 720px; margin: 0; }
+:root{
+  --ink:#0E1628; --ink2:#334155; --muted:#5B6678; --line:#DCE1EA; --bg:#F5F7FB; --card:#FFFFFF;
+  --navy:#0A1022; --navy2:#121A33; --indigo:#4F46E5; --cyan:#0891B2; --cyanL:#22D3EE; --amber:#F59E0B;
+  --good:#047857; --goodL:#D1FAE5; --bad:#BE123C; --badL:#FFE4E6;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slide{width:1280px;height:720px;position:relative;overflow:hidden;background:var(--bg);break-after:page;page-break-after:always}
+.slide:last-child{break-after:auto}
+.pad{position:absolute;inset:0;padding:56px 72px 64px}
+h1,h2,h3,.disp{font-family:Bahnschrift,"Segoe UI",sans-serif;margin:0;font-weight:600;letter-spacing:-.2px}
+h2{font-size:42px;line-height:1.08;color:var(--ink)}
+h3{font-size:21px;line-height:1.2}
+p{margin:0}
+.kicker{font-family:Bahnschrift,sans-serif;font-size:14px;letter-spacing:2.4px;text-transform:uppercase;color:var(--indigo);font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:26px;height:3px;background:linear-gradient(90deg,var(--indigo),var(--cyanL));border-radius:2px}
+.lead{font-size:20px;line-height:1.45;color:var(--ink2);margin-top:14px;max-width:900px}
+.foot{position:absolute;left:72px;right:72px;bottom:22px;display:flex;justify-content:space-between;font-size:12px;color:#8A94A6;letter-spacing:.3px}
+.foot b{color:#5B6678;font-weight:600}
+.dark .foot{color:#6B7699}.dark .foot b{color:#9AA5C4}
+.dark{background:radial-gradient(1200px 700px at 85% 10%,#1C2A5C 0%,transparent 60%),radial-gradient(900px 600px at 0% 100%,#0E3A4A 0%,transparent 55%),var(--navy);color:#fff}
+.grid-bg::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 6px 18px rgba(15,23,42,.05)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-size:14px;font-weight:600}
+.row{display:flex;gap:20px}
+.small{font-size:14px;color:var(--muted);line-height:1.45}
+.num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--indigo);color:#fff;font:600 14px Bahnschrift,sans-serif;flex:none}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:6px;background:#EEF2FF;color:#3730A3}
+/* question slides */
+.q .pad{display:flex;flex-direction:column;justify-content:center}
+.q .qlabel{font-family:Bahnschrift,sans-serif;font-size:16px;letter-spacing:3px;color:var(--amber);text-transform:uppercase;font-weight:600;display:flex;align-items:center;gap:12px}
+.q .qmark{position:absolute;right:40px;top:-60px;font:700 560px/1 Bahnschrift,sans-serif;color:rgba(255,255,255,.04)}
+.q h1{font-size:68px;line-height:1.08;margin-top:22px;max-width:1000px;font-weight:600}
+.q .hint{margin-top:34px;display:flex;gap:12px}
+.q .hint span{border:1px solid rgba(255,255,255,.18);color:#C9D2EA;padding:9px 16px;border-radius:999px;font-size:15px}
+/* phones */
+.phone{width:236px;height:480px;border-radius:36px;background:#0B0F1A;padding:9px;box-shadow:0 20px 40px rgba(15,23,42,.18);position:relative;flex:none}
+.phone .scr{width:100%;height:100%;border-radius:28px;overflow:hidden;background:#fff;position:relative;font-size:11px}
+.phone .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:84px;height:18px;background:#0B0F1A;border-radius:0 0 12px 12px;z-index:5}
+.sbar{height:28px;display:flex;justify-content:space-between;align-items:center;padding:0 18px;font-size:10px;font-weight:600}
+.arrow{color:var(--indigo);font:600 28px Bahnschrift}
+.callout{position:absolute;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--amber);color:#111;font:700 13px Bahnschrift;box-shadow:0 0 0 3px #fff;z-index:6}
+</style>
+</head>
+<body>
+
+<!-- ============ 1 TITLE ============ -->
+<section class="slide dark grid-bg">
+  <svg style="position:absolute;right:-40px;top:70px;opacity:.9" width="560" height="560" viewBox="0 0 560 560">
+    <defs><linearGradient id="g1" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#4F46E5"/><stop offset="1" stop-color="#22D3EE"/></linearGradient></defs>
+    <!-- stylised wireframe → UI motif -->
+    <rect x="250" y="40" width="210" height="420" rx="34" fill="none" stroke="url(#g1)" stroke-width="3"/>
+    <rect x="272" y="86" width="166" height="26" rx="13" fill="none" stroke="#7DD3FC" stroke-opacity=".6" stroke-width="2"/>
+    <rect x="272" y="130" width="76" height="96" rx="10" fill="#4F46E5" fill-opacity=".35"/>
+    <rect x="362" y="130" width="76" height="96" rx="10" fill="#22D3EE" fill-opacity=".25"/>
+    <rect x="272" y="244" width="166" height="12" rx="6" fill="#fff" fill-opacity=".25"/>
+    <rect x="272" y="266" width="120" height="12" rx="6" fill="#fff" fill-opacity=".15"/>
+    <rect x="272" y="300" width="166" height="54" rx="12" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+    <rect x="272" y="372" width="166" height="40" rx="20" fill="url(#g1)"/>
+    <rect x="40" y="120" width="170" height="330" rx="24" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="2" stroke-dasharray="7 7"/>
+    <line x1="62" y1="160" x2="188" y2="160" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+    <rect x="62" y="180" width="56" height="70" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+    <line x1="62" y1="180" x2="118" y2="250" stroke="#fff" stroke-opacity=".2" stroke-width="1.5"/><line x1="118" y1="180" x2="62" y2="250" stroke="#fff" stroke-opacity=".2" stroke-width="1.5"/>
+    <rect x="132" y="180" width="56" height="70" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+    <rect x="62" y="380" width="126" height="34" rx="6" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+    <path d="M212 280 C 230 280, 232 280, 246 280" stroke="#22D3EE" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+    <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22D3EE"/></marker></defs>
+  </svg>
+  <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+    <div class="disp" style="font-size:17px;letter-spacing:3px;color:#7DD3FC;text-transform:uppercase">Codeflow PSUT &nbsp;·&nbsp; Session: Design Phase</div>
+    <h1 style="font-size:66px;line-height:1.04;margin-top:22px;max-width:720px">UI/UX Design:<br><span style="color:#A5B4FC">From Requirements to</span> <span style="color:#67E8F9">User Experience</span></h1>
+    <p style="font-size:24px;color:#C9D2EA;margin-top:24px">Industry Practices Using the SDLC</p>
+    <div style="margin-top:46px;display:flex;gap:14px">
+      <span class="chip" style="background:rgba(255,255,255,.08);color:#E2E8F0;border:1px solid rgba(255,255,255,.15)">Codeflow PSUT</span>
+      <span class="chip" style="background:rgba(255,255,255,.08);color:#E2E8F0;border:1px solid rgba(255,255,255,.15)">November 4, 2026</span>
+    </div>
+  </div>
+  <div class="foot"><span><b>Princess Sumaya University for Technology</b></span><span>01</span></div>
+</section>
+
+<!-- ============ 2 QUESTION ============ -->
+<section class="slide dark q">
+  <div class="qmark">?</div>
+  <div class="pad">
+    <div class="qlabel">Discussion question · 01</div>
+    <h1>What is the difference between <span style="color:#A5B4FC">UI</span> and <span style="color:#67E8F9">UX</span>?</h1>
+    <div class="hint"><span>Talk to the person next to you</span><span>2 minutes</span></div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>02</span></div>
+</section>
+
+<!-- ============ 3 WHAT IS UI ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Foundations</div>
+    <h2>What is UI?</h2>
+    <p class="lead" style="max-width:640px"><b>User Interface</b> — everything a person sees, hears and touches to operate a product: the visible <i>layer</i> between the user and the system.</p>
+    <div style="margin-top:28px;display:grid;grid-template-columns:1fr;gap:12px;width:620px">
+      <div class="row" style="align-items:center;gap:14px"><span class="num" style="background:var(--amber);color:#111">1</span><div><b style="font-size:17px">Visual elements</b> <span class="small">— icons, images, cards, colour blocks</span></div></div>
+      <div class="row" style="align-items:center;gap:14px"><span class="num" style="background:var(--amber);color:#111">2</span><div><b style="font-size:17px">Buttons, forms &amp; navigation</b> <span class="small">— the controls people operate</span></div></div>
+      <div class="row" style="align-items:center;gap:14px"><span class="num" style="background:var(--amber);color:#111">3</span><div><b style="font-size:17px">Typography &amp; colour</b> <span class="small">— font, size, weight, palette, contrast</span></div></div>
+      <div class="row" style="align-items:center;gap:14px"><span class="num" style="background:var(--amber);color:#111">4</span><div><b style="font-size:17px">Layout &amp; visual hierarchy</b> <span class="small">— what the eye sees first, second, third</span></div></div>
+      <div class="row" style="align-items:center;gap:14px"><span class="num" style="background:var(--amber);color:#111">5</span><div><b style="font-size:17px">Interactive elements</b> <span class="small">— toggles, tabs, states (pressed, disabled, loading)</span></div></div>
+    </div>
+    <div class="card" style="position:absolute;left:72px;bottom:64px;width:620px;padding:14px 18px;background:#EEF2FF;border-color:#C7D2FE">
+      <p style="font-size:15px;color:#312E81"><b>Think of UI as the “what”:</b> the screen-level decisions you could point at in a screenshot.</p>
+    </div>
+    <!-- example phone: campus bus ticket app -->
+    <div style="position:absolute;right:150px;top:70px">
+      <div class="phone"><div class="notch"></div><div class="scr" style="background:#F8FAFC">
+        <div class="sbar"><span>9:41</span><span>●●● ▮</span></div>
+        <div style="padding:6px 16px 0"><div style="font:600 19px Bahnschrift;color:#0F172A">Campus Shuttle</div><div style="color:#64748B;font-size:11px;margin-top:2px">Buy a ride ticket</div></div>
+        <div style="margin:14px 16px 0;background:#fff;border:1px solid #E2E8F0;border-radius:14px;padding:12px">
+          <div style="font-size:9.5px;color:#64748B;font-weight:600">FROM</div><div style="font-weight:600;font-size:12.5px;margin:2px 0 9px">Main Gate</div>
+          <div style="height:1px;background:#E2E8F0"></div>
+          <div style="font-size:9.5px;color:#64748B;font-weight:600;margin-top:9px">TO</div><div style="font-weight:600;font-size:12.5px;margin-top:2px">Engineering Building</div>
+        </div>
+        <div style="margin:12px 16px 0;display:flex;gap:6px">
+          <span style="flex:1;text-align:center;padding:7px 0;border-radius:9px;background:#4F46E5;color:#fff;font-weight:600">Now</span>
+          <span style="flex:1;text-align:center;padding:7px 0;border-radius:9px;background:#fff;border:1px solid #E2E8F0">10:30</span>
+          <span style="flex:1;text-align:center;padding:7px 0;border-radius:9px;background:#fff;border:1px solid #E2E8F0">11:00</span>
+        </div>
+        <div style="margin:14px 16px 0;display:flex;align-items:center;gap:10px;background:#ECFEFF;border-radius:12px;padding:10px">
+          <div style="width:34px;height:34px;border-radius:9px;background:#0891B2;display:grid;place-items:center;color:#fff;font-weight:700">B</div>
+          <div><div style="font-weight:600">Shuttle B · 4 min</div><div style="color:#0E7490;font-size:10px">12 seats free</div></div>
+        </div>
+        <div style="position:absolute;left:16px;right:16px;bottom:66px;height:42px;border-radius:12px;background:#4F46E5;color:#fff;display:grid;place-items:center;font-weight:600;font-size:13px">Buy ticket · 0.35 JOD</div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:52px;border-top:1px solid #E2E8F0;background:#fff;display:flex;justify-content:space-around;align-items:center;font-size:9.5px;color:#64748B">
+          <span style="color:#4F46E5;font-weight:700">◉<br>Ride</span><span>▤<br>Tickets</span><span>☺<br>Account</span>
+        </div>
+      </div></div>
+      <span class="callout" style="left:-12px;top:150px">1</span>
+      <span class="callout" style="left:246px;top:470px">2</span>
+      <span class="callout" style="left:-12px;top:52px">3</span>
+      <span class="callout" style="left:246px;top:68px">4</span>
+      <span class="callout" style="left:246px;top:215px">5</span>
+    </div>
+    <div class="small" style="position:absolute;right:72px;top:600px;width:340px;text-align:center">Example: a campus shuttle app. Numbers match the UI elements on the left.</div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>03</span></div>
+</section>
+
+<!-- ============ 4 WHAT IS UX ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Foundations</div>
+    <h2>What is UX?</h2>
+    <p class="lead"><b>User Experience</b> — how it feels to <i>reach a goal</i> with a product, from first intention to final outcome. It includes the screens, but also timing, wording, effort, errors and what happens off-screen.</p>
+    <!-- journey map -->
+    <div class="card" style="margin-top:26px;padding:22px 26px 18px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><h3>Journey: “I need to get to my 10:30 lecture”</h3><span class="small">Same shuttle app · each step is part of the experience</span></div>
+      <svg width="1090" height="190" viewBox="0 0 1090 190" style="margin-top:6px">
+        <line x1="0" y1="40" x2="1090" y2="40" stroke="#E2E8F0" stroke-dasharray="4 5"/><text x="0" y="34" font-size="11" fill="#94A3B8" font-family="Segoe UI">satisfied</text>
+        <line x1="0" y1="120" x2="1090" y2="120" stroke="#E2E8F0" stroke-dasharray="4 5"/><text x="0" y="114" font-size="11" fill="#94A3B8" font-family="Segoe UI">frustrated</text>
+        <path d="M70 70 C 160 60, 200 55, 270 52 S 420 120, 490 118 S 640 70, 710 64 S 860 40, 930 38 L1040 34" fill="none" stroke="#4F46E5" stroke-width="3.5"/>
+        <g font-family="Segoe UI" font-size="13" fill="#0E1628" text-anchor="middle">
+          <circle cx="70" cy="70" r="7" fill="#4F46E5"/><circle cx="270" cy="52" r="7" fill="#4F46E5"/><circle cx="490" cy="118" r="7" fill="#BE123C"/><circle cx="710" cy="64" r="7" fill="#4F46E5"/><circle cx="930" cy="38" r="7" fill="#047857"/>
+          <text x="70" y="160" font-weight="600">Open app</text><text x="270" y="160" font-weight="600">Find route</text><text x="490" y="160" font-weight="600">Pay</text><text x="710" y="160" font-weight="600">Get ticket</text><text x="930" y="160" font-weight="600">Board bus</text>
+          <text x="70" y="178" fill="#5B6678" font-size="11.5">Goal is clear</text><text x="270" y="178" fill="#5B6678" font-size="11.5">Remembers last trip</text><text x="490" y="178" fill="#BE123C" font-size="11.5">Card error, form resets</text><text x="710" y="178" fill="#5B6678" font-size="11.5">Clear QR + seat info</text><text x="930" y="178" fill="#5B6678" font-size="11.5">Scan works offline</text>
+        </g>
+      </svg>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:18px">
+      <div class="card" style="padding:14px 16px"><b>User goals</b><p class="small">Why are they here?</p></div>
+      <div class="card" style="padding:14px 16px"><b>Ease of tasks</b><p class="small">How much effort?</p></div>
+      <div class="card" style="padding:14px 16px"><b>Navigation &amp; flow</b><p class="small">Is the next step obvious?</p></div>
+      <div class="card" style="padding:14px 16px"><b>Efficiency &amp; satisfaction</b><p class="small">Fast? Pleasant?</p></div>
+      <div class="card" style="padding:14px 16px"><b>Errors &amp; recovery</b><p class="small">Prevented? Fixable?</p></div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>04</span></div>
+</section>
+
+<!-- ============ 5 UI vs UX ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Foundations</div>
+    <h2>UI vs. UX: looking good ≠ working well</h2>
+    <div style="display:flex;gap:56px;margin-top:26px;align-items:flex-start">
+      <!-- A pretty but frustrating -->
+      <div style="display:flex;gap:22px;align-items:flex-start">
+        <div class="phone" style="width:206px;height:420px"><div class="notch"></div><div class="scr" style="background:linear-gradient(160deg,#7C3AED,#DB2777 55%,#F59E0B);color:#fff">
+          <div class="sbar"><span>9:41</span><span>●●● ▮</span></div>
+          <div style="padding:20px 16px 0;font:300 30px/1 Bahnschrift;letter-spacing:4px">RIDE.</div>
+          <div style="padding:4px 16px;font-size:10px;opacity:.6">move beautifully</div>
+          <div style="margin:22px 16px 0;height:150px;border-radius:22px;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);display:grid;place-items:center;font-size:44px">✦</div>
+          <div style="text-align:center;margin-top:16px;font-size:10px;color:rgba(255,255,255,.55)">swipe to discover routes →</div>
+          <div style="position:absolute;bottom:22px;left:0;right:0;display:flex;justify-content:center;gap:26px;font-size:17px;opacity:.8"><span>◌</span><span>⌁</span><span>✧</span><span>☰</span></div>
+        </div></div>
+        <div style="width:250px">
+          <span class="chip" style="background:var(--badL);color:var(--bad)">A · Stunning UI</span>
+          <ul style="padding-left:18px;margin:14px 0 0;font-size:15px;line-height:1.55;color:var(--ink2)">
+            <li>Unlabelled icons — guess the navigation</li>
+            <li>Low-contrast text on gradients</li>
+            <li>Routes hidden behind a swipe gesture</li>
+            <li>7 steps to buy one ticket</li>
+          </ul>
+          <p style="margin-top:14px;font:600 17px Bahnschrift;color:var(--bad)">Beautiful screenshot.<br>Frustrating journey.</p>
+        </div>
+      </div>
+      <!-- B simple but effortless -->
+      <div style="display:flex;gap:22px;align-items:flex-start">
+        <div class="phone" style="width:206px;height:420px"><div class="notch"></div><div class="scr" style="background:#fff">
+          <div class="sbar"><span>9:41</span><span>●●● ▮</span></div>
+          <div style="padding:10px 16px 0;font:600 17px Bahnschrift">Where to?</div>
+          <div style="margin:10px 16px 0;border:1.5px solid #CBD5E1;border-radius:10px;padding:9px 10px;color:#475569">⌕ Search destination</div>
+          <div style="padding:14px 16px 4px;font-size:9.5px;color:#64748B;font-weight:700">RECENT</div>
+          <div style="margin:0 16px;border-bottom:1px solid #EEF2F6;padding:9px 0"><b>Engineering Building</b><br><span style="color:#64748B">Shuttle B · next in 4 min</span></div>
+          <div style="margin:0 16px;border-bottom:1px solid #EEF2F6;padding:9px 0"><b>Library</b><br><span style="color:#64748B">Shuttle A · next in 9 min</span></div>
+          <div style="position:absolute;left:14px;right:14px;bottom:64px;height:38px;border-radius:10px;background:#1E293B;color:#fff;display:grid;place-items:center;font-weight:600">Buy ticket</div>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:48px;border-top:1px solid #E2E8F0;display:flex;justify-content:space-around;align-items:center;font-size:9.5px;color:#334155"><span>◉ Ride</span><span>▤ Tickets</span><span>☺ Account</span></div>
+        </div></div>
+        <div style="width:250px">
+          <span class="chip" style="background:var(--goodL);color:var(--good)">B · Plain UI, great UX</span>
+          <ul style="padding-left:18px;margin:14px 0 0;font-size:15px;line-height:1.55;color:var(--ink2)">
+            <li>Opens on the user’s actual goal</li>
+            <li>Remembers recent destinations</li>
+            <li>Labelled navigation, high contrast</li>
+            <li>3 steps to buy one ticket</li>
+          </ul>
+          <p style="margin-top:14px;font:600 17px Bahnschrift;color:var(--good)">Ordinary screenshot.<br>Effortless journey.</p>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;left:72px;right:72px;bottom:58px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="card" style="padding:12px 18px;border-left:4px solid var(--indigo)"><b style="color:var(--indigo)">UI</b> = the interface’s appearance and behaviour on each screen.</div>
+      <div class="card" style="padding:12px 18px;border-left:4px solid var(--cyan)"><b style="color:var(--cyan)">UX</b> = the whole journey toward a goal — across screens, time and channels.</div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>05</span></div>
+</section>
+
+<!-- ============ 6 QUESTION ============ -->
+<section class="slide dark q">
+  <div class="qmark">?</div>
+  <div class="pad">
+    <div class="qlabel">Discussion question · 02</div>
+    <h1>Why does UI/UX matter in <span style="color:#67E8F9">software engineering</span>?</h1>
+    <div class="hint"><span>Think beyond “it looks nicer”</span><span>2 minutes</span></div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>06</span></div>
+</section>
+
+<!-- ============ 7 WHY IT MATTERS ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Impact</div>
+    <h2>Why UI/UX matters</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;width:600px;margin-top:26px">
+      <div class="card" style="padding:13px 16px"><b>Task completion</b><p class="small">Can people actually finish what they came to do?</p></div>
+      <div class="card" style="padding:13px 16px"><b>User satisfaction</b><p class="small">Will they choose to come back?</p></div>
+      <div class="card" style="padding:13px 16px"><b>Accessibility</b><p class="small">Can people with disabilities use it at all?</p></div>
+      <div class="card" style="padding:13px 16px"><b>Error rates</b><p class="small">Confusing UI creates wrong data and support tickets.</p></div>
+      <div class="card" style="padding:13px 16px"><b>Development cost</b><p class="small">A fix in a sketch takes minutes; after release it takes sprints.</p></div>
+      <div class="card" style="padding:13px 16px"><b>Customer retention</b><p class="small">Users leave products that waste their time.</p></div>
+      <div class="card" style="padding:13px 16px;grid-column:span 2;background:#0E1628;color:#fff;border:none"><b>Business success</b><p style="font-size:14px;color:#CBD5E1;margin-top:2px">Adoption, reputation and cost all depend on whether real users succeed.</p></div>
+    </div>
+    <!-- case -->
+    <div style="position:absolute;right:72px;top:56px;width:470px">
+      <span class="chip" style="background:var(--badL);color:var(--bad)">Case · “Every test passes”</span>
+      <div class="card" style="margin-top:14px;padding:0;overflow:hidden">
+        <div style="background:#E5E7EB;padding:8px 14px;font-size:12px;color:#374151;display:flex;gap:6px;align-items:center"><span style="width:9px;height:9px;border-radius:50%;background:#F87171"></span><span style="width:9px;height:9px;border-radius:50%;background:#FBBF24"></span><span style="width:9px;height:9px;border-radius:50%;background:#34D399"></span>&nbsp; Course Registration Portal</div>
+        <div style="padding:16px 18px;font-size:13px">
+          <div style="background:#FEF2F2;border:1px solid #FCA5A5;color:#991B1B;padding:10px 12px;border-radius:8px;font-weight:600">Error: Session expired. Please re-enter all fields.</div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:110px 1fr;gap:8px;align-items:center;color:#6B7280">
+            <span>Course code</span><span style="border:1px solid #D1D5DB;height:26px;border-radius:4px"></span>
+            <span>Section</span><span style="border:1px solid #D1D5DB;height:26px;border-radius:4px"></span>
+            <span>Semester</span><span style="border:1px solid #D1D5DB;height:26px;border-radius:4px"></span>
+          </div>
+        </div>
+      </div>
+      <ul style="padding-left:18px;font-size:15px;line-height:1.55;color:var(--ink2);margin:16px 0 0">
+        <li>Every function works and passes its tests ✓</li>
+        <li>Sessions time out after 3 minutes; forms clear on error</li>
+        <li>Result: students queue at the registrar’s office instead</li>
+      </ul>
+      <p style="margin-top:14px;font:600 18px Bahnschrift;color:var(--ink)">“Functionally correct” is not the same as <span style="color:var(--bad)">usable</span>.</p>
+      <p class="small" style="margin-top:6px">Illustrative scenario for discussion.</p>
+    </div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>07</span></div>
+</section>
+
+<!-- ============ 8 GOOD UX PRINCIPLES ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Principles</div>
+    <h2>What makes a good user experience?</h2>
+    <style>.pp .card{padding:22px 20px !important;min-height:212px}.pp .small{font-size:15.5px;margin-top:12px !important}.pp .tag{margin-top:16px !important;font-size:12.5px}</style>
+    <div class="pp" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px">
+      <div class="card" style="padding:16px 18px"><div class="row" style="gap:10px;align-items:center"><span class="num">1</span><h3>Clarity</h3></div><p class="small" style="margin-top:8px">Use words users know. “Pay now”, not “Execute transaction”.</p><span class="tag" style="margin-top:10px">H2 · Match the real world</span></div>
+      <div class="card" style="padding:16px 18px"><div class="row" style="gap:10px;align-items:center"><span class="num">2</span><h3>Consistency</h3></div><p class="small" style="margin-top:8px">Same action, same look, same place — on every screen.</p><span class="tag" style="margin-top:10px">H4 · Consistency &amp; standards</span></div>
+      <div class="card" style="padding:16px 18px"><div class="row" style="gap:10px;align-items:center"><span class="num">3</span><h3>Simplicity</h3></div><p class="small" style="margin-top:8px">Show what matters now; remove what doesn’t help the task.</p><span class="tag" style="margin-top:10px">H8 · Minimalist design</span></div>
+      <div class="card" style="padding:16px 18px"><div class="row" style="gap:10px;align-items:center"><span class="num">4</span><h3>Accessibility</h3></div><p class="small" style="margin-top:8px">Readable contrast, labelled controls, keyboard &amp; screen-reader support.</p><span class="tag" style="margin-top:10px;background:#ECFEFF;color:#0E7490">WCAG 2.2</span></div>
+      <div class="card" style="padding:16px 18px"><div class="row" style="gap:10px;align-items:center"><span class="num">5</span><h3>Feedback</h3></div><p class="small" style="margin-top:8px">Every action gets a response: “Saving…”, “Saved ✓”, “Failed — retry”.</p><span class="tag" style="margin-top:10px">H1 · Visibility of status</span></div>
+      <div class="card" style="padding:16px 18px"><div class="row" style="gap:10px;align-items:center"><span class="num">6</span><h3>Error prevention</h3></div><p class="small" style="margin-top:8px">Disable impossible choices; explain errors in plain language.</p><span class="tag" style="margin-top:10px">H5 + H9 · Prevent &amp; recover</span></div>
+      <div class="card" style="padding:16px 18px"><div class="row" style="gap:10px;align-items:center"><span class="num">7</span><h3>Efficiency</h3></div><p class="small" style="margin-top:8px">Fewest steps for frequent tasks: defaults, recents, autofill.</p><span class="tag" style="margin-top:10px">H7 · Flexibility &amp; efficiency</span></div>
+      <div class="card" style="padding:16px 18px"><div class="row" style="gap:10px;align-items:center"><span class="num">8</span><h3>User control</h3></div><p class="small" style="margin-top:8px">Back, cancel and undo are always available.</p><span class="tag" style="margin-top:10px">H3 · Control &amp; freedom</span></div>
+    </div>
+    <p class="small" style="position:absolute;left:72px;bottom:52px">“H” tags refer to Jakob Nielsen’s 10 usability heuristics (Nielsen Norman Group). WCAG = W3C Web Content Accessibility Guidelines.</p>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>08</span></div>
+</section>
+
+<!-- ============ 9 QUESTION ============ -->
+<section class="slide dark q">
+  <div class="qmark">?</div>
+  <div class="pad">
+    <div class="qlabel">Discussion question · 03</div>
+    <h1>Should every user be required to <span style="color:#FCD34D">sign in</span> before using a system?</h1>
+    <div class="hint"><span>Yes? No? It depends — on what?</span><span>3 minutes</span></div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>09</span></div>
+</section>
+
+<!-- ============ 10 USER GOALS ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Thinking like a user</div>
+    <h2>Understanding user goals</h2>
+    <p class="lead" style="max-width:1100px">A student wants to know one thing: <b>“Does the library have this book?”</b> Developers often design around what <i>the system</i> needs first.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:24px">
+      <div class="card" style="border-top:4px solid var(--bad)">
+        <span class="chip" style="background:var(--badL);color:var(--bad);padding:5px 12px">System-first flow</span>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:16px;font-size:14px;font-weight:600">
+          <span style="padding:9px 11px;border-radius:9px;background:#F1F5F9">Open</span><span style="color:#94A3B8">→</span>
+          <span style="padding:9px 11px;border-radius:9px;background:var(--badL);color:var(--bad)">Sign in</span><span style="color:#94A3B8">→</span>
+          <span style="padding:9px 11px;border-radius:9px;background:#F1F5F9">Dashboard</span><span style="color:#94A3B8">→</span>
+          <span style="padding:9px 11px;border-radius:9px;background:#F1F5F9">Search</span><span style="color:#94A3B8">→</span>
+          <span style="padding:9px 11px;border-radius:9px;background:#F1F5F9">Answer</span>
+        </div>
+        <p class="small" style="margin-top:14px">The answer arrives last. A guest, a forgotten password, or a slow login blocks a simple question.</p>
+      </div>
+      <div class="card" style="border-top:4px solid var(--good)">
+        <span class="chip" style="background:var(--goodL);color:var(--good);padding:5px 12px">Goal-first flow</span>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:16px;font-size:14px;font-weight:600">
+          <span style="padding:9px 11px;border-radius:9px;background:#F1F5F9">Open</span><span style="color:#94A3B8">→</span>
+          <span style="padding:9px 11px;border-radius:9px;background:#F1F5F9">Search</span><span style="color:#94A3B8">→</span>
+          <span style="padding:9px 11px;border-radius:9px;background:var(--goodL);color:var(--good)">Answer</span><span style="color:#94A3B8">→</span>
+          <span style="padding:9px 11px;border-radius:9px;border:1.5px dashed #94A3B8;color:#475569">Sign in only to reserve</span>
+        </div>
+        <p class="small" style="margin-top:14px">The answer comes first. Identity is requested only when it becomes necessary.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px">
+      <div style="padding:4px 0 0 16px;border-left:3px solid var(--indigo)"><b style="font-size:17px">Progressive disclosure</b><p class="small">Reveal complexity (forms, options, sign-in) only when the user reaches the step that needs it.</p></div>
+      <div style="padding:4px 0 0 16px;border-left:3px solid var(--indigo)"><b style="font-size:17px">Remove unnecessary steps</b><p class="small">Every extra screen between the user and their goal is a chance to give up.</p></div>
+      <div style="padding:4px 0 0 16px;border-left:3px solid var(--amber)"><b style="font-size:17px">But: protect what must be protected</b><p class="small">Authentication is still required before protected actions — reserving, viewing personal loans or fines.</p></div>
+    </div>
+    <div style="position:absolute;left:72px;right:72px;bottom:56px;background:#0E1628;color:#E2E8F0;border-radius:14px;padding:16px 22px;display:flex;gap:16px;align-items:center;font-size:17px">
+      <span style="font:600 14px Bahnschrift;letter-spacing:2px;color:#FCD34D;white-space:nowrap">ASK AT EVERY STEP</span>
+      <span>“What is the <b style="color:#fff">least</b> the user must give us <b style="color:#fff">right now</b> — and why do we need it <b style="color:#fff">here</b>?”</span>
+    </div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>10</span></div>
+</section>
+
+<!-- ============ 11 SDLC ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Process</div>
+    <h2>Where does UI/UX fit into the SDLC?</h2>
+    <p class="lead">It starts where the last session ended — with requirements — and keeps looping.</p>
+    <svg width="1136" height="330" viewBox="0 0 1136 330" style="margin-top:22px">
+      <defs>
+        <marker id="m1" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#94A3B8"/></marker>
+        <marker id="m2" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#F59E0B"/></marker>
+        <linearGradient id="gstep" x1="0" x2="1"><stop offset="0" stop-color="#4F46E5"/><stop offset="1" stop-color="#0891B2"/></linearGradient>
+      </defs>
+      <g font-family="Bahnschrift, Segoe UI" text-anchor="middle">
+        <!-- 8 steps x positions -->
+        <g>
+          <rect x="0" y="100" width="122" height="74" rx="14" fill="#0E1628"/><text x="61" y="134" fill="#fff" font-size="16" font-weight="600">Requirements</text><text x="61" y="155" fill="#94A3B8" font-size="11.5" font-family="Segoe UI">last session</text>
+          <rect x="145" y="100" width="122" height="74" rx="14" fill="#fff" stroke="#C7D2FE" stroke-width="2"/><text x="206" y="134" fill="#0E1628" font-size="16" font-weight="600">User</text><text x="206" y="154" fill="#0E1628" font-size="16" font-weight="600">Research</text>
+          <rect x="290" y="100" width="122" height="74" rx="14" fill="#fff" stroke="#C7D2FE" stroke-width="2"/><text x="351" y="142" fill="#0E1628" font-size="16" font-weight="600">User Flows</text>
+          <rect x="435" y="100" width="122" height="74" rx="14" fill="url(#gstep)"/><text x="496" y="142" fill="#fff" font-size="16" font-weight="600">Wireframes</text>
+          <rect x="580" y="100" width="122" height="74" rx="14" fill="url(#gstep)"/><text x="641" y="142" fill="#fff" font-size="16" font-weight="600">Prototypes</text>
+          <rect x="725" y="100" width="122" height="74" rx="14" fill="url(#gstep)"/><text x="786" y="134" fill="#fff" font-size="16" font-weight="600">Usability</text><text x="786" y="154" fill="#fff" font-size="16" font-weight="600">Testing</text>
+          <rect x="870" y="100" width="122" height="74" rx="14" fill="#fff" stroke="#FCD34D" stroke-width="2"/><text x="931" y="142" fill="#0E1628" font-size="16" font-weight="600">Iteration</text>
+          <rect x="1014" y="100" width="122" height="74" rx="14" fill="#0E1628"/><text x="1075" y="142" fill="#fff" font-size="16" font-weight="600">Development</text>
+        </g>
+        <g stroke="#94A3B8" stroke-width="2" marker-end="url(#m1)">
+          <line x1="123" y1="137" x2="141" y2="137"/><line x1="268" y1="137" x2="286" y2="137"/><line x1="413" y1="137" x2="431" y2="137"/><line x1="558" y1="137" x2="576" y2="137"/><line x1="703" y1="137" x2="721" y2="137"/><line x1="848" y1="137" x2="866" y2="137"/><line x1="993" y1="137" x2="1010" y2="137"/>
+        </g>
+        <!-- loop -->
+        <path d="M931 100 C 931 30, 496 30, 496 96" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#m2)"/>
+        <text x="713" y="40" fill="#B45309" font-size="15" font-weight="600">learn → redesign → test again</text>
+        <!-- continuous band -->
+        <rect x="145" y="226" width="991" height="46" rx="23" fill="#EEF2FF"/>
+        <text x="640" y="255" fill="#3730A3" font-size="15.5" font-weight="600">UX work continues during development and maintenance: analytics · user feedback · support tickets · new tests</text>
+        <path d="M1075 176 L1075 222" stroke="#A5B4FC" stroke-width="2" marker-end="url(#m1)"/>
+        <text x="496" y="205" fill="#5B6678" font-size="12.5" font-family="Segoe UI">today’s focus</text>
+        <line x1="440" y1="196" x2="845" y2="196" stroke="#4F46E5" stroke-width="2"/>
+      </g>
+    </svg>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px">
+      <div class="card" style="padding:14px 18px"><b>Input</b><p class="small">Requirements, stakeholders, constraints, business rules</p></div>
+      <div class="card" style="padding:14px 18px"><b>Output</b><p class="small">Flows, wireframes, a tested prototype, design decisions with reasons</p></div>
+      <div class="card" style="padding:14px 18px"><b>Reality check</b><p class="small">Testing findings often send you back to the flows — or even the requirements</p></div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>11</span></div>
+</section>
+
+<!-- ============ 12 USER FLOW ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Design artefacts</div>
+    <h2>What is a user flow?</h2>
+    <p class="lead" style="max-width:1100px">A diagram of the <b>steps and decisions a user goes through</b> to complete one goal. It helps teams spot missing screens, dead ends and unnecessary steps — before anything is drawn in detail.</p>
+    <svg width="1136" height="200" viewBox="0 0 1136 200" style="margin-top:20px">
+      <defs><marker id="m3" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748B"/></marker></defs>
+      <g font-family="Segoe UI" font-size="14.5" font-weight="600" text-anchor="middle" fill="#0E1628">
+        <rect x="0" y="56" width="150" height="56" rx="28" fill="#E0E7FF"/><text x="75" y="89">Browse Catalog</text>
+        <rect x="190" y="56" width="140" height="56" rx="10" fill="#fff" stroke="#94A3B8" stroke-width="1.5"/><text x="260" y="89">Select Book</text>
+        <polygon points="445,34 520,84 445,134 370,84" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/><text x="445" y="80" font-size="13">Check</text><text x="445" y="96" font-size="13">Availability</text>
+        <rect x="560" y="56" width="120" height="56" rx="10" fill="#fff" stroke="#94A3B8" stroke-width="1.5"/><text x="620" y="89">Reserve</text>
+        <polygon points="800,34 880,84 800,134 720,84" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/><text x="800" y="80" font-size="13">Authenticate</text><text x="800" y="96" font-size="12" fill="#92400E">(if needed)</text>
+        <rect x="920" y="56" width="130" height="56" rx="28" fill="#D1FAE5"/><text x="985" y="89">Confirm</text>
+        <rect x="370" y="160" width="150" height="38" rx="8" fill="#fff" stroke="#CBD5E1" stroke-dasharray="5 4"/><text x="445" y="184" font-size="13" fill="#475569">Join waitlist</text>
+      </g>
+      <g stroke="#64748B" stroke-width="2" fill="none" marker-end="url(#m3)">
+        <line x1="151" y1="84" x2="186" y2="84"/><line x1="331" y1="84" x2="366" y2="84"/><line x1="521" y1="84" x2="556" y2="84"/><line x1="681" y1="84" x2="716" y2="84"/><line x1="881" y1="84" x2="916" y2="84"/><line x1="445" y1="135" x2="445" y2="156"/>
+      </g>
+      <g font-family="Segoe UI" font-size="12" fill="#64748B"><text x="530" y="74">yes</text><text x="456" y="150">no</text></g>
+    </svg>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px">
+      <div class="card" style="border:2px solid var(--indigo)"><b style="color:var(--indigo)">User flow</b><p class="small" style="margin-top:4px">What the <b>user does</b>, step by step, toward a goal. Screens + decisions.</p></div>
+      <div class="card"><b>Database schema</b><p class="small" style="margin-top:4px">How <b>data is stored</b>: tables, keys and relationships. No user steps.</p></div>
+      <div class="card"><b>Architecture diagram</b><p class="small" style="margin-top:4px">How <b>system components</b> connect: app, API, database, services.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>12</span></div>
+</section>
+
+<!-- ============ 13 WIREFRAME ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Design artefacts</div>
+    <h2>What is a wireframe?</h2>
+    <p class="lead" style="max-width:600px">A simplified, usually grayscale blueprint of a screen. It shows <b>structure</b>, <b>layout</b>, <b>content hierarchy</b> and <b>navigation</b> — deliberately leaving out colour, imagery and polish.</p>
+    <div style="margin-top:28px;width:600px">
+      <h3 style="font-size:19px">Why wireframe before development?</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
+        <div class="card" style="padding:12px 16px"><b>Cheap to change</b><p class="small">Move a box, not a component tree.</p></div>
+        <div class="card" style="padding:12px 16px"><b>Aligns the team</b><p class="small">Devs, designers &amp; clients see the same plan.</p></div>
+        <div class="card" style="padding:12px 16px"><b>Exposes gaps</b><p class="small">Missing requirements and states show up early.</p></div>
+        <div class="card" style="padding:12px 16px"><b>Testable early</b><p class="small">Users can react before code exists.</p></div>
+      </div>
+    </div>
+    <!-- annotated grayscale wireframe: campus events -->
+    <div style="position:absolute;right:190px;top:64px">
+      <div class="phone" style="background:#9CA3AF"><div class="notch" style="background:#9CA3AF"></div><div class="scr" style="background:#fff;font-family:Segoe UI">
+        <div class="sbar" style="color:#9CA3AF"><span>9:41</span><span>▮</span></div>
+        <div style="margin:4px 14px 0;height:16px;width:110px;background:#9CA3AF;border-radius:3px"></div>
+        <div style="margin:12px 14px 0;height:30px;border:2px solid #9CA3AF;border-radius:6px;display:flex;align-items:center;padding-left:8px;color:#9CA3AF">⌕ Search events</div>
+        <div style="margin:12px 14px 0;display:flex;gap:6px"><span style="height:20px;width:52px;border:1.5px solid #9CA3AF;border-radius:10px"></span><span style="height:20px;width:52px;border:1.5px solid #9CA3AF;border-radius:10px"></span><span style="height:20px;width:52px;border:1.5px solid #9CA3AF;border-radius:10px"></span></div>
+        <div style="margin:14px 14px 0;height:96px;border:2px solid #9CA3AF;border-radius:6px;background:linear-gradient(to top right,transparent calc(50% - 1px),#D1D5DB,transparent calc(50% + 1px)),linear-gradient(to top left,transparent calc(50% - 1px),#D1D5DB,transparent calc(50% + 1px))"></div>
+        <div style="margin:8px 14px 0;height:10px;width:150px;background:#6B7280;border-radius:2px"></div>
+        <div style="margin:6px 14px 0;height:8px;width:110px;background:#D1D5DB;border-radius:2px"></div>
+        <div style="margin:14px 14px 0;display:flex;gap:8px;align-items:center"><span style="width:44px;height:44px;border:2px solid #9CA3AF;border-radius:6px"></span><span><span style="display:block;height:9px;width:120px;background:#6B7280;border-radius:2px"></span><span style="display:block;margin-top:6px;height:7px;width:80px;background:#D1D5DB;border-radius:2px"></span></span></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:46px;border-top:2px solid #D1D5DB;display:flex;justify-content:space-around;align-items:center"><span style="width:22px;height:22px;border:2px solid #6B7280;border-radius:5px"></span><span style="width:22px;height:22px;border:2px solid #9CA3AF;border-radius:5px"></span><span style="width:22px;height:22px;border:2px solid #9CA3AF;border-radius:5px"></span></div>
+      </div></div>
+      <div style="position:absolute;left:250px;top:50px;width:160px;font-size:13px;color:var(--ink2)"><b style="color:var(--indigo)">← Hierarchy</b><br>Title, then search: the most important things first</div>
+      <div style="position:absolute;left:250px;top:170px;width:160px;font-size:13px;color:var(--ink2)"><b style="color:var(--indigo)">← Layout</b><br>Featured card, then list items</div>
+      <div style="position:absolute;left:250px;top:300px;width:160px;font-size:13px;color:var(--ink2)"><b style="color:var(--indigo)">← Content</b><br>Grey bars = text, crossed box = image</div>
+      <div style="position:absolute;left:250px;top:430px;width:160px;font-size:13px;color:var(--ink2)"><b style="color:var(--indigo)">← Navigation</b><br>Persistent bottom tab bar</div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design · example: a campus events app</span><span>13</span></div>
+</section>
+
+<!-- ============ 14 LOW FIDELITY ============ -->
+<section class="slide">
+  <svg width="0" height="0" style="position:absolute"><defs><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3.2"/></filter></defs></svg>
+  <div class="pad">
+    <div class="kicker">Fidelity</div>
+    <h2>Low-fidelity wireframes</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:22px">
+      <!-- hand drawn -->
+      <div>
+        <div style="height:372px;border-radius:12px;background:#FFFDF6;border:1px solid #EADFC4;background-image:repeating-linear-gradient(#FFFDF6 0 27px,#DCE8F5 27px 28px);position:relative;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.08)">
+          <svg width="340" height="372" viewBox="0 0 340 372" style="filter:url(#rough)">
+            <g fill="none" stroke="#1F2937" stroke-width="2.2" stroke-linecap="round">
+              <rect x="90" y="18" width="160" height="330" rx="18"/>
+              <line x1="104" y1="52" x2="200" y2="52"/>
+              <rect x="104" y="66" width="132" height="24" rx="6"/>
+              <rect x="104" y="104" width="132" height="70"/><line x1="104" y1="104" x2="236" y2="174"/><line x1="236" y1="104" x2="104" y2="174"/>
+              <line x1="104" y1="188" x2="210" y2="188"/><line x1="104" y1="200" x2="180" y2="200"/>
+              <rect x="104" y="216" width="30" height="30"/><line x1="142" y1="224" x2="228" y2="224"/><line x1="142" y1="236" x2="200" y2="236"/>
+              <rect x="104" y="256" width="30" height="30"/><line x1="142" y1="264" x2="228" y2="264"/><line x1="142" y1="276" x2="200" y2="276"/>
+              <line x1="92" y1="316" x2="248" y2="316"/><circle cx="125" cy="332" r="6"/><circle cx="170" cy="332" r="6"/><circle cx="215" cy="332" r="6"/>
+              <path d="M250 78 C 275 70, 285 60, 292 50" stroke="#2563EB"/><path d="M84 140 C 60 150, 46 160, 40 178" stroke="#2563EB"/>
+            </g>
+            <g font-family="Ink Free, Segoe Print, cursive" font-size="15" fill="#2563EB"><text x="258" y="44">search!</text><text x="8" y="196">big photo?</text></g>
+          </svg>
+        </div>
+        <h3 style="margin-top:14px">Hand-drawn sketch</h3><p class="small">Minutes per idea. Draw five, keep one.</p>
+      </div>
+      <!-- paper / sticky notes -->
+      <div>
+        <div style="height:372px;border-radius:12px;background:#B88B5A;background-image:radial-gradient(rgba(0,0,0,.06) 1px,transparent 1px);background-size:6px 6px;position:relative;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.08)">
+          <div style="position:absolute;left:30px;top:26px;width:150px;height:300px;background:#fff;transform:rotate(-3deg);box-shadow:2px 4px 10px rgba(0,0,0,.25);border-radius:4px">
+            <svg width="150" height="300" style="filter:url(#rough)"><g fill="none" stroke="#111" stroke-width="2"><rect x="12" y="14" width="126" height="272" rx="14"/><line x1="24" y1="40" x2="100" y2="40"/><rect x="24" y="52" width="102" height="20" rx="5"/></g></svg>
+            <div style="position:absolute;left:22px;top:84px;width:106px;height:58px;background:#FDE68A;box-shadow:1px 2px 4px rgba(0,0,0,.2);font:15px 'Ink Free',cursive;padding:6px;transform:rotate(2deg)">Featured event</div>
+            <div style="position:absolute;left:22px;top:152px;width:106px;height:44px;background:#A7F3D0;box-shadow:1px 2px 4px rgba(0,0,0,.2);font:14px 'Ink Free',cursive;padding:6px;transform:rotate(-2deg)">list item</div>
+            <div style="position:absolute;left:22px;top:204px;width:106px;height:44px;background:#A7F3D0;box-shadow:1px 2px 4px rgba(0,0,0,.2);font:14px 'Ink Free',cursive;padding:6px;transform:rotate(1deg)">list item</div>
+          </div>
+          <div style="position:absolute;right:26px;top:60px;width:118px;height:110px;background:#FBCFE8;transform:rotate(4deg);box-shadow:2px 4px 8px rgba(0,0,0,.25);font:16px/1.3 'Ink Free',cursive;padding:10px">filter chips here?<br>→ test with 3 users</div>
+          <div style="position:absolute;right:40px;top:200px;width:104px;height:86px;background:#BFDBFE;transform:rotate(-5deg);box-shadow:2px 4px 8px rgba(0,0,0,.25);font:16px/1.3 'Ink Free',cursive;padding:10px">Tab bar:<br>Home · Saved · Me</div>
+        </div>
+        <h3 style="margin-top:14px">Paper wireframe</h3><p class="small">Rearrange sticky notes with users in the room.</p>
+      </div>
+      <!-- grayscale digital -->
+      <div>
+        <div style="height:372px;border-radius:12px;background:#E5E7EB;position:relative;overflow:hidden;display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,0,0,.08)">
+          <div style="width:170px;height:330px;background:#fff;border:2px solid #6B7280;border-radius:18px;padding:16px 12px;font-family:Segoe UI;position:relative">
+            <div style="font-weight:700;color:#374151;font-size:13px">Campus Events</div>
+            <div style="margin-top:8px;border:1.5px solid #9CA3AF;border-radius:5px;padding:5px 6px;font-size:10px;color:#6B7280">⌕ Search</div>
+            <div style="margin-top:8px;height:72px;background:#D1D5DB;border-radius:5px;display:grid;place-items:center;color:#6B7280;font-size:10px">[ image ]</div>
+            <div style="margin-top:6px;font-size:11px;font-weight:700;color:#374151">Hackathon 2026</div><div style="font-size:9.5px;color:#6B7280">Thu · Main Hall</div>
+            <div style="margin-top:8px;display:flex;gap:6px;align-items:center"><span style="width:28px;height:28px;background:#D1D5DB;border-radius:4px"></span><span style="font-size:10px;color:#374151">Career Fair<br><span style="color:#9CA3AF">Sun · Gym</span></span></div>
+            <div style="margin-top:8px;display:flex;gap:6px;align-items:center"><span style="width:28px;height:28px;background:#D1D5DB;border-radius:4px"></span><span style="font-size:10px;color:#374151">Robotics Club<br><span style="color:#9CA3AF">Mon · Lab 3</span></span></div>
+            <div style="position:absolute;left:12px;right:12px;bottom:14px;height:28px;background:#4B5563;border-radius:5px;color:#fff;font-size:10.5px;display:grid;place-items:center">Register</div>
+          </div>
+        </div>
+        <h3 style="margin-top:14px">Grayscale digital</h3><p class="small">Clean boxes in Figma/FigJam — easy to share &amp; link.</p>
+      </div>
+    </div>
+    <div style="position:absolute;left:72px;right:72px;bottom:54px;display:flex;gap:10px;align-items:center">
+      <b style="font-size:15px;margin-right:6px">Why low-fi?</b>
+      <span class="chip" style="background:#EEF2FF;color:#3730A3">Fast</span><span class="chip" style="background:#EEF2FF;color:#3730A3">Cheap</span><span class="chip" style="background:#EEF2FF;color:#3730A3">Easy to change</span><span class="chip" style="background:#EEF2FF;color:#3730A3">Encourages experimentation</span><span class="chip" style="background:#EEF2FF;color:#3730A3">Focus on structure, not styling</span>
+    </div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>14</span></div>
+</section>
+
+<!-- ============ 15 HIGH FIDELITY ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Fidelity</div>
+    <h2>High-fidelity prototypes</h2>
+    <div style="display:flex;gap:30px;align-items:center;margin-top:20px">
+      <!-- phone 1 list -->
+      <div class="phone" style="width:206px;height:420px"><div class="notch"></div><div class="scr" style="background:#F8FAFC">
+        <div class="sbar"><span>9:41</span><span>▮</span></div>
+        <div style="padding:4px 14px 0;font:600 17px Bahnschrift;color:#0F172A">Campus Events</div>
+        <div style="margin:10px 14px 0;background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:7px 9px;color:#64748B">⌕ Search events</div>
+        <div style="margin:12px 14px 0;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);position:relative">
+          <div style="height:80px;background:linear-gradient(135deg,#4F46E5,#06B6D4)"></div>
+          <div style="padding:8px 10px"><b style="font-size:12px">Hackathon 2026</b><div style="color:#64748B;font-size:10px">Thu 12 Nov · Main Hall</div></div>
+          <span style="position:absolute;right:10px;top:-0px;transform:translateY(-0px);top:64px;background:#fff;border-radius:999px;padding:3px 8px;font-size:9.5px;font-weight:700;color:#047857">32 seats left</span>
+        </div>
+        <div style="margin:10px 14px 0;display:flex;gap:8px;align-items:center;background:#fff;border-radius:12px;padding:8px"><span style="width:34px;height:34px;border-radius:8px;background:#FDE68A"></span><span><b>Career Fair</b><br><span style="color:#64748B;font-size:10px">Sun 15 Nov · Gym</span></span></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:46px;background:#fff;border-top:1px solid #E2E8F0;display:flex;justify-content:space-around;align-items:center;font-size:9.5px;color:#64748B"><span style="color:#4F46E5;font-weight:700">● Explore</span><span>♡ Saved</span><span>☺ Me</span></div>
+        <span style="position:absolute;left:60px;top:150px;width:34px;height:34px;border-radius:50%;background:rgba(245,158,11,.35);border:2px solid #F59E0B"></span>
+      </div></div>
+      <div class="arrow">→<div style="font:600 11px Segoe UI;color:var(--muted);text-align:center">tap</div></div>
+      <!-- phone 2 detail -->
+      <div class="phone" style="width:206px;height:420px"><div class="notch"></div><div class="scr" style="background:#fff">
+        <div style="height:130px;background:linear-gradient(135deg,#4F46E5,#06B6D4);position:relative"><span style="position:absolute;left:12px;top:34px;color:#fff;font-size:15px">‹</span></div>
+        <div style="padding:12px 14px"><div style="font:600 17px Bahnschrift">Hackathon 2026</div><div style="color:#64748B;font-size:10.5px;margin-top:2px">Thu 12 Nov · 09:00 – 18:00 · Main Hall</div>
+          <div style="margin-top:10px;display:flex;gap:6px"><span style="background:#EEF2FF;color:#3730A3;border-radius:999px;padding:3px 8px;font-size:9.5px;font-weight:600">Teams of 3</span><span style="background:#ECFDF5;color:#047857;border-radius:999px;padding:3px 8px;font-size:9.5px;font-weight:600">Free</span></div>
+          <p style="margin-top:10px;color:#334155;line-height:1.45">Build something useful for campus in one day. Mentors and lunch provided.</p></div>
+        <div style="position:absolute;left:14px;right:14px;bottom:20px;height:40px;border-radius:12px;background:#4F46E5;color:#fff;display:grid;place-items:center;font-weight:600;font-size:12.5px">Register</div>
+        <span style="position:absolute;left:84px;bottom:22px;width:36px;height:36px;border-radius:50%;background:rgba(245,158,11,.35);border:2px solid #F59E0B"></span>
+      </div></div>
+      <div class="arrow">→<div style="font:600 11px Segoe UI;color:var(--muted);text-align:center">tap</div></div>
+      <!-- phone 3 success -->
+      <div class="phone" style="width:206px;height:420px"><div class="notch"></div><div class="scr" style="background:#fff;text-align:center">
+        <div style="margin:90px auto 0;width:64px;height:64px;border-radius:50%;background:#D1FAE5;display:grid;place-items:center;color:#047857;font-size:30px;font-weight:700">✓</div>
+        <div style="font:600 17px Bahnschrift;margin-top:16px">You’re registered</div>
+        <p style="color:#475569;margin:8px 22px 0;line-height:1.45">We’ve added Hackathon 2026 to your calendar. Bring your student card.</p>
+        <div style="position:absolute;left:14px;right:14px;bottom:66px;height:38px;border-radius:12px;background:#4F46E5;color:#fff;display:grid;place-items:center;font-weight:600">View my events</div>
+        <div style="position:absolute;left:14px;right:14px;bottom:20px;height:38px;border-radius:12px;border:1.5px solid #CBD5E1;display:grid;place-items:center;font-weight:600;color:#334155">Back to Explore</div>
+      </div></div>
+      <!-- explanation -->
+      <div style="flex:1;padding-left:10px">
+        <div style="display:grid;gap:9px;font-size:14.5px;color:var(--ink2)">
+          <div><b style="color:var(--ink)">Typography</b> — real fonts, sizes and weights</div>
+          <div><b style="color:var(--ink)">Colours</b> — the final palette and contrast</div>
+          <div><b style="color:var(--ink)">Components</b> — cards, chips, buttons, tab bar</div>
+          <div><b style="color:var(--ink)">Visual states</b> —
+            <span style="display:inline-flex;gap:4px;vertical-align:middle;margin-top:4px"><span style="padding:3px 7px;border-radius:6px;background:#4F46E5;color:#fff;font-size:10.5px">default</span><span style="padding:3px 7px;border-radius:6px;background:#3730A3;color:#fff;font-size:10.5px">pressed</span><span style="padding:3px 7px;border-radius:6px;background:#E2E8F0;color:#64748B;font-size:10.5px">disabled</span></span></div>
+          <div><b style="color:var(--ink)">Interactive navigation</b> — <span style="color:#B45309">hotspots</span> link screens</div>
+          <div><b style="color:var(--ink)">Realistic task flows</b> — test a whole goal</div>
+        </div>
+        <div class="card" style="margin-top:16px;padding:12px 14px;background:#FFFBEB;border-color:#FDE68A;font-size:13.5px;color:#78350F"><b>Careful:</b> a polished <b>mockup</b> is just a picture. It becomes a <b>prototype</b> only when it simulates interaction.</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design · example: a campus events app</span><span>15</span></div>
+</section>
+
+<!-- ============ 16 WIREFRAME vs MOCKUP vs PROTOTYPE ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Fidelity</div>
+    <h2>Wireframe vs. mockup vs. prototype</h2>
+    <div style="display:grid;grid-template-columns:170px repeat(3,1fr);gap:0;margin-top:22px;align-items:stretch">
+      <div></div>
+      <div style="text-align:center;padding-bottom:12px">
+        <div style="margin:0 auto;width:110px;height:170px;border:2px solid #9CA3AF;border-radius:14px;padding:12px 10px;background:#fff">
+          <div style="height:8px;width:60px;background:#9CA3AF;border-radius:2px"></div><div style="margin-top:8px;height:44px;border:1.5px solid #D1D5DB;background:linear-gradient(to top right,transparent 49%,#E5E7EB,transparent 51%)"></div><div style="margin-top:6px;height:6px;width:70px;background:#D1D5DB"></div><div style="margin-top:4px;height:6px;width:50px;background:#E5E7EB"></div><div style="margin-top:34px;height:16px;border:1.5px solid #9CA3AF;border-radius:4px"></div>
+        </div>
+        <h3 style="margin-top:10px">Wireframe</h3>
+      </div>
+      <div style="text-align:center;padding-bottom:12px">
+        <div style="margin:0 auto;width:110px;height:170px;border:2px solid #0F172A;border-radius:14px;padding:12px 10px;background:#fff;overflow:hidden">
+          <div style="font:600 10px Bahnschrift;text-align:left">Hackathon 2026</div><div style="margin-top:6px;height:44px;border-radius:6px;background:linear-gradient(135deg,#4F46E5,#06B6D4)"></div><div style="margin-top:6px;font-size:7px;color:#64748B;text-align:left">Thu 12 Nov · Main Hall</div><div style="margin-top:4px;display:flex;gap:3px"><span style="height:8px;width:28px;border-radius:4px;background:#EEF2FF"></span><span style="height:8px;width:20px;border-radius:4px;background:#ECFDF5"></span></div><div style="margin-top:30px;height:16px;border-radius:5px;background:#4F46E5"></div>
+        </div>
+        <h3 style="margin-top:10px">Mockup</h3>
+      </div>
+      <div style="text-align:center;padding-bottom:12px;position:relative">
+        <div style="display:flex;justify-content:center;gap:10px;align-items:center">
+          <div style="width:84px;height:130px;border:2px solid #0F172A;border-radius:12px;background:linear-gradient(#fff 0 60%,#fff),#fff;position:relative;overflow:hidden"><div style="height:34px;margin:8px;border-radius:5px;background:linear-gradient(135deg,#4F46E5,#06B6D4)"></div><span style="position:absolute;left:28px;top:20px;width:20px;height:20px;border-radius:50%;background:rgba(245,158,11,.4);border:2px solid #F59E0B"></span></div>
+          <span style="color:#F59E0B;font:700 22px Bahnschrift">⇢</span>
+          <div style="width:84px;height:130px;border:2px solid #0F172A;border-radius:12px;background:#fff;display:grid;place-items:center;color:#047857;font-size:22px;font-weight:700">✓</div>
+        </div>
+        <h3 style="margin-top:50px">Prototype</h3>
+      </div>
+      <!-- rows -->
+      <div class="cmp-h">Purpose</div><div class="cmp">Agree on structure &amp; flow</div><div class="cmp">Agree on visual look</div><div class="cmp">Test how it <b>works</b> with users</div>
+      <div class="cmp-h">Detail</div><div class="cmp">Low: boxes, grey, placeholders</div><div class="cmp">High: real colours, type, images</div><div class="cmp">Low <i>or</i> high — interaction is the point</div>
+      <div class="cmp-h">Interactive?</div><div class="cmp">No</div><div class="cmp">No (static image)</div><div class="cmp"><b>Yes</b> — clickable, linked screens</div>
+      <div class="cmp-h">Effort</div><div class="cmp">Minutes – hours</div><div class="cmp">Hours – days</div><div class="cmp">Hours – days</div>
+      <div class="cmp-h">Typical tools</div><div class="cmp">Paper, FigJam, Figma</div><div class="cmp">Figma</div><div class="cmp">Figma prototyping, paper prototypes</div>
+    </div>
+  </div>
+  <style>
+    .cmp-h{font:600 15px Bahnschrift;color:var(--muted);padding:11px 0;border-top:1px solid var(--line);text-transform:uppercase;letter-spacing:1px;font-size:13px;display:flex;align-items:center}
+    .cmp{padding:11px 14px;border-top:1px solid var(--line);font-size:15px;text-align:center;color:var(--ink2)}
+  </style>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>16</span></div>
+</section>
+
+<!-- ============ 17 TOOLS ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Industry toolkit</div>
+    <h2>Industry design tools — and where they fit</h2>
+    <svg width="1136" height="70" viewBox="0 0 1136 70" style="margin-top:22px">
+      <defs><linearGradient id="gline" x1="0" x2="1"><stop offset="0" stop-color="#4F46E5"/><stop offset="1" stop-color="#0891B2"/></linearGradient></defs>
+      <rect x="0" y="28" width="1136" height="6" rx="3" fill="url(#gline)"/>
+      <g font-family="Bahnschrift" font-size="14" font-weight="600" text-anchor="middle" fill="#334155">
+        <circle cx="95" cy="31" r="10" fill="#fff" stroke="#4F46E5" stroke-width="4"/><text x="95" y="66">Explore</text>
+        <circle cx="284" cy="31" r="10" fill="#fff" stroke="#4F46E5" stroke-width="4"/><text x="284" y="66">Map flows</text>
+        <circle cx="473" cy="31" r="10" fill="#fff" stroke="#3F5FD9" stroke-width="4"/><text x="473" y="66">Design screens</text>
+        <circle cx="662" cy="31" r="10" fill="#fff" stroke="#2C74CC" stroke-width="4"/><text x="662" y="66">Stay consistent</text>
+        <circle cx="851" cy="31" r="10" fill="#fff" stroke="#1983BE" stroke-width="4"/><text x="851" y="66">Build faster</text>
+        <circle cx="1040" cy="31" r="10" fill="#fff" stroke="#0891B2" stroke-width="4"/><text x="1040" y="66">Validate</text>
+      </g>
+    </svg>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:12px">
+      <div class="card tool"><div class="ic" style="background:#FEF3C7">✎</div><b>Pen &amp; paper</b><p class="small">Rapid sketching, crazy-8s, paper prototypes. No learning curve.</p></div>
+      <div class="card tool"><div class="ic" style="background:#FCE7F3">◫</div><b>FigJam</b><p class="small">Online whiteboard for user flows, journey maps and team workshops.</p></div>
+      <div class="card tool"><div class="ic" style="background:#EDE9FE">◩</div><b>Figma</b><p class="small">Collaborative wireframes, mockups, prototypes and developer hand-off.</p></div>
+      <div class="card tool"><div class="ic" style="background:#E0E7FF">▦</div><b>Design systems</b><p class="small">Shared rules: colours, type, spacing, patterns. e.g. Material Design, Apple HIG.</p></div>
+      <div class="card tool"><div class="ic" style="background:#CFFAFE">❒</div><b>Component libraries</b><p class="small">Reusable coded parts that match the design system: buttons, inputs, cards.</p></div>
+      <div class="card tool"><div class="ic" style="background:#D1FAE5">◎</div><b>Usability testing</b><p class="small">Moderated sessions, unmoderated tools (e.g. Maze), screen recording &amp; surveys.</p></div>
+    </div>
+    <div class="card" style="margin-top:22px;display:flex;gap:26px;align-items:center;padding:16px 22px">
+      <div style="font:600 16px Bahnschrift;white-space:nowrap">A typical team week</div>
+      <div class="small" style="font-size:15px;color:var(--ink2)">Sketch 6 ideas on paper → map the chosen flow in FigJam → wireframe in Figma using the team’s design system → link a clickable prototype → test with 5 users → engineers build with the component library.</div>
+    </div>
+    <p class="small" style="position:absolute;left:72px;bottom:50px">Product names are trademarks of their owners; logos intentionally omitted. Tools change — the workflow skills transfer.</p>
+  </div>
+  <style>.tool{padding:16px}.tool .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:21px;margin-bottom:12px;color:#1E293B}.tool b{font-size:16px}.tool p{margin-top:6px}</style>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>17</span></div>
+</section>
+
+<!-- ============ 18 WHY MOBILE-FIRST ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Mobile-first</div>
+    <h2>Why mobile-first?</h2>
+    <p class="lead" style="max-width:640px">Design for the <b>smallest, most constrained screen first</b>, then enhance for larger ones. Constraints force you to decide what truly matters.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 22px;margin-top:22px;width:650px">
+      <div><b>Limited screen space</b><p class="small">No room for “nice to have”.</p></div>
+      <div><b>Content prioritisation</b><p class="small">The primary task goes on top.</p></div>
+      <div><b>Touch interactions</b><p class="small">Fingers, not precise mouse pointers.</p></div>
+      <div><b>Thumb-friendly navigation</b><p class="small">Key actions within easy reach.</p></div>
+      <div><b>Responsive layouts</b><p class="small">One design adapts to every width.</p></div>
+      <div><b>Progressive enhancement</b><p class="small">Add columns &amp; shortcuts as space grows.</p></div>
+    </div>
+    <div class="card" style="position:absolute;left:72px;bottom:56px;width:650px;padding:13px 18px;background:#FFFBEB;border-color:#FDE68A">
+      <p style="font-size:14px;color:#78350F"><b>Case-study hypothesis:</b> we <i>assume</i> most students will use the library system on their phones. This is not a verified statistic about PSUT students — a real team would confirm it with surveys or analytics.</p>
+    </div>
+    <!-- thumb zone -->
+    <div style="position:absolute;right:330px;top:84px">
+      <div class="phone" style="width:206px;height:420px"><div class="notch"></div><div class="scr" style="background:linear-gradient(180deg,#FECACA 0%,#FECACA 18%,#FDE68A 30%,#FDE68A 46%,#BBF7D0 60%,#BBF7D0 100%)">
+        <div style="position:absolute;top:44px;left:0;right:0;text-align:center;font-weight:700;color:#991B1B">Hard to reach</div>
+        <div style="position:absolute;top:150px;left:0;right:0;text-align:center;font-weight:700;color:#92400E">OK</div>
+        <div style="position:absolute;top:330px;left:70px;right:0;text-align:center;font-weight:700;color:#166534">Easy — thumb zone</div>
+        <svg width="188" height="402" style="position:absolute;inset:0"><path d="M30 402 A 170 170 0 0 1 188 240" stroke="#166534" stroke-width="2" stroke-dasharray="5 5" fill="none"/></svg>
+      </div></div>
+      <p class="small" style="text-align:center;margin-top:10px;width:206px">One-handed use, right thumb</p>
+    </div>
+    <!-- progressive enhancement -->
+    <div style="position:absolute;right:72px;top:110px;width:220px">
+      <div style="font:600 13px Bahnschrift;color:var(--muted);letter-spacing:1px">SAME CONTENT, MORE SPACE</div>
+      <div style="margin-top:12px;display:flex;gap:10px;align-items:flex-end">
+        <div style="width:40px;height:72px;border:2px solid #334155;border-radius:7px;padding:5px;display:grid;gap:3px"><span style="background:#C7D2FE;border-radius:2px"></span><span style="background:#E2E8F0;border-radius:2px"></span><span style="background:#E2E8F0;border-radius:2px"></span></div>
+        <div style="width:70px;height:92px;border:2px solid #334155;border-radius:8px;padding:6px;display:grid;grid-template-columns:1fr 1fr;gap:3px"><span style="background:#C7D2FE;border-radius:2px;grid-column:span 2"></span><span style="background:#E2E8F0;border-radius:2px"></span><span style="background:#E2E8F0;border-radius:2px"></span></div>
+        <div style="width:96px;height:66px;border:2px solid #334155;border-radius:6px;padding:5px;display:grid;grid-template-columns:20px 1fr 1fr;gap:3px"><span style="background:#CFFAFE;border-radius:2px;grid-row:span 2"></span><span style="background:#C7D2FE;border-radius:2px;grid-column:span 2"></span><span style="background:#E2E8F0;border-radius:2px"></span><span style="background:#E2E8F0;border-radius:2px"></span></div>
+      </div>
+      <div style="display:flex;gap:10px;font-size:11px;color:var(--muted);margin-top:6px"><span style="width:40px">phone</span><span style="width:70px">tablet</span><span>desktop</span></div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>18</span></div>
+</section>
+
+<!-- ============ 19 MOBILE-FIRST PRINCIPLES ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Mobile-first</div>
+    <h2>Mobile-first design principles</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px">
+      <!-- touch targets -->
+      <div class="card pr"><b>Accessible touch targets</b>
+        <div class="dd"><div class="x"><span style="display:flex;gap:2px"><span class="tiny"></span><span class="tiny"></span><span class="tiny"></span></span></div><div class="v"><span style="display:flex;gap:8px"><span class="big"></span><span class="big"></span></span></div></div>
+        <p class="small">WCAG 2.2 (2.5.8) sets a 24×24 px minimum; platform guides recommend ~44–48 px.</p></div>
+      <!-- readable type -->
+      <div class="card pr"><b>Readable typography</b>
+        <div class="dd"><div class="x"><span style="font-size:8px;color:#94A3B8">Due 07/11 — see T&amp;C §4</span></div><div class="v"><span style="font-size:15px;font-weight:600">Due 7 Nov</span></div></div>
+        <p class="small">~16 px body text; text must still work when zoomed to 200% (WCAG 1.4.4).</p></div>
+      <!-- clear navigation -->
+      <div class="card pr"><b>Clear navigation</b>
+        <div class="dd"><div class="x"><span style="font-size:15px;letter-spacing:6px;color:#475569">◌⌁✧☰</span></div><div class="v"><span style="font-size:10px;display:flex;gap:8px;color:#1E293B;font-weight:600"><span>⌂<br>Home</span><span>⌕<br>Search</span><span>☺<br>Me</span></span></div></div>
+        <p class="small">Icons with text labels; few, predictable destinations.</p></div>
+      <!-- search visibility -->
+      <div class="card pr"><b>Search visibility</b>
+        <div class="dd"><div class="x"><span style="font-size:10px;color:#64748B">Menu ▸ Tools ▸ Find…</span></div><div class="v"><span style="border:1.5px solid #334155;border-radius:7px;padding:4px 10px;font-size:11px;color:#334155">⌕ Search…</span></div></div>
+        <p class="small">If search is the main task, put it at the top — not in a menu.</p></div>
+      <!-- minimal forms -->
+      <div class="card pr"><b>Minimal forms</b>
+        <div class="dd"><div class="x"><span style="display:grid;gap:3px;width:60px"><span class="ln"></span><span class="ln"></span><span class="ln"></span><span class="ln"></span><span class="ln"></span></span></div><div class="v"><span style="display:grid;gap:4px;width:60px"><span class="ln" style="height:9px"></span></span></div></div>
+        <p class="small">Ask only for what you can’t already know. Prefill the rest.</p></div>
+      <!-- contrast -->
+      <div class="card pr"><b>Appropriate contrast</b>
+        <div class="dd"><div class="x"><span style="color:#C3CAD5;font-weight:600">Reserve</span></div><div class="v"><span style="color:#0F172A;font-weight:600">Reserve</span></div></div>
+        <p class="small">Text ≥ 4.5:1 (WCAG 1.4.3); buttons &amp; icons ≥ 3:1 (1.4.11).</p></div>
+      <!-- primary actions -->
+      <div class="card pr" style="grid-column:span 2"><b>Clear primary action</b>
+        <div class="dd" style="grid-template-columns:1fr 1fr"><div class="x"><span style="display:flex;gap:4px"><span class="btn o">Submit</span><span class="btn o">Reset</span><span class="btn o">Print</span><span class="btn o">Help</span></span></div><div class="v"><span style="display:flex;gap:6px;align-items:center"><span class="btn p">Register</span><span style="font-size:10.5px;color:#334155;text-decoration:underline">Cancel</span></span></div></div>
+        <p class="small">One visually dominant action per screen, labelled with what it actually does.</p></div>
+    </div>
+  </div>
+  <style>
+    .pr{padding:16px 16px}.pr b{font-size:16px}.pr p{margin-top:10px;font-size:13.5px}
+    .dd{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+    .dd>div{height:96px;border-radius:10px;display:grid;place-items:center;position:relative}
+    .dd .x{background:#FFF1F2;border:1px solid #FECDD3}.dd .v{background:#ECFDF5;border:1px solid #A7F3D0}
+    .dd .x::after{content:"✗";position:absolute;top:3px;left:7px;font-size:11px;color:#BE123C;font-weight:700}
+    .dd .v::after{content:"✓";position:absolute;top:3px;left:7px;font-size:11px;color:#047857;font-weight:700}
+    .tiny{width:12px;height:12px;border:1.5px solid #64748B;border-radius:3px;display:inline-block}
+    .big{width:30px;height:30px;border:2px solid #047857;border-radius:7px;display:inline-block;background:#fff}
+    .ln{height:6px;border:1px solid #94A3B8;border-radius:2px;background:#fff;display:block}
+    .btn{font-size:10px;padding:4px 7px;border-radius:5px;font-weight:600}.btn.o{border:1px solid #94A3B8;color:#475569;background:#fff}.btn.p{background:#4F46E5;color:#fff;padding:6px 12px;font-size:11px}
+  </style>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design · WCAG references: W3C WCAG 2.2 success criteria</span><span>19</span></div>
+</section>
+
+<!-- ============ 20 CASE STUDY ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Case study</div>
+    <h2>University Library Management System</h2>
+    <p class="lead" style="max-width:980px">Students browse, search and reserve books online, then <b>collect and return them physically</b> at the library. We’ll trace how written requirements become screens.</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px">
+      <div class="card role"><div class="av" style="background:#F1F5F9;color:#334155">G</div><h3>Guest</h3><p class="small">Browses and searches the public catalogue.</p></div>
+      <div class="card role"><div class="av" style="background:#E0E7FF;color:#3730A3">S</div><h3>Student</h3><p class="small">Reserves books, tracks loans, due dates and fines.</p></div>
+      <div class="card role"><div class="av" style="background:#CFFAFE;color:#155E75">L</div><h3>Librarian</h3><p class="small">Prepares reservations, confirms hand-overs and returns.</p></div>
+      <div class="card role"><div class="av" style="background:#FEF3C7;color:#92400E">A</div><h3>Administrator</h3><p class="small">Manages policies, staff permissions and configuration.</p></div>
+    </div>
+    <div class="card" style="margin-top:22px;padding:16px 22px;display:flex;align-items:center;gap:14px;font-size:15px;font-weight:600;color:var(--ink2)">
+      <span style="font:600 13px Bahnschrift;letter-spacing:1.5px;color:var(--muted);margin-right:6px">CORE JOURNEY</span>
+      <span>Search online</span><span style="color:#94A3B8">→</span><span>Reserve online</span><span style="color:#94A3B8">→</span><span>Librarian prepares</span><span style="color:#94A3B8">→</span><span style="color:var(--indigo)">Collect in person</span><span style="color:#94A3B8">→</span><span>Track due date</span><span style="color:#94A3B8">→</span><span style="color:var(--indigo)">Return in person</span>
+    </div>
+    <div style="margin-top:20px;display:flex;gap:12px;align-items:center" class="small">
+      <span class="chip" style="background:#fff;border:1px solid var(--line);color:var(--ink2)">📄 Handout: 02 — Requirements (SRS)</span>
+      <span class="chip" style="background:#fff;border:1px solid var(--line);color:var(--ink2)">📱 Handout: 03 — Wireframes exercise</span>
+    </div>
+  </div>
+  <style>.role{padding:22px}.role .av{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font:600 22px Bahnschrift;margin-bottom:16px}.role p{margin-top:6px;font-size:14.5px}</style>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design · fictional system for teaching</span><span>20</span></div>
+</section>
+
+<!-- ============ 21 THE CHALLENGE ============ -->
+<section class="slide dark grid-bg">
+  <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+    <div class="disp" style="font-size:16px;letter-spacing:3px;color:#FCD34D;text-transform:uppercase">The challenge</div>
+    <h1 style="font-size:72px;line-height:1.05;margin-top:22px">The system works.<br><span style="color:#67E8F9">But is it usable?</span></h1>
+    <p style="font-size:22px;color:#C9D2EA;margin-top:30px;max-width:820px;line-height:1.45">You’ll receive a version of the library app that meets the requirements on paper — but was designed without enough UX thinking. Your job: find what creates friction, then fix it.</p>
+  </div>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>21</span></div>
+</section>
+
+<!-- ============ 22 ACTIVITY ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Hands-on activity</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end">
+      <h2>Redesign the Library System</h2>
+      <div style="display:flex;gap:10px"><span class="chip" style="background:#0E1628;color:#fff">⏱ 15–20 min</span><span class="chip" style="background:#E0E7FF;color:#3730A3">👥 Work in pairs</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px">
+      <div class="card step"><span class="sn">1</span><h3>Study the bad interface</h3><p class="small">Walk through every screen in Part A as a student would.</p></div>
+      <div class="card step"><span class="sn">2</span><h3>Identify problems</h3><p class="small">Find the obvious ones — then look for the subtle ones.</p></div>
+      <div class="card step"><span class="sn">3</span><h3>Discuss the friction</h3><p class="small">Which design decisions slow users down or mislead them?</p></div>
+      <div class="card step"><span class="sn">4</span><h3>Sketch a better version</h3><p class="small">Homepage, catalogue or reservation flow — on paper.</p></div>
+      <div class="card step"><span class="sn">5</span><h3>Present &amp; justify</h3><p class="small">Link each decision to a user need or a requirement.</p></div>
+      <div class="card step"><span class="sn">6</span><h3>Compare</h3><p class="small">Check your redesign against the instructor’s reference.</p></div>
+    </div>
+    <div style="margin-top:22px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+      <div style="border:2px dashed #C7D2FE;border-radius:14px;padding:14px 18px"><b style="color:var(--indigo)">You need</b><p class="small">Handout 02 (SRS) · Handout 03, Parts A–B · pen &amp; paper</p></div>
+      <div style="border:2px dashed #C7D2FE;border-radius:14px;padding:14px 18px"><b style="color:var(--indigo)">You produce</b><p class="small">A ranked list of ≥ 5 problems + one redesigned flow sketch</p></div>
+      <div style="border:2px dashed #C7D2FE;border-radius:14px;padding:14px 18px"><b style="color:var(--indigo)">You present</b><p class="small">2 minutes: the problem you fixed first, and why</p></div>
+    </div>
+  </div>
+  <style>.step{padding:22px 22px 20px;position:relative}.step .sn{font:600 44px/1 Bahnschrift;color:#C7D2FE;position:absolute;right:20px;top:14px}.step h3{max-width:230px}.step p{margin-top:8px;font-size:14.5px}</style>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>22</span></div>
+</section>
+
+<!-- ============ 23 DISCUSSION QUESTIONS ============ -->
+<section class="slide">
+  <div class="pad">
+    <div class="kicker">Guide your critique</div>
+    <h2>Discussion questions</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 22px;margin-top:28px">
+      <div class="dq"><span class="num">1</span>What is the first thing a user wants to do?</div>
+      <div class="dq"><span class="num">2</span>What is making that task difficult?</div>
+      <div class="dq"><span class="num">3</span>Is the navigation understandable?</div>
+      <div class="dq"><span class="num">4</span>Which information is unnecessary?</div>
+      <div class="dq"><span class="num">5</span>Are users receiving enough feedback?</div>
+      <div class="dq"><span class="num">6</span>Does the interface meet accessibility expectations?</div>
+      <div class="dq" style="grid-column:span 2;background:#0E1628;color:#fff;border:none"><span class="num" style="background:var(--amber);color:#111">7</span>What happens when something goes wrong?</div>
+    </div>
+  </div>
+  <style>.dq{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;font:500 21px Bahnschrift}</style>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design</span><span>23</span></div>
+</section>
+
+<!-- ============ 24 TAKEAWAY ============ -->
+<section class="slide dark grid-bg">
+  <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+    <div class="disp" style="font-size:16px;letter-spacing:3px;color:#7DD3FC;text-transform:uppercase">Final takeaway</div>
+    <h1 style="font-size:54px;line-height:1.1;margin-top:20px;max-width:1050px">Good UI/UX is not just about making software <span style="color:#94A3B8;text-decoration:line-through;text-decoration-thickness:3px">look good</span>.</h1>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px">
+      <div class="tk"><span>01</span>Make the <b>correct actions easy</b></div>
+      <div class="tk"><span>02</span>Make the system’s <b>behaviour understandable</b></div>
+      <div class="tk"><span>03</span>Make mistakes <b>preventable or recoverable</b></div>
+    </div>
+    <p style="margin-top:36px;font-size:19px;color:#C9D2EA">Justify every design decision with <b style="color:#fff">user needs</b>, <b style="color:#fff">requirements</b> and <b style="color:#fff">usability evidence</b> — not personal taste.</p>
+  </div>
+  <style>.tk{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);border-radius:16px;padding:20px 22px;font-size:20px;line-height:1.35;color:#E2E8F0}.tk span{display:block;font:600 14px Bahnschrift;color:#67E8F9;letter-spacing:2px;margin-bottom:8px}.tk b{color:#fff}</style>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design · Thank you</span><span>24</span></div>
+</section>
+
+</body>
+</html>

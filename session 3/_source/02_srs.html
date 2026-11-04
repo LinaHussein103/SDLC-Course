@@ -1,0 +1,352 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SRS — University Library Reservation and Borrowing System</title>
+<style>
+@page{size:A4;margin:16mm 15mm 16mm 15mm;
+  @top-left{content:"University Library Reservation & Borrowing System · SRS v0.9";font:8pt "Segoe UI";color:#8A94A6}
+  @top-right{content:"Codeflow PSUT · Teaching case";font:8pt "Segoe UI";color:#8A94A6}
+  @bottom-right{content:"Page " counter(page) " of " counter(pages);font:8pt "Segoe UI";color:#8A94A6}
+  @bottom-left{content:"Fictional system for teaching. Not an official PSUT document.";font:8pt "Segoe UI";color:#8A94A6}
+}
+@page:first{@top-left{content:none}@top-right{content:none}}
+:root{--ink:#0E1628;--ink2:#334155;--muted:#5B6678;--line:#D8DEE8;--soft:#F3F5F9;--indigo:#4338CA;--indigoL:#EEF2FF;--cyan:#0E7490;--cyanL:#ECFEFF;--amber:#B45309;--amberL:#FFFBEB;--good:#047857;--goodL:#ECFDF5}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font:9.6pt/1.45 "Segoe UI",sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3{font-family:Bahnschrift,"Segoe UI",sans-serif;font-weight:600;margin:0;color:var(--ink)}
+h2{font-size:15pt;margin:18px 0 8px;padding-top:4px;display:flex;align-items:baseline;gap:10px;break-after:avoid}
+h2 .n{color:var(--indigo);font-size:12pt;min-width:22px}
+h3{font-size:11pt;margin:12px 0 5px;color:var(--indigo);break-after:avoid}
+p{margin:0 0 6px}
+.why{background:var(--soft);border-left:3px solid var(--indigo);padding:6px 10px;margin:4px 0 8px;font-size:8.8pt;color:var(--ink2);border-radius:0 6px 6px 0}
+.why b{color:var(--indigo)}
+table{width:100%;border-collapse:collapse;margin:4px 0 8px;font-size:8.8pt;break-inside:auto}
+th{background:#1E293B;color:#fff;text-align:left;font-weight:600;padding:5px 7px;font-size:8.4pt}
+td{padding:4.5px 7px;border-bottom:1px solid var(--line);vertical-align:top}
+tr{break-inside:avoid}
+tbody tr:nth-child(even) td{background:#FAFBFD}
+td.id{font:600 8.4pt Consolas,monospace;color:var(--indigo);white-space:nowrap;width:52px}
+.grp td{background:var(--indigoL) !important;font:600 8.6pt Bahnschrift,sans-serif;color:var(--indigo);letter-spacing:.3px;padding:4px 7px}
+.pill{display:inline-block;font-size:7.6pt;font-weight:600;padding:1px 7px;border-radius:99px;white-space:nowrap}
+.p-m{background:#FEE2E2;color:#991B1B}.p-p{background:var(--amberL);color:var(--amber);border:1px solid #FDE68A}.p-a{background:var(--goodL);color:var(--good)}
+.box{border:1px solid var(--line);border-radius:8px;padding:10px 12px;break-inside:avoid;margin:6px 0 10px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cols3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.mono{font-family:Consolas,monospace;font-size:8.6pt}
+.pb{break-before:page}
+.avoid{break-inside:avoid}
+.small{font-size:8.4pt;color:var(--muted)}
+ul{margin:2px 0 6px;padding-left:16px}li{margin:1px 0}
+.ck{color:var(--good);font-weight:700;text-align:center}.no{color:#B0B8C6;text-align:center}
+</style>
+</head>
+<body>
+
+<!-- ===== Title block ===== -->
+<div style="border-radius:12px;background:#0B1022;color:#fff;padding:22px 24px 20px;position:relative;overflow:hidden">
+  <div style="position:absolute;right:-30px;top:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(#4F46E5 0%,transparent 65%);opacity:.55"></div>
+  <div style="font:600 8.5pt Bahnschrift;letter-spacing:2.5px;color:#7DD3FC">SOFTWARE REQUIREMENTS SPECIFICATION</div>
+  <h1 style="color:#fff;font-size:22pt;line-height:1.12;margin-top:8px">University Library Reservation<br>and Borrowing System</h1>
+  <div style="margin-top:12px;color:#C9D2EA;font-size:9.5pt">Codeflow PSUT · Industry Practices Using the SDLC · Session: UI/UX Design · November 4, 2026</div>
+</div>
+<table style="margin-top:10px">
+  <tbody>
+    <tr><td style="width:110px;color:var(--muted)">Version / status</td><td>0.9 — Draft for design phase (teaching case)</td><td style="width:110px;color:var(--muted)">Scope</td><td>Catalogue, reservations, loans, notifications, librarian operations</td></tr>
+    <tr><td style="color:var(--muted)">Audience</td><td>Students, designers, developers, testers</td><td style="color:var(--muted)">Out of scope</td><td>Source code, SQL, hosting, e-books, inter-library loans, payments</td></tr>
+  </tbody>
+</table>
+<div class="why"><b>How to read this document.</b> Each requirement has a unique ID (e.g. <span class="mono">FR-09</span>) so designers, developers and testers can refer to it precisely. “Shall” means mandatory once approved. Policies marked <span class="pill p-p">Proposed</span> are example values for teaching — they are <b>not</b> confirmed PSUT rules.</div>
+
+<!-- ===== 1 ===== -->
+<h2><span class="n">1</span>Project overview</h2>
+<p><b>System name:</b> University Library Reservation and Borrowing System.</p>
+<p><b>Description.</b> Students can browse books, search the catalogue, check availability, reserve books and monitor their borrowing status through a digital system. <b>The student must physically visit the university library to collect and return books.</b> Librarians handle physical preparation, collection and return confirmation.</p>
+<div class="cols" style="margin-top:6px">
+  <div class="box" style="margin:0"><h3 style="margin-top:0">Objectives</h3>
+    <ul style="margin:0"><li>Reduce unnecessary library visits.</li><li>Improve book discovery.</li><li>Allow digital reservations.</li><li>Prevent conflicting reservations.</li><li>Improve loan tracking.</li><li>Automate reminders and availability notifications.</li><li>Improve librarians’ operational efficiency.</li></ul></div>
+  <div class="box" style="margin:0"><h3 style="margin-top:0">Key terms</h3>
+    <ul style="margin:0"><li><b>Book (title)</b> — a bibliographic record, e.g. “Clean Code”.</li><li><b>Copy</b> — one physical item of that book with its own barcode.</li><li><b>Reservation</b> — a request that holds a specific copy for a student.</li><li><b>Loan</b> — a copy that has been physically handed over to a student.</li><li><b>Waitlist</b> — a queue of students waiting for any copy of a title.</li></ul></div>
+</div>
+
+<!-- ===== 2 ===== -->
+<h2><span class="n">2</span>User roles and permissions</h2>
+<div class="cols">
+  <div><p><b>Guest</b> — anyone, not signed in. Can browse and search the public catalogue without authentication.</p>
+  <p><b>Student</b> — an authenticated, enrolled student. Can reserve books, view loans, receive notifications and monitor fines.</p></div>
+  <div><p><b>Librarian</b> — library staff. Views student reservations, prepares books, confirms collection and returns, manages copy availability and monitors borrowing periods.</p>
+  <p><b>Administrator</b> — manages policies (loan length, fine rates), staff permissions and system configuration.</p></div>
+</div>
+<table>
+  <thead><tr><th>Capability</th><th style="text-align:center;width:70px">Guest</th><th style="text-align:center;width:70px">Student</th><th style="text-align:center;width:70px">Librarian</th><th style="text-align:center;width:80px">Admin</th></tr></thead>
+  <tbody>
+    <tr><td>Browse &amp; search the public catalogue</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+    <tr><td>Reserve a copy / join a waitlist / cancel own reservation</td><td class="no">—</td><td class="ck">✓ own</td><td class="no">—</td><td class="no">—</td></tr>
+    <tr><td>View loans, due dates, fines and notifications</td><td class="no">—</td><td class="ck">✓ own</td><td class="ck">✓ all students</td><td class="no">— <span class="small">(audit only)</span></td></tr>
+    <tr><td>Mark ready, confirm hand-over, record returns, manage copies</td><td class="no">—</td><td class="no">—</td><td class="ck">✓</td><td class="no">—</td></tr>
+    <tr><td>Configure policies, fine rates, staff roles, calendars</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="ck">✓</td></tr>
+  </tbody>
+</table>
+<div class="why"><b>Why separate permissions?</b> The principle of <i>least privilege</i>: each role gets only what it needs. A student sees only their own data; a librarian cannot change the fine policy; an administrator does not process day-to-day loans.</div>
+
+<!-- ===== 3 ===== -->
+<h2><span class="n">3</span>Functional requirements</h2>
+<p class="small" style="margin-bottom:6px">Functional requirements describe <b>what the system must do</b>. Each is written so a tester can verify it with a clear pass/fail result.</p>
+<table>
+  <thead><tr><th>ID</th><th>Requirement</th><th style="width:86px">Role</th></tr></thead>
+  <tbody>
+    <tr class="grp"><td colspan="3">Catalogue and search</td></tr>
+    <tr><td class="id">FR-01</td><td>Guests and authenticated students shall be able to browse the library catalogue.</td><td>Guest, Student</td></tr>
+    <tr><td class="id">FR-02</td><td>Users shall be able to search by title, author, ISBN, category and keyword.</td><td>All</td></tr>
+    <tr><td class="id">FR-03</td><td>The system shall display book details, including title, author, category and copy availability.</td><td>All</td></tr>
+    <tr><td class="id">FR-04</td><td>The system shall distinguish available, reserved, borrowed and unavailable copies.</td><td>All</td></tr>
+    <tr class="grp"><td colspan="3">Authentication</td></tr>
+    <tr><td class="id">FR-05</td><td>Students shall authenticate through an approved university identity mechanism using their university student identity.</td><td>Student</td></tr>
+    <tr><td class="id">FR-06</td><td>Only verified, active, eligible students shall be allowed to reserve books.</td><td>Student</td></tr>
+    <tr><td class="id">FR-07</td><td>Guests shall not be required to authenticate to browse or search the public catalogue.</td><td>Guest</td></tr>
+    <tr><td class="id">FR-08</td><td>The system shall preserve the selected book and return the student to their intended reservation action after successful authentication.</td><td>Student</td></tr>
+    <tr class="grp"><td colspan="3">Reservations</td></tr>
+    <tr><td class="id">FR-09</td><td>Eligible students shall be able to reserve available physical book copies.</td><td>Student</td></tr>
+    <tr><td class="id">FR-10</td><td>The system shall prevent multiple active reservations for the same physical copy.</td><td>System</td></tr>
+    <tr><td class="id">FR-11</td><td>The system shall support waitlisting when all eligible copies are unavailable.</td><td>Student</td></tr>
+    <tr><td class="id">FR-12</td><td>Students shall be able to view, track and cancel their pending reservations, subject to university policy.</td><td>Student</td></tr>
+    <tr><td class="id">FR-13</td><td>The system shall provide a confirmation containing reservation status and collection instructions.</td><td>System</td></tr>
+    <tr class="grp"><td colspan="3">Notifications</td></tr>
+    <tr><td class="id">FR-14</td><td>Students shall be notified when a reserved book is ready for physical collection.</td><td>System</td></tr>
+    <tr><td class="id">FR-15</td><td>Students on a waitlist shall be notified when a copy becomes available for reservation or allocation.</td><td>System</td></tr>
+    <tr><td class="id">FR-16</td><td>Students shall receive reminders three days, two days and one day before the due date, and on the due date.</td><td>System</td></tr>
+    <tr><td class="id">FR-17</td><td>Students with overdue loans shall receive daily reminders showing their overdue duration and outstanding fine.</td><td>System</td></tr>
+    <tr><td class="id">FR-18</td><td>Students shall be able to view notifications inside the system.</td><td>Student</td></tr>
+    <tr class="grp"><td colspan="3">Librarian operations</td></tr>
+    <tr><td class="id">FR-19</td><td>Librarians shall be able to view reservation requests and associated student identifiers.</td><td>Librarian</td></tr>
+    <tr><td class="id">FR-20</td><td>Librarians shall be able to mark reserved copies as ready for collection.</td><td>Librarian</td></tr>
+    <tr><td class="id">FR-21</td><td>Librarians shall confirm book hand-over and record the loan start and due dates.</td><td>Librarian</td></tr>
+    <tr><td class="id">FR-22</td><td>Librarians shall be able to view borrowing periods and active loans by student.</td><td>Librarian</td></tr>
+    <tr><td class="id">FR-23</td><td>Librarians shall record returned copies and update their status.</td><td>Librarian</td></tr>
+    <tr><td class="id">FR-24</td><td>Authorised librarians shall be able to manage book-copy inventory and record damaged or lost books.</td><td>Librarian</td></tr>
+    <tr class="grp"><td colspan="3">Student loan management</td></tr>
+    <tr><td class="id">FR-25</td><td>Students shall be able to view current and previous loans.</td><td>Student</td></tr>
+    <tr><td class="id">FR-26</td><td>Students shall be able to view due dates, reservation statuses and outstanding fines.</td><td>Student</td></tr>
+    <tr><td class="id">FR-27</td><td>The system shall calculate overdue penalties according to configured university policy.</td><td>System</td></tr>
+  </tbody>
+</table>
+<div class="why avoid"><b>Testable language.</b> Compare “the system should be fast and user-friendly” (untestable) with FR-16: a tester can set a due date, advance the clock and check that exactly four reminders were sent on the right days.</div>
+
+<!-- ===== 4 ===== -->
+<h2><span class="n">4</span>Business rules <span class="pill p-p" style="font-family:Segoe UI">Proposed example policies</span></h2>
+<p class="small">Business rules are the organisation’s policies that the software must enforce. The values below are <b>illustrative</b> and must be confirmed by library management before implementation.</p>
+<table>
+  <thead><tr><th>ID</th><th>Rule</th><th style="width:150px">Enforced by / related FR</th></tr></thead>
+  <tbody>
+    <tr><td class="id">BR-01</td><td>Loan duration defaults to <b>14 days</b>.</td><td>Configurable policy · FR-21</td></tr>
+    <tr><td class="id">BR-02</td><td>Reservations expire after <b>48 hours</b> without collection (counted from the “ready” notification).</td><td>Scheduled job · FR-14</td></tr>
+    <tr><td class="id">BR-03</td><td>Fine rates are configured by authorised staff (e.g. an example rate of 0.25 JOD per overdue day).</td><td>Admin policy · FR-27</td></tr>
+    <tr><td class="id">BR-04</td><td>A student cannot reserve a copy already reserved by another student.</td><td>Transaction check · FR-10</td></tr>
+    <tr><td class="id">BR-05</td><td>Physical collection is mandatory; no book is delivered.</td><td>Process · FR-13, FR-21</td></tr>
+    <tr><td class="id">BR-06</td><td>The loan period begins when the librarian confirms hand-over, not when the student creates a reservation.</td><td>FR-21</td></tr>
+    <tr><td class="id">BR-07</td><td>Returned copies must be checked against the waitlist before becoming publicly reservable.</td><td>FR-11, FR-15, FR-23</td></tr>
+    <tr><td class="id">BR-08</td><td>Invalid or inactive students cannot create reservations.</td><td>FR-06</td></tr>
+    <tr><td class="id">BR-09</td><td>A student cannot hold conflicting active reservations for the same title unless university policy explicitly allows it.</td><td>Transaction check</td></tr>
+    <tr><td class="id">BR-10</td><td>Reservation, loan and copy states must remain synchronised.</td><td>Atomic transactions</td></tr>
+  </tbody>
+</table>
+<div class="box avoid" style="background:var(--amberL);border-color:#FDE68A">
+  <h3 style="margin-top:0;color:var(--amber)">Race conditions — why “check, then save” is not enough</h3>
+  <div class="cols" style="align-items:center">
+    <div style="font-size:8.8pt">Sara and Yazan both open the last available copy of <i>Introduction to Algorithms</i>. At 10:00:01 both apps check: “1 copy available”. Both press <b>Reserve</b>. If the system checks availability and saves the reservation as two separate steps, <b>both</b> requests can pass the check — and two students are promised one book.</div>
+    <div style="font-size:8.8pt"><b>Requirement:</b> the availability check and the reservation write must happen inside <b>one atomic database transaction</b>, protected by a uniqueness rule (only one active reservation per copy). The first request wins; the second receives a clear message and an offer to join the waitlist. UI checks alone can never prevent this, because the conflict happens on the server.</div>
+  </div>
+</div>
+
+<!-- ===== 5 ===== -->
+<h2><span class="n">5</span>Non-functional requirements <span class="pill p-p" style="font-family:Segoe UI">Proposed acceptance targets</span></h2>
+<p class="small">Non-functional requirements describe <b>how well</b> the system must work. Targets are proposals for discussion; final values are agreed with stakeholders.</p>
+<table>
+  <thead><tr><th>ID</th><th style="width:100px">Quality</th><th>Requirement</th><th style="width:190px">Proposed acceptance target</th></tr></thead>
+  <tbody>
+    <tr><td class="id">NFR-01</td><td>Performance</td><td>Search results return quickly under normal load.</td><td>95% of ordinary searches complete within 2 s</td></tr>
+    <tr><td class="id">NFR-02</td><td>Security</td><td>All traffic encrypted; staff functions require staff roles; sessions expire safely.</td><td>HTTPS only; role checks on every protected request</td></tr>
+    <tr><td class="id">NFR-03</td><td>Accessibility</td><td>Usable with keyboard, screen readers and zoom.</td><td>WCAG 2.2 Level AA target</td></tr>
+    <tr><td class="id">NFR-04</td><td>Privacy</td><td>Students see only their own records; minimal personal data stored.</td><td>No other student’s data visible to students</td></tr>
+    <tr><td class="id">NFR-05</td><td>Usability</td><td>A first-time student can reserve a book without help.</td><td>≥ 90% task success in usability testing</td></tr>
+    <tr><td class="id">NFR-06</td><td>Responsiveness</td><td>Layout adapts to the device.</td><td>Supports mobile, tablet and desktop layouts</td></tr>
+    <tr><td class="id">NFR-07</td><td>Reliability</td><td>No lost or duplicated reservations after failures.</td><td>0 duplicate active reservations per copy</td></tr>
+    <tr><td class="id">NFR-08</td><td>Availability</td><td>System available during library service hours and beyond.</td><td>99.5% monthly availability</td></tr>
+    <tr><td class="id">NFR-09</td><td>Scalability</td><td>Handles peaks at the start of semester and exam periods.</td><td>Target peak load agreed with IT before launch</td></tr>
+    <tr><td class="id">NFR-10</td><td>Maintainability</td><td>Policies change without code changes.</td><td>Loan days, fine rates, hours are configurable</td></tr>
+    <tr><td class="id">NFR-11</td><td>Auditability</td><td>Staff actions are traceable.</td><td>Every hand-over/return/fine change logged with who &amp; when</td></tr>
+    <tr><td class="id">NFR-12</td><td>Data integrity</td><td>Reservation, loan and copy states remain consistent.</td><td>Atomic database transactions prevent inconsistent reservations</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== 6 ===== -->
+<h2><span class="n">6</span>University and external requirements</h2>
+<p class="small">These come from outside the project team. This document <b>does not claim</b> legal compliance or certification; each item must be verified with the responsible university office.</p>
+<table>
+  <thead><tr><th style="width:22px">#</th><th style="width:150px">Area</th><th>What it means for the system</th><th style="width:118px">Status</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Identity &amp; enrolment verification</td><td>Students sign in with the university’s approved identity service; enrolment status decides eligibility (FR-05, FR-06).</td><td><span class="pill p-m">Mandatory*</span></td></tr>
+    <tr><td>2</td><td>Integration with university systems</td><td>Read-only access to authorised student information systems via approved interfaces; no copying of unneeded data.</td><td><span class="pill p-m">Mandatory*</span></td></tr>
+    <tr><td>3</td><td>Borrowing &amp; disciplinary policies</td><td>Loan limits, fines and blocks follow official university policy, configured by administrators (BR-01–03).</td><td><span class="pill p-p">Proposed</span></td></tr>
+    <tr><td>4</td><td>Jordanian personal-data protection</td><td>Handle student data according to applicable Jordanian law (e.g. the Personal Data Protection Law, No. 24 of 2023). Scope and obligations to be confirmed by the university’s legal office.</td><td><span class="pill p-p">To verify</span></td></tr>
+    <tr><td>5</td><td>Accessibility standards</td><td>Design and test against WCAG 2.2 Level AA (NFR-03).</td><td><span class="pill p-p">Proposed</span></td></tr>
+    <tr><td>6</td><td>Bibliographic metadata standards</td><td>Use MARC 21 or Dublin Core where catalogue data is exchanged with other library systems.</td><td><span class="pill p-p">Proposed</span></td></tr>
+    <tr><td>7</td><td>Calendars, holidays &amp; hours</td><td>Due dates and 48-hour collection windows skip configured closures; collection hours are shown to students.</td><td><span class="pill p-p">Proposed</span></td></tr>
+    <tr><td>8</td><td>Retention, auditing &amp; permissions</td><td>Define how long loan history and logs are kept; restrict access by role (NFR-11).</td><td><span class="pill p-m">Mandatory*</span></td></tr>
+    <tr><td>9</td><td>Notification &amp; communication policy</td><td>Approved channels (in-app, university e-mail), wording and frequency of reminders (FR-14–18).</td><td><span class="pill p-p">Proposed</span></td></tr>
+  </tbody>
+</table>
+<p class="small">* <b>Mandatory</b> = assumed in this teaching case to have been decided by the project sponsor (library management and university IT). <b>Proposed</b> = the team’s recommendation awaiting approval. <b>To verify</b> = depends on external rules that must be checked by qualified staff.</p>
+
+<!-- ===== 7 ===== -->
+<h2><span class="n">7</span>Database requirements (conceptual)</h2>
+<p class="small">A conceptual model shows <b>what data</b> the system needs and how it relates — not how tables are implemented. No SQL is part of this specification.</p>
+<svg viewBox="-2 -2 736 516" width="100%" style="display:block;margin:4px 0 6px" font-family="Segoe UI">
+  <defs>
+    <style>.eh{fill:#1E293B}.et{fill:#fff;font:600 11.5px Bahnschrift}.ea{font-size:10.4px;fill:#334155}.pk{font:700 10.4px Consolas;fill:#4338CA}.fk{font:700 10.4px Consolas;fill:#0E7490}.rel{stroke:#64748B;stroke-width:1.4;fill:none}.card{font:700 10px Segoe UI;fill:#B45309}</style>
+  </defs>
+  <!-- relationships first -->
+  <path class="rel" d="M190 243 L270 52"/><path class="rel" d="M190 243 L270 184"/><path class="rel" d="M190 243 L270 311"/><path class="rel" d="M190 243 L270 440"/>
+  <path class="rel" d="M460 184 L540 184"/><path class="rel" d="M460 300 L540 300"/><path class="rel" d="M460 402 L540 330"/><path class="rel" d="M460 450 L540 450"/><path class="rel" d="M635 220 L635 254"/>
+  <g class="card"><text x="196" y="236">1</text><text x="258" y="46">N</text><text x="258" y="178">N</text><text x="258" y="327">N</text><text x="258" y="456">N</text>
+    <text x="526" y="180">N</text><text x="466" y="180">N</text><text x="530" y="178" style="display:none"></text>
+    <text x="526" y="296">1</text><text x="466" y="296">N</text><text x="530" y="350">1</text><text x="470" y="414">N</text><text x="466" y="446">1</text><text x="514" y="446">0..1</text><text x="640" y="232">1</text><text x="640" y="250">N</text></g>
+  <!-- Students -->
+  <g transform="translate(0,200)"><rect width="190" height="86" rx="7" fill="#fff" stroke="#1E293B"/><path class="eh" d="M0 7 a7 7 0 0 1 7 -7 h176 a7 7 0 0 1 7 7 v17 h-190z"/><text class="et" x="10" y="16">Students</text>
+    <text class="pk" x="10" y="38">PK</text><text class="ea" x="32" y="38">StudentID</text><text class="ea" x="32" y="52">FullName</text><text class="ea" x="32" y="66">UniversityEmail</text><text class="ea" x="32" y="80">EnrollmentStatus</text></g>
+  <!-- Notifications -->
+  <g transform="translate(270,0)"><rect width="190" height="114" rx="7" fill="#fff" stroke="#1E293B"/><path class="eh" d="M0 7 a7 7 0 0 1 7 -7 h176 a7 7 0 0 1 7 7 v17 h-190z"/><text class="et" x="10" y="16">Notifications</text>
+    <text class="pk" x="10" y="38">PK</text><text class="ea" x="32" y="38">NotificationID</text><text class="fk" x="10" y="52">FK</text><text class="ea" x="32" y="52">StudentID</text><text class="ea" x="32" y="66">Type</text><text class="ea" x="32" y="80">Message</text><text class="ea" x="32" y="94">SentAt</text><text class="ea" x="32" y="108">ReadAt</text></g>
+  <!-- Waitlist -->
+  <g transform="translate(270,134)"><rect width="190" height="100" rx="7" fill="#fff" stroke="#1E293B"/><path class="eh" d="M0 7 a7 7 0 0 1 7 -7 h176 a7 7 0 0 1 7 7 v17 h-190z"/><text class="et" x="10" y="16">Waitlist</text>
+    <text class="pk" x="10" y="38">PK</text><text class="ea" x="32" y="38">WaitlistID</text><text class="fk" x="10" y="52">FK</text><text class="ea" x="32" y="52">StudentID</text><text class="fk" x="10" y="66">FK</text><text class="ea" x="32" y="66">BookID</text><text class="ea" x="32" y="80">QueuePosition</text><text class="ea" x="32" y="94">Status</text></g>
+  <!-- Reservations -->
+  <g transform="translate(270,254)"><rect width="190" height="114" rx="7" fill="#fff" stroke="#1E293B"/><path class="eh" d="M0 7 a7 7 0 0 1 7 -7 h176 a7 7 0 0 1 7 7 v17 h-190z"/><text class="et" x="10" y="16">Reservations</text>
+    <text class="pk" x="10" y="38">PK</text><text class="ea" x="32" y="38">ReservationID</text><text class="fk" x="10" y="52">FK</text><text class="ea" x="32" y="52">StudentID</text><text class="fk" x="10" y="66">FK</text><text class="ea" x="32" y="66">CopyID</text><text class="ea" x="32" y="80">Status</text><text class="ea" x="32" y="94">ReservedAt</text><text class="ea" x="32" y="108">ExpiresAt</text></g>
+  <!-- Loans -->
+  <g transform="translate(270,388)"><rect width="190" height="114" rx="7" fill="#fff" stroke="#1E293B"/><path class="eh" d="M0 7 a7 7 0 0 1 7 -7 h176 a7 7 0 0 1 7 7 v17 h-190z"/><text class="et" x="10" y="16">Loans</text>
+    <text class="pk" x="10" y="38">PK</text><text class="ea" x="32" y="38">LoanID</text><text class="fk" x="10" y="52">FK</text><text class="ea" x="32" y="52">StudentID</text><text class="fk" x="10" y="66">FK</text><text class="ea" x="32" y="66">CopyID</text><text class="ea" x="32" y="80">IssuedAt</text><text class="ea" x="32" y="94">DueAt</text><text class="ea" x="32" y="108">ReturnedAt</text></g>
+  <!-- Books -->
+  <g transform="translate(540,120)"><rect width="190" height="100" rx="7" fill="#fff" stroke="#1E293B"/><path class="eh" d="M0 7 a7 7 0 0 1 7 -7 h176 a7 7 0 0 1 7 7 v17 h-190z"/><text class="et" x="10" y="16">Books</text>
+    <text class="pk" x="10" y="38">PK</text><text class="ea" x="32" y="38">BookID</text><text class="ea" x="32" y="52">ISBN</text><text class="ea" x="32" y="66">Title</text><text class="ea" x="32" y="80">Author</text><text class="ea" x="32" y="94">Category</text></g>
+  <!-- BookCopies -->
+  <g transform="translate(540,254)"><rect width="190" height="86" rx="7" fill="#fff" stroke="#1E293B"/><path class="eh" d="M0 7 a7 7 0 0 1 7 -7 h176 a7 7 0 0 1 7 7 v17 h-190z"/><text class="et" x="10" y="16">BookCopies</text>
+    <text class="pk" x="10" y="38">PK</text><text class="ea" x="32" y="38">CopyID</text><text class="fk" x="10" y="52">FK</text><text class="ea" x="32" y="52">BookID</text><text class="ea" x="32" y="66">Barcode</text><text class="ea" x="32" y="80">Status</text></g>
+  <!-- Fines -->
+  <g transform="translate(540,400)"><rect width="190" height="100" rx="7" fill="#fff" stroke="#1E293B"/><path class="eh" d="M0 7 a7 7 0 0 1 7 -7 h176 a7 7 0 0 1 7 7 v17 h-190z"/><text class="et" x="10" y="16">Fines</text>
+    <text class="pk" x="10" y="38">PK</text><text class="ea" x="32" y="38">FineID</text><text class="fk" x="10" y="52">FK</text><text class="ea" x="32" y="52">LoanID</text><text class="ea" x="32" y="66">Amount</text><text class="ea" x="32" y="80">Status</text><text class="ea" x="32" y="94">UpdatedAt</text></g>
+</svg>
+<p class="small" style="text-align:center;margin-top:-2px"><b style="color:#4338CA">PK</b> primary key · <b style="color:#0E7490">FK</b> foreign key · <b style="color:#B45309">1 / N</b> one-to-many · <b style="color:#B45309">0..1</b> at most one</p>
+
+<table class="avoid">
+  <thead><tr><th style="width:120px">Supporting entity</th><th>Purpose (summary)</th></tr></thead>
+  <tbody>
+    <tr><td><b>StaffAccounts</b></td><td>Librarians and administrators: StaffID, name, role, active flag. Linked to the university identity service; roles drive permissions.</td></tr>
+    <tr><td><b>Policies</b></td><td>Configurable values with effective dates: loan days, reservation expiry hours, fine rate, maximum loans, collection hours, closures.</td></tr>
+    <tr><td><b>AuditLogs</b></td><td>Append-only record of important actions: who (StaffID/StudentID), what (action, entity, old → new status), when (timestamp).</td></tr>
+  </tbody>
+</table>
+
+<div class="cols" style="font-size:8.8pt">
+  <div>
+    <p><b>Primary key (PK)</b> — a value that uniquely identifies one row, e.g. <span class="mono">CopyID</span>.</p>
+    <p><b>Foreign key (FK)</b> — a column that points to another entity’s PK, e.g. <span class="mono">Loans.CopyID → BookCopies.CopyID</span>.</p>
+    <p><b>One-to-many</b> — one student can have many loans; each loan belongs to exactly one student.</p>
+    <p><b>Books vs. copies</b> — “Clean Code” is <i>one</i> Book with <i>several</i> BookCopies. Students reserve and borrow <b>copies</b>; they wait for <b>books</b> (any copy).</p>
+  </div>
+  <div>
+    <p><b>Referential integrity</b> — an FK must always point to an existing row; a copy cannot be deleted while a loan refers to it.</p>
+    <p><b>Atomic transactions</b> — related changes (reservation → loan, copy status) succeed or fail together (BR-10).</p>
+    <p><b>No duplicate active reservations</b> — a uniqueness rule allows at most one <i>active</i> reservation per <span class="mono">CopyID</span> (FR-10, BR-04).</p>
+    <p><b>Dates &amp; times</b> — store timestamps in UTC with time-zone awareness; display in local time (Asia/Amman). Due dates are calculated with the academic calendar.</p>
+  </div>
+</div>
+
+<!-- ===== 8 ===== -->
+<h2><span class="n">8</span>User workflows</h2>
+<div style="display:flex;gap:14px;font-size:8.4pt;margin-bottom:6px;color:var(--ink2)">
+  <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#E0E7FF;border:1px solid #6366F1;vertical-align:-1px"></span> Digital step (app)</span>
+  <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#FEF3C7;border:1px solid #D97706;vertical-align:-1px"></span> Physical step (at the library)</span>
+  <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#CFFAFE;border:1px solid #0891B2;vertical-align:-1px"></span> System / notification</span>
+  <span><span style="display:inline-block;width:10px;height:10px;transform:rotate(45deg);background:#fff;border:1.5px solid #64748B;vertical-align:0"></span>&nbsp; Decision</span>
+</div>
+<h3>8.1 Student workflow</h3>
+<svg viewBox="-2 -2 706 302" width="100%" font-family="Segoe UI" style="display:block">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#475569"/></marker>
+  <marker id="ad" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#B45309"/></marker>
+  <style>.d{fill:#E0E7FF;stroke:#6366F1}.ph{fill:#FEF3C7;stroke:#D97706}.sy{fill:#CFFAFE;stroke:#0891B2}.t{font-size:11px;font-weight:600;fill:#0E1628;text-anchor:middle}.k{font:700 9px Consolas;fill:#475569}.ln{stroke:#475569;stroke-width:1.5;fill:none}</style></defs>
+  <!-- row 1: 1-4 L→R -->
+  <rect class="d" x="0" y="10" width="150" height="48" rx="8"/><text class="k" x="8" y="22">1</text><text class="t" x="75" y="40">Browse catalogue</text>
+  <rect class="d" x="183" y="10" width="150" height="48" rx="8"/><text class="k" x="191" y="22">2</text><text class="t" x="258" y="40">Search</text>
+  <rect class="d" x="366" y="10" width="150" height="48" rx="8"/><text class="k" x="374" y="22">3</text><text class="t" x="441" y="40">View book</text>
+  <polygon points="624,4 700,34 624,64 548,34" fill="#fff" stroke="#64748B" stroke-width="1.5"/><text class="k" x="532" y="12">4</text><text class="t" x="624" y="31">Check</text><text class="t" x="624" y="45">availability</text>
+  <path class="ln" d="M150 34 H179" marker-end="url(#a)"/><path class="ln" d="M333 34 H362" marker-end="url(#a)"/><path class="ln" d="M516 34 H544" marker-end="url(#a)"/>
+  <path class="ln" d="M624 64 V96" marker-end="url(#a)"/><text x="630" y="84" font-size="9.5" fill="#047857" font-weight="700">available</text>
+  <!-- row 2: 5-8 R→L -->
+  <rect class="d" x="549" y="100" width="150" height="48" rx="8"/><text class="k" x="557" y="112">5</text><text class="t" x="624" y="130">Reserve</text>
+  <rect class="d" x="366" y="100" width="150" height="48" rx="8"/><text class="k" x="374" y="112">6</text><text class="t" x="441" y="123">Authenticate</text><text class="t" x="441" y="137" style="font-weight:400;font-size:10px">(only if not signed in)</text>
+  <rect class="sy" x="183" y="100" width="150" height="48" rx="8"/><text class="k" x="191" y="112">7</text><text class="t" x="258" y="123">Confirm</text><text class="t" x="258" y="137" style="font-weight:400;font-size:10px">status + instructions</text>
+  <rect class="ph" x="0" y="100" width="150" height="48" rx="8"/><text class="k" x="8" y="112">8</text><text class="t" x="75" y="123">Wait for</text><text class="t" x="75" y="137">preparation</text>
+  <path class="ln" d="M549 124 H520" marker-end="url(#a)"/><path class="ln" d="M366 124 H337" marker-end="url(#a)"/><path class="ln" d="M183 124 H154" marker-end="url(#a)"/>
+  <path class="ln" d="M75 148 V182" marker-end="url(#a)"/>
+  <!-- row 3: 9-12 L→R -->
+  <rect class="sy" x="0" y="186" width="150" height="48" rx="8"/><text class="k" x="8" y="198">9</text><text class="t" x="75" y="209">Receive “ready”</text><text class="t" x="75" y="223">notification</text>
+  <rect class="ph" x="183" y="186" width="150" height="48" rx="8"/><text class="k" x="191" y="198">10</text><text class="t" x="258" y="209">Collect physically</text><text class="t" x="258" y="223" style="font-weight:400;font-size:10px">within 48 h (BR-02)</text>
+  <rect class="d" x="366" y="186" width="150" height="48" rx="8"/><text class="k" x="374" y="198">11</text><text class="t" x="441" y="209">Monitor due date</text><text class="t" x="441" y="223" style="font-weight:400;font-size:10px">reminders (FR-16)</text>
+  <rect class="ph" x="549" y="186" width="150" height="48" rx="8"/><text class="k" x="557" y="198">12</text><text class="t" x="624" y="216">Return physically</text>
+  <path class="ln" d="M150 210 H179" marker-end="url(#a)"/><path class="ln" d="M333 210 H362" marker-end="url(#a)"/><path class="ln" d="M516 210 H545" marker-end="url(#a)"/>
+  <!-- alternate path -->
+  <path d="M700 34 H712" stroke="none"/>
+  <rect x="0" y="252" width="700" height="44" rx="8" fill="#FFFBEB" stroke="#F59E0B" stroke-dasharray="5 4"/>
+  <text x="12" y="270" font-size="10.5" font-weight="700" fill="#B45309">Alternate path — no copy available at step 4</text>
+  <text x="12" y="287" font-size="10.5" fill="#0E1628">Join waitlist (sign in if needed) → see queue position → copy returned &amp; allocated (BR-07) → notified (FR-15) → continue at step 8</text>
+</svg>
+
+<h3 style="margin-top:14px">8.2 Librarian workflow</h3>
+<svg viewBox="-2 -2 706 242" width="100%" font-family="Segoe UI" style="display:block">
+  <!-- row 1 L→R: 1-4 -->
+  <rect class="d" x="0" y="10" width="150" height="48" rx="8"/><text class="k" x="8" y="22">1</text><text class="t" x="75" y="40">View requests</text>
+  <rect class="d" x="183" y="10" width="150" height="48" rx="8"/><text class="k" x="191" y="22">2</text><text class="t" x="258" y="40">Verify reservation</text>
+  <rect class="ph" x="366" y="10" width="150" height="48" rx="8"/><text class="k" x="374" y="22">3</text><text class="t" x="441" y="40">Locate book</text>
+  <rect class="ph" x="549" y="10" width="150" height="48" rx="8"/><text class="k" x="557" y="22">4</text><text class="t" x="624" y="40">Prepare book</text>
+  <path class="ln" d="M150 34 H179" marker-end="url(#a)"/><path class="ln" d="M333 34 H362" marker-end="url(#a)"/><path class="ln" d="M516 34 H545" marker-end="url(#a)"/>
+  <path class="ln" d="M624 58 V96" marker-end="url(#a)"/>
+  <!-- row 2 R→L: 5-8 -->
+  <rect class="sy" x="549" y="100" width="150" height="48" rx="8"/><text class="k" x="557" y="112">5</text><text class="t" x="624" y="123">Mark ready</text><text class="t" x="624" y="137" style="font-weight:400;font-size:10px">student notified (FR-14)</text>
+  <rect class="ph" x="366" y="100" width="150" height="48" rx="8"/><text class="k" x="374" y="112">6</text><text class="t" x="441" y="130">Student arrives</text>
+  <rect class="ph" x="183" y="100" width="150" height="48" rx="8"/><text class="k" x="191" y="112">7</text><text class="t" x="258" y="123">Verify identity</text><text class="t" x="258" y="137" style="font-weight:400;font-size:10px">university ID card</text>
+  <rect class="d" x="0" y="100" width="150" height="48" rx="8"/><text class="k" x="8" y="112">8</text><text class="t" x="75" y="123">Confirm hand-over</text><text class="t" x="75" y="137" style="font-weight:400;font-size:10px">loan starts (BR-06)</text>
+  <path class="ln" d="M549 124 H520" marker-end="url(#a)"/><path class="ln" d="M366 124 H337" marker-end="url(#a)"/><path class="ln" d="M183 124 H154" marker-end="url(#a)"/>
+  <path class="ln" d="M75 148 V182" marker-end="url(#a)"/>
+  <!-- row 3 L→R: 9-12 -->
+  <rect class="sy" x="0" y="186" width="150" height="48" rx="8"/><text class="k" x="8" y="198">9</text><text class="t" x="75" y="216">Track due date</text>
+  <rect class="ph" x="183" y="186" width="150" height="48" rx="8"/><text class="k" x="191" y="198">10</text><text class="t" x="258" y="209">Receive returned</text><text class="t" x="258" y="223">book</text>
+  <rect class="ph" x="366" y="186" width="150" height="48" rx="8"/><text class="k" x="374" y="198">11</text><text class="t" x="441" y="209">Inspect &amp; record</text><text class="t" x="441" y="223">return (FR-23)</text>
+  <rect class="sy" x="549" y="186" width="150" height="48" rx="8"/><text class="k" x="557" y="198">12</text><text class="t" x="624" y="209">Update availability</text><text class="t" x="624" y="223" style="font-weight:400;font-size:10px">waitlist first (BR-07)</text>
+  <path class="ln" d="M150 210 H179" marker-end="url(#a)"/><path class="ln" d="M333 210 H362" marker-end="url(#a)"/><path class="ln" d="M516 210 H545" marker-end="url(#a)"/>
+</svg>
+
+<!-- ===== 9 ===== -->
+<h2><span class="n">9</span>Edge cases and expected behaviour</h2>
+<table>
+  <thead><tr><th style="width:24px">#</th><th style="width:205px">Scenario</th><th>Expected system behaviour</th></tr></thead>
+  <tbody>
+    <tr><td>E1</td><td>Two students reserve the final copy simultaneously</td><td>One atomic transaction succeeds; the other student sees “This copy was just reserved” and is offered the waitlist (FR-10, BR-04).</td></tr>
+    <tr><td>E2</td><td>Student authentication fails</td><td>Clear, non-technical message; retry or help link; the selected book is kept for after sign-in (FR-08).</td></tr>
+    <tr><td>E3</td><td>Student becomes ineligible while a reservation is pending</td><td>Reservation is flagged for the librarian and not handed over; the student is notified with the reason and next steps (BR-08).</td></tr>
+    <tr><td>E4</td><td>Reservation expires before collection</td><td>After 48 h the reservation becomes “Expired”, the student is informed and the copy goes to the next waitlisted student or back to available (BR-02, BR-07).</td></tr>
+    <tr><td>E5</td><td>A student does not receive a notification</td><td>All notifications are also visible in the in-app list (FR-18); failed deliveries are logged and retried.</td></tr>
+    <tr><td>E6</td><td>A book is reported lost or damaged</td><td>Librarian records the condition (FR-24); the copy leaves circulation; affected reservations are reallocated or the students notified.</td></tr>
+    <tr><td>E7</td><td>A student returns a book late</td><td>Return is recorded normally; the fine is calculated by configured policy (FR-27) and shown with days overdue and rate.</td></tr>
+    <tr><td>E8</td><td>Connectivity is lost while reserving</td><td>No reservation is created unless the server confirms it; the app shows the true status on reconnect and never shows a false success.</td></tr>
+    <tr><td>E9</td><td>An overdue book is returned while a fine is outstanding</td><td>The loan closes; the fine stays “Outstanding” until settled under university policy, and remains visible to the student.</td></tr>
+    <tr><td>E10</td><td>A copy is returned while students are waiting for that title</td><td>The copy is allocated to the first eligible waitlisted student before anyone else can reserve it (BR-07, FR-15).</td></tr>
+  </tbody>
+</table>
+<div class="why avoid"><b>From requirements to design.</b> Every screen in the UI/UX exercise should trace back to at least one requirement above. When you critique or redesign a screen, ask: <i>which FR, BR or NFR does this element serve — and does the design make that requirement easy for a real user?</i></div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,101 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>UI/UX Design — Codeflow PSUT</title>
+<style>
+@page { size: 1280px 720px; margin: 0; }
+:root{
+  --ink:#0E1628; --ink2:#334155; --muted:#5B6678; --line:#DCE1EA; --bg:#F5F7FB; --card:#FFFFFF;
+  --navy:#0A1022; --navy2:#121A33; --indigo:#4F46E5; --cyan:#0891B2; --cyanL:#22D3EE; --amber:#F59E0B;
+  --good:#047857; --goodL:#D1FAE5; --bad:#BE123C; --badL:#FFE4E6;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slide{width:1280px;height:720px;position:relative;overflow:hidden;background:var(--bg);break-after:page;page-break-after:always}
+.slide:last-child{break-after:auto}
+.pad{position:absolute;inset:0;padding:56px 72px 64px}
+h1,h2,h3,.disp{font-family:Bahnschrift,"Segoe UI",sans-serif;margin:0;font-weight:600;letter-spacing:-.2px}
+h2{font-size:42px;line-height:1.08;color:var(--ink)}
+h3{font-size:21px;line-height:1.2}
+p{margin:0}
+.kicker{font-family:Bahnschrift,sans-serif;font-size:14px;letter-spacing:2.4px;text-transform:uppercase;color:var(--indigo);font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:26px;height:3px;background:linear-gradient(90deg,var(--indigo),var(--cyanL));border-radius:2px}
+.lead{font-size:20px;line-height:1.45;color:var(--ink2);margin-top:14px;max-width:900px}
+.foot{position:absolute;left:72px;right:72px;bottom:22px;display:flex;justify-content:space-between;font-size:12px;color:#8A94A6;letter-spacing:.3px}
+.foot b{color:#5B6678;font-weight:600}
+.dark .foot{color:#6B7699}.dark .foot b{color:#9AA5C4}
+.dark{background:radial-gradient(1200px 700px at 85% 10%,#1C2A5C 0%,transparent 60%),radial-gradient(900px 600px at 0% 100%,#0E3A4A 0%,transparent 55%),var(--navy);color:#fff}
+.grid-bg::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 6px 18px rgba(15,23,42,.05)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-size:14px;font-weight:600}
+.row{display:flex;gap:20px}
+.small{font-size:14px;color:var(--muted);line-height:1.45}
+.num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--indigo);color:#fff;font:600 14px Bahnschrift,sans-serif;flex:none}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:6px;background:#EEF2FF;color:#3730A3}
+/* question slides */
+.q .pad{display:flex;flex-direction:column;justify-content:center}
+.q .qlabel{font-family:Bahnschrift,sans-serif;font-size:16px;letter-spacing:3px;color:var(--amber);text-transform:uppercase;font-weight:600;display:flex;align-items:center;gap:12px}
+.q .qmark{position:absolute;right:40px;top:-60px;font:700 560px/1 Bahnschrift,sans-serif;color:rgba(255,255,255,.04)}
+.q h1{font-size:68px;line-height:1.08;margin-top:22px;max-width:1000px;font-weight:600}
+.q .hint{margin-top:34px;display:flex;gap:12px}
+.q .hint span{border:1px solid rgba(255,255,255,.18);color:#C9D2EA;padding:9px 16px;border-radius:999px;font-size:15px}
+/* phones */
+.phone{width:236px;height:480px;border-radius:36px;background:#0B0F1A;padding:9px;box-shadow:0 20px 40px rgba(15,23,42,.18);position:relative;flex:none}
+.phone .scr{width:100%;height:100%;border-radius:28px;overflow:hidden;background:#fff;position:relative;font-size:11px}
+.phone .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:84px;height:18px;background:#0B0F1A;border-radius:0 0 12px 12px;z-index:5}
+.sbar{height:28px;display:flex;justify-content:space-between;align-items:center;padding:0 18px;font-size:10px;font-weight:600}
+.arrow{color:var(--indigo);font:600 28px Bahnschrift}
+.callout{position:absolute;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--amber);color:#111;font:700 13px Bahnschrift;box-shadow:0 0 0 3px #fff;z-index:6}
+html,body{width:1280px;height:720px;overflow:hidden}</style>
+</head>
+<body><section class="slide">
+  <div class="pad">
+    <div class="kicker">Mobile-first</div>
+    <h2>Mobile-first design principles</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px">
+      <!-- touch targets -->
+      <div class="card pr"><b>Accessible touch targets</b>
+        <div class="dd"><div class="x"><span style="display:flex;gap:2px"><span class="tiny"></span><span class="tiny"></span><span class="tiny"></span></span></div><div class="v"><span style="display:flex;gap:8px"><span class="big"></span><span class="big"></span></span></div></div>
+        <p class="small">WCAG 2.2 (2.5.8) sets a 24×24 px minimum; platform guides recommend ~44–48 px.</p></div>
+      <!-- readable type -->
+      <div class="card pr"><b>Readable typography</b>
+        <div class="dd"><div class="x"><span style="font-size:8px;color:#94A3B8">Due 07/11 — see T&amp;C §4</span></div><div class="v"><span style="font-size:15px;font-weight:600">Due 7 Nov</span></div></div>
+        <p class="small">~16 px body text; text must still work when zoomed to 200% (WCAG 1.4.4).</p></div>
+      <!-- clear navigation -->
+      <div class="card pr"><b>Clear navigation</b>
+        <div class="dd"><div class="x"><span style="font-size:15px;letter-spacing:6px;color:#475569">◌⌁✧☰</span></div><div class="v"><span style="font-size:10px;display:flex;gap:8px;color:#1E293B;font-weight:600"><span>⌂<br>Home</span><span>⌕<br>Search</span><span>☺<br>Me</span></span></div></div>
+        <p class="small">Icons with text labels; few, predictable destinations.</p></div>
+      <!-- search visibility -->
+      <div class="card pr"><b>Search visibility</b>
+        <div class="dd"><div class="x"><span style="font-size:10px;color:#64748B">Menu ▸ Tools ▸ Find…</span></div><div class="v"><span style="border:1.5px solid #334155;border-radius:7px;padding:4px 10px;font-size:11px;color:#334155">⌕ Search…</span></div></div>
+        <p class="small">If search is the main task, put it at the top — not in a menu.</p></div>
+      <!-- minimal forms -->
+      <div class="card pr"><b>Minimal forms</b>
+        <div class="dd"><div class="x"><span style="display:grid;gap:3px;width:60px"><span class="ln"></span><span class="ln"></span><span class="ln"></span><span class="ln"></span><span class="ln"></span></span></div><div class="v"><span style="display:grid;gap:4px;width:60px"><span class="ln" style="height:9px"></span></span></div></div>
+        <p class="small">Ask only for what you can’t already know. Prefill the rest.</p></div>
+      <!-- contrast -->
+      <div class="card pr"><b>Appropriate contrast</b>
+        <div class="dd"><div class="x"><span style="color:#C3CAD5;font-weight:600">Reserve</span></div><div class="v"><span style="color:#0F172A;font-weight:600">Reserve</span></div></div>
+        <p class="small">Text ≥ 4.5:1 (WCAG 1.4.3); buttons &amp; icons ≥ 3:1 (1.4.11).</p></div>
+      <!-- primary actions -->
+      <div class="card pr" style="grid-column:span 2"><b>Clear primary action</b>
+        <div class="dd" style="grid-template-columns:1fr 1fr"><div class="x"><span style="display:flex;gap:4px"><span class="btn o">Submit</span><span class="btn o">Reset</span><span class="btn o">Print</span><span class="btn o">Help</span></span></div><div class="v"><span style="display:flex;gap:6px;align-items:center"><span class="btn p">Register</span><span style="font-size:10.5px;color:#334155;text-decoration:underline">Cancel</span></span></div></div>
+        <p class="small">One visually dominant action per screen, labelled with what it actually does.</p></div>
+    </div>
+  </div>
+  <style>
+    .pr{padding:16px 16px}.pr b{font-size:16px}.pr p{margin-top:10px;font-size:13.5px}
+    .dd{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+    .dd>div{height:96px;border-radius:10px;display:grid;place-items:center;position:relative}
+    .dd .x{background:#FFF1F2;border:1px solid #FECDD3}.dd .v{background:#ECFDF5;border:1px solid #A7F3D0}
+    .dd .x::after{content:"✗";position:absolute;top:3px;left:7px;font-size:11px;color:#BE123C;font-weight:700}
+    .dd .v::after{content:"✓";position:absolute;top:3px;left:7px;font-size:11px;color:#047857;font-weight:700}
+    .tiny{width:12px;height:12px;border:1.5px solid #64748B;border-radius:3px;display:inline-block}
+    .big{width:30px;height:30px;border:2px solid #047857;border-radius:7px;display:inline-block;background:#fff}
+    .ln{height:6px;border:1px solid #94A3B8;border-radius:2px;background:#fff;display:block}
+    .btn{font-size:10px;padding:4px 7px;border-radius:5px;font-weight:600}.btn.o{border:1px solid #94A3B8;color:#475569;background:#fff}.btn.p{background:#4F46E5;color:#fff;padding:6px 12px;font-size:11px}
+  </style>
+  <div class="foot"><span><b>Codeflow PSUT</b> · UI/UX Design · WCAG references: W3C WCAG 2.2 success criteria</span><span>19</span></div>
+</section></body></html>
